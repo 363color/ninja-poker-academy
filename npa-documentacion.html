@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ninja Poker Academy — Documentación del Proyecto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--rd:#CC1A1A;--rd-bg:rgba(204,26,26,.08);--rd-bd:rgba(204,26,26,.22)}
+[data-theme="dark"]{--bg:#0D0D0D;--bg2:#141414;--bg3:#1A1A1A;--card:#161616;--brd:rgba(255,255,255,.07);--brd2:rgba(255,255,255,.12);--t1:#F3F0EB;--t2:rgba(243,240,235,.54);--t3:rgba(243,240,235,.28);--t4:rgba(243,240,235,.10);--nav-bg:rgba(13,13,13,.92)}
+[data-theme="light"]{--bg:#F5F3F0;--bg2:#FFFFFF;--bg3:#EDEAE5;--card:#FFFFFF;--brd:rgba(0,0,0,.08);--brd2:rgba(0,0,0,.14);--t1:#111111;--t2:rgba(17,17,17,.56);--t3:rgba(17,17,17,.32);--t4:rgba(17,17,17,.09);--nav-bg:rgba(245,243,240,.92)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);transition:background .25s,color .25s;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--rd);color:#fff}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:2px}
+header{position:sticky;top:0;z-index:100;height:54px;background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);display:flex;align-items:center;padding:0 clamp(16px,4vw,48px);gap:12px}
+.logo{font-size:14px;font-weight:600;color:var(--t1);display:flex;align-items:center;gap:8px;text-decoration:none;letter-spacing:-.1px}
+.logo-pip{width:6px;height:6px;border-radius:50%;background:var(--rd);flex-shrink:0;animation:blink 2.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hright{display:flex;align-items:center;gap:6px;margin-left:auto}
+.ibtn{height:30px;padding:0 12px;border:1px solid var(--brd2);border-radius:6px;background:transparent;color:var(--t3);cursor:pointer;font-size:12px;font-family:'Inter',sans-serif;transition:all .15s;display:flex;align-items:center;gap:5px}
+.ibtn:hover{border-color:var(--rd);color:var(--rd)}
+.layout{display:grid;grid-template-columns:220px 1fr;max-width:1180px;margin:0 auto;min-height:calc(100vh - 54px)}
+@media(max-width:740px){.layout{grid-template-columns:1fr}.sidebar{display:none}}
+.sidebar{border-right:1px solid var(--brd);padding:24px 16px;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto}
+.sb-group{margin-bottom:20px}
+.sb-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);padding:0 8px;margin-bottom:8px;display:block}
+.sb-nav{list-style:none;display:flex;flex-direction:column;gap:1px}
+.sb-nav a{font-size:12.5px;color:var(--t2);text-decoration:none;padding:5px 8px;border-radius:5px;display:block;transition:all .12s;line-height:1.4}
+.sb-nav a:hover{color:var(--t1);background:var(--brd)}
+.sb-nav a.on{color:var(--rd);background:var(--rd-bg);font-weight:500}
+.sb-div{height:1px;background:var(--brd);margin:12px 0}
+.content{padding:clamp(32px,5vw,60px) clamp(16px,4vw,52px)}
+.sec{margin-bottom:clamp(48px,7vw,80px);scroll-margin-top:70px}
+.eyebrow{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--rd);margin-bottom:8px}
+.sec-title{font-size:clamp(20px,2.5vw,28px);font-weight:600;color:var(--t1);letter-spacing:-.3px;line-height:1.2;margin-bottom:12px}
+.sec-lead{font-size:14px;font-weight:300;color:var(--t2);line-height:1.75;max-width:620px;margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--brd);border-radius:8px;padding:18px 20px;margin-bottom:10px}
+.card-head{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.card-body{font-size:13px;font-weight:300;color:var(--t2);line-height:1.75}
+.card-body strong{font-weight:500;color:var(--t1)}
+.card-body code{font-size:11.5px;background:var(--bg3);border:1px solid var(--brd);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',ui-monospace,monospace;color:var(--rd)}
+.callout{border-left:2px solid var(--rd);background:var(--rd-bg);border-radius:0 7px 7px 0;padding:12px 14px;margin:14px 0;font-size:13px;font-weight:300;color:var(--t2);line-height:1.7}
+.callout strong{font-weight:500;color:var(--t1)}
+.callout.warn{border-left-color:#c8960a;background:rgba(200,150,10,.07)}
+.callout.info{border-left-color:#2272c3;background:rgba(34,114,195,.07)}
+.callout.danger{border-left-color:#c03030;background:rgba(192,48,48,.07)}
+.callout.ok{border-left-color:#1a8a50;background:rgba(26,138,80,.07)}
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:4px;flex-shrink:0;white-space:nowrap}
+.b-rd{background:var(--rd-bg);color:var(--rd);border:1px solid var(--rd-bd)}
+.b-am{background:rgba(200,150,10,.09);color:#a07808;border:1px solid rgba(200,150,10,.18)}
+.b-ok{background:rgba(30,140,80,.09);color:#1a8a50;border:1px solid rgba(30,140,80,.18)}
+.b-gy{background:var(--bg3);color:var(--t3);border:1px solid var(--brd)}
+.b-nv{background:rgba(34,114,195,.1);color:#2272c3;border:1px solid rgba(34,114,195,.2)}
+[data-theme="light"] .b-am{color:#7a5c00}[data-theme="light"] .b-ok{color:#0f6030}[data-theme="light"] .b-nv{color:#1458a0}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px}
+.tbl th{text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--t3);padding:8px 12px;border-bottom:1px solid var(--brd);background:var(--bg3)}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--brd);font-weight:300;color:var(--t2);vertical-align:top;line-height:1.6}
+.tbl td strong{font-weight:500;color:var(--t1)}
+.tbl tr:last-child td{border-bottom:none}.tbl tr:hover td{background:var(--bg3)}
+.tbl th:first-child{border-radius:7px 0 0 0}.tbl th:last-child{border-radius:0 7px 0 0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+@media(max-width:540px){.g2{grid-template-columns:1fr}}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+@media(max-width:680px){.g3{grid-template-columns:1fr}}
+.ulist{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.ulist li{display:flex;gap:9px;align-items:flex-start;font-size:13px;font-weight:300;color:var(--t2);line-height:1.65}
+.ulist li::before{content:'—';color:var(--rd);font-size:12px;flex-shrink:0;margin-top:1px}
+.ulist li strong{font-weight:500;color:var(--t1)}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:0;row-gap:8px;margin:14px 0}
+.fl-step{background:var(--bg3);border:1px solid var(--brd);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--t1);text-align:center;min-width:90px;line-height:1.4}
+.fl-step.hl{background:var(--rd-bg);border-color:var(--rd-bd);color:var(--rd);font-weight:500}
+.fl-arr{color:var(--t4);font-size:12px;padding:0 6px;flex-shrink:0}
+.svc{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center;padding:12px 16px;background:var(--card);border:1px solid var(--brd);border-radius:8px;margin-bottom:8px}
+.svc-ico{width:34px;height:34px;border-radius:7px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.svc-name{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:2px}
+.svc-desc{font-size:12px;font-weight:300;color:var(--t3);line-height:1.5}
+.svc-price{font-size:13px;font-weight:500;color:var(--rd);white-space:nowrap;text-align:right}
+.svc-price small{font-size:10px;font-weight:300;color:var(--t3);display:block;white-space:nowrap}
+.svc.total{border-color:var(--rd-bd);background:var(--rd-bg)}.svc.total .svc-name{color:var(--rd)}
+.field-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-bottom:12px}
+.field-item{background:var(--bg3);border:1px solid var(--brd);border-radius:6px;padding:10px 12px}
+.field-name{font-size:12px;font-weight:500;color:var(--t1);margin-bottom:2px}
+.field-type{font-size:11px;color:var(--rd);font-family:ui-monospace,monospace}
+.field-desc{font-size:11px;color:var(--t3);margin-top:3px;line-height:1.5}
+.channel{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border:1px solid var(--brd);border-radius:8px;margin-bottom:8px}
+.ch-ico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ch-name{font-size:13px;font-weight:500;color:var(--t1)}
+.ch-handle{font-size:12px;color:var(--t3);font-family:ui-monospace,monospace}
+.ch-desc{font-size:12px;font-weight:300;color:var(--t2);margin-top:2px;line-height:1.5}
+.nav-preview{display:flex;align-items:center;gap:0;background:var(--bg3);border:1px solid var(--brd);border-radius:8px;overflow:hidden;margin:14px 0;flex-wrap:wrap}
+.nav-item{padding:10px 16px;font-size:13px;font-weight:500;color:var(--t2);border-right:1px solid var(--brd);white-space:nowrap}
+.nav-item.active{background:var(--rd-bg);color:var(--rd)}
+.nav-item:last-child{border-right:none}
+hr{border:none;border-top:1px solid var(--brd);margin:28px 0}
+.footer-note{font-size:11px;font-weight:300;color:var(--t3);text-align:center;padding-bottom:40px;line-height:1.7}
+@media print{header,.sidebar,.ibtn{display:none!important}.layout{grid-template-columns:1fr}body{background:#fff;color:#000}}
+</style>
+</head>
+<body data-theme="dark">
+<header>
+  <a href="#" class="logo"><span class="logo-pip"></span>Ninja Poker Academy — Documentación del Proyecto</a>
+  <div class="hright">
+    <button class="ibtn" onclick="window.print()">↓ Guardar PDF</button>
+    <button class="ibtn" onclick="toggleTheme()" aria-label="Cambiar tema"><span id="tico">☀</span> Tema</button>
+  </div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <div class="sb-group">
+    <span class="sb-label">Proyecto</span>
+    <ul class="sb-nav">
+      <li><a href="#s1">Visión general</a></li>
+      <li><a href="#s2">El negocio</a></li>
+      <li><a href="#s3">Stack tecnológico</a></li>
+      <li><a href="#s4">Servicios y costes</a></li>
+      <li><a href="#s5">Canales de contacto</a></li>
+    </ul>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-group">
+    <span class="sb-label">SEO y posicionamiento</span>
+    <ul class="sb-nav">
+      <li><a href="#s6">Estrategia SEO</a></li>
+      <li><a href="#s7">Estructura de URLs</a></li>
+      <li><a href="#s8">Navegación del sitio</a></li>
+    </ul>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-group">
+    <span class="sb-label">Arquitectura</span>
+    <ul class="sb-nav">
+      <li><a href="#s9">Collections — Payload</a></li>
+      <li><a href="#s10">Collection Videos</a></li>
+    </ul>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-group">
+    <span class="sb-label">Contenido y automatización</span>
+    <ul class="sb-nav">
+      <li><a href="#s11">Flujo YouTube → Estrategia</a></li>
+      <li><a href="#s12">Pipeline IA completo</a></li>
+      <li><a href="#s13">Newsletter automática</a></li>
+    </ul>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-group">
+    <span class="sb-label">Legal y cumplimiento</span>
+    <ul class="sb-nav">
+      <li><a href="#s14">Verificación 18+</a></li>
+      <li><a href="#s15">Cookies y RGPD</a></li>
+      <li><a href="#s16">Juego responsable</a></li>
+      <li><a href="#s17">Regulación por país</a></li>
+      <li><a href="#s18">Páginas legales</a></li>
+    </ul>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-group">
+    <span class="sb-label">Analytics</span>
+    <ul class="sb-nav">
+      <li><a href="#s19">Google Search Console</a></li>
+      <li><a href="#s20">Google Analytics 4</a></li>
+      <li><a href="#s21">Bing Webmaster Tools</a></li>
+    </ul>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-group">
+    <span class="sb-label">Diseño y estilo</span>
+    <ul class="sb-nav">
+      <li><a href="#s22">Design system</a></li>
+      <li><a href="#s23">Reglas de estilo</a></li>
+      <li><a href="#s24">Decisiones pendientes</a></li>
+      <li><a href="#s25">GitHub y GitHub Pages</a></li>
+    </ul>
+  </div>
+</aside>
+<div class="content">
+
+<!-- S1 -->
+<section class="sec" id="s1">
+  <div class="eyebrow">Visión general</div>
+  <h2 class="sec-title">El proyecto</h2>
+  <p class="sec-lead">Ninja Poker Academy es una escuela de póker online en español. Formamos jugadores desde cero con un enfoque serio, estructurado y responsable. Educación gratuita, comunidad activa y bancaje opcional como plus.</p>
+  <div class="g2">
+    <div class="card">
+      <div class="card-head"><span class="badge b-am">Identidad del proyecto</span></div>
+      <div class="card-body">
+        <strong>Nombre:</strong> Ninja Poker Academy<br>
+        <strong>Dominio:</strong> ninjapokeracademy.com<br>
+        <strong>Idioma:</strong> Solo español<br>
+        <strong>YouTube:</strong> @ninjapokeracademy<br>
+        <strong>Instagram:</strong> @ninjapokeracademy<br>
+        <strong>Discord:</strong> ninjapoker10<br>
+        <strong>Telegram:</strong> @Perep10<br>
+        <strong>TikTok:</strong> @ninjapokeracademy
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><span class="badge b-ok">Objetivo del proyecto</span></div>
+      <div class="card-body">
+        <strong>Posición SEO objetivo:</strong> "escuela de poker" (keyword principal)<br>
+        <strong>CMS:</strong> Payload CMS 3.0<br>
+        <strong>Frontend:</strong> Next.js 14+<br>
+        <strong>PageSpeed:</strong> 95+ en todo<br>
+        <strong>IA:</strong> Claude API — contenido y automatizaciones<br>
+        <strong>Dark mode nativo · Mobile-first · WCAG 2.1 AA<br>RGPD · Verificación 18+</strong>
+      </div>
+    </div>
+  </div>
+  <div class="callout ok"><strong>Filosofía del proyecto:</strong> Todo lo que se puede automatizar, se automatiza — con aprobación humana en cada paso. Los videos de YouTube se convierten en artículos SEO. El contenido crece solo. El equipo aprueba y publica.</div>
+</section>
+
+<!-- S2 -->
+<section class="sec" id="s2">
+  <div class="eyebrow">El negocio</div>
+  <h2 class="sec-title">Qué es Ninja Poker Academy</h2>
+  <p class="sec-lead">Una escuela de póker online gratuita en español. No es una sala de apuestas, no es un sitio de afiliación. Es educación, comunidad y mejora continua.</p>
+  <div class="card">
+    <div class="card-head">Lo que ofrece la academia — fuente: descripción oficial de YouTube</div>
+    <div class="card-body">
+      Bienvenidos a Ninja Poker Academy. En nuestra escuela aprenderás a jugar poker online de forma seria, estructurada y responsable, con un enfoque realista en el estudio del juego y en el proceso de mejora como jugador.<br><br>
+      Formamos jugadores desde cero y también ayudamos a mejorar su juego a cualquier persona con experiencia, basándonos en el análisis matemático, psicológico y estratégico del Poker.<br><br>
+      <strong>● Clases diarias</strong><br>
+      <strong>● Revisión y análisis de manos</strong><br>
+      <strong>● Análisis de estadísticas y bases de datos</strong><br>
+      <strong>● Tutorías y seguimiento personalizado</strong><br>
+      <strong>● Trabajo sobre leaks, toma de decisiones y mental game</strong><br>
+      <strong>● Bancaje opcional y condiciones competitivas</strong><br>
+      <strong>● Trato cercano y familiar</strong>
+    </div>
+  </div>
+  <div class="callout info"><strong>Relación con APD y GPD:</strong> Ninja Poker Academy es un proyecto hermano bajo el mismo operador. Comparten stack técnico pero identidad, branding, SEO y estrategia de contenido completamente independientes. NPA no es un sitio de afiliación — es una escuela.</div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">Los tres pilares</div>
+      <div class="card-body">
+        <strong>Educación:</strong> Clases diarias en YouTube, artículos de estrategia, análisis de manos. Todo gratuito, todo en español.<br><br>
+        <strong>Comunidad:</strong> Discord activo (ninjapoker10) y Telegram (@Perep10). Revisión de manos, seguimiento personalizado, trato cercano.<br><br>
+        <strong>Bancaje (opcional):</strong> Un plus para jugadores con potencial. No es el centro del proyecto — es una posibilidad más dentro de la academia.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">Audiencia objetivo</div>
+      <div class="card-body">
+        <strong>Primaria:</strong> Jugadores hispanohablantes que quieren aprender póker desde cero o mejorar su nivel actual.<br><br>
+        <strong>Secundaria:</strong> Jugadores con experiencia que buscan análisis más profundo: leaks, estadísticas, mental game.<br><br>
+        <strong>Canal de adquisición principal:</strong> SEO orgánico (Google) → web → comunidad Discord/Telegram. YouTube como motor de contenido y visibilidad.
+      </div>
+    </div>
+  </div>
+  <div class="callout danger"><strong>Regla de contenido:</strong> En el sitio nunca se mencionan porcentajes de distribución de bancaje ni cantidades concretas. Lenguaje correcto: "bancaje opcional", "condiciones competitivas", "posibilidad de bancaje". Los detalles se negocian en privado por los canales de la academia.</div>
+</section>
+
+<!-- S3 -->
+<section class="sec" id="s3">
+  <div class="eyebrow">Tecnología</div>
+  <h2 class="sec-title">Stack tecnológico</h2>
+  <p class="sec-lead">Todo open-source. Sin licencias de terceros, sin plugins que actualizar. Construido desde cero con el stack probado en APD y GPD.</p>
+  <table class="tbl">
+    <thead><tr><th>Capa</th><th>Tecnología</th><th>Función</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Frontend</strong></td><td>Next.js 14+</td><td>SSG ultrarrápido, App Router, server components, SEO perfecto.</td><td><span class="badge b-am">Por instalar</span></td></tr>
+      <tr><td><strong>CMS</strong></td><td>Payload CMS 3.0</td><td>Panel de admin, colecciones en TypeScript, flujo editorial con estados.</td><td><span class="badge b-am">Por instalar</span></td></tr>
+      <tr><td><strong>Base de datos</strong></td><td>PostgreSQL (Railway)</td><td>Base relacional. Backups automáticos.</td><td><span class="badge b-am">Por crear</span></td></tr>
+      <tr><td><strong>Hosting frontend</strong></td><td>Vercel</td><td>Deploy automático desde GitHub. CDN global.</td><td><span class="badge b-am">Por configurar</span></td></tr>
+      <tr><td><strong>CDN + DNS</strong></td><td>Cloudflare</td><td>CDN, SSL, DDoS, Email Routing. Cuenta: 363color@gmail.com (misma que APD y GPD).</td><td><span class="badge b-am">Por activar</span></td></tr>
+      <tr><td><strong>Email routing</strong></td><td>Cloudflare Email Routing</td><td>hola@, privacidad@, bancaje@ninjapokeracademy.com → 363color@gmail.com. Gratis.</td><td><span class="badge b-am">Por configurar</span></td></tr>
+      <tr><td><strong>Email transaccional</strong></td><td>Resend</td><td>Confirmaciones y newsletter. 3.000 emails/mes gratis.</td><td><span class="badge b-am">Por configurar</span></td></tr>
+      <tr><td><strong>IA — contenido</strong></td><td>Claude API (Anthropic)</td><td>Artículos desde keywords, video→artículo, newsletter, repurposing. Siempre con aprobación humana.</td><td><span class="badge b-am">Por integrar</span></td></tr>
+      <tr><td><strong>Cookie consent</strong></td><td>Klaro (open-source)</td><td>Self-hosted. RGPD. Bloquea GA4 y Bing hasta opt-in explícito.</td><td><span class="badge b-am">Por integrar</span></td></tr>
+      <tr><td><strong>Analytics</strong></td><td>GA4 + GSC + Bing</td><td>Google Analytics 4, Google Search Console, Bing Webmaster Tools.</td><td><span class="badge b-am">Por conectar</span></td></tr>
+      <tr><td><strong>Repositorio</strong></td><td>GitHub (repo privado)</td><td>ninja-poker-academy. Deploy automático en cada push a main.</td><td><span class="badge b-rd">Por crear</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout info"><strong>Nota Payload CMS:</strong> Figma adquirió Payload en junio 2025. La licencia MIT no puede revocarse. NPA hace self-hosting en Railway. Sin impacto en el proyecto.</div>
+</section>
+
+<!-- S4 -->
+<section class="sec" id="s4">
+  <div class="eyebrow">Costes</div>
+  <h2 class="sec-title">Servicios y costes estimados</h2>
+  <p class="sec-lead">Stack diseñado para coste mínimo. La mayoría de servicios son gratuitos en los volúmenes iniciales.</p>
+  <div class="svc"><div class="svc-ico">⚡</div><div><div class="svc-name">Vercel</div><div class="svc-desc">Frontend Next.js. Deploy automático. CDN global.</div></div><div class="svc-price">$0/mes<small>plan gratuito</small></div></div>
+  <div class="svc"><div class="svc-ico">🗄</div><div><div class="svc-name">Railway</div><div class="svc-desc">Backend Payload CMS 3.0 + PostgreSQL. Backups automáticos diarios.</div></div><div class="svc-price">~$10–15/mes</div></div>
+  <div class="svc"><div class="svc-ico">🌐</div><div><div class="svc-name">Cloudflare</div><div class="svc-desc">CDN, DNS, DDoS, SSL, Email Routing. Una cuenta para APD, GPD y NPA.</div></div><div class="svc-price">$0/mes<small>plan gratuito · dominios ilimitados</small></div></div>
+  <div class="svc"><div class="svc-ico">📧</div><div><div class="svc-name">Resend</div><div class="svc-desc">Email transaccional y newsletter. Dominio verificado ninjapokeracademy.com.</div></div><div class="svc-price">$0/mes<small>3.000 emails/mes gratis</small></div></div>
+  <div class="svc"><div class="svc-ico">🍪</div><div><div class="svc-name">Klaro</div><div class="svc-desc">Cookie consent open-source self-hosted. RGPD compliant.</div></div><div class="svc-price">$0/mes<small>open-source MIT</small></div></div>
+  <div class="svc"><div class="svc-ico">🤖</div><div><div class="svc-name">Claude API</div><div class="svc-desc">Generación de contenido y automatizaciones. Pago por uso real.</div></div><div class="svc-price">~$5–20/mes<small>depende del volumen</small></div></div>
+  <div class="svc total"><div class="svc-ico">💰</div><div><div class="svc-name">Total estimado</div><div class="svc-desc">Stack completo desde cero. Sin WordPress, sin plugins, sin sorpresas.</div></div><div class="svc-price">~$15–35/mes</div></div>
+</section>
+
+<!-- S5 -->
+<section class="sec" id="s5">
+  <div class="eyebrow">Comunicaciones</div>
+  <h2 class="sec-title">Canales de contacto</h2>
+  <p class="sec-lead">La comunidad vive en las redes. El contacto es orgánico — comentarios, DMs y mensajes directos. No hay formulario web obligatorio.</p>
+  <div class="channel"><div class="ch-ico" style="background:rgba(225,48,108,.12)">📸</div><div><div class="ch-name">Instagram</div><div class="ch-handle">@ninjapokeracademy</div><div class="ch-desc">Canal principal de marca. DMs y comentarios. Contenido visual, clips, logros de alumnos.</div></div></div>
+  <div class="channel"><div class="ch-ico" style="background:rgba(255,0,0,.08)">▶</div><div><div class="ch-name">YouTube</div><div class="ch-handle">@ninjapokeracademy</div><div class="ch-desc">Motor de contenido principal. Clases diarias, análisis de manos, estrategia. Los comentarios son canal de contacto directo.</div></div></div>
+  <div class="channel"><div class="ch-ico" style="background:rgba(114,137,218,.12)">🎮</div><div><div class="ch-name">Discord</div><div class="ch-handle">ninjapoker10</div><div class="ch-desc">Comunidad activa. Análisis de manos, dudas, seguimiento personalizado. El canal más directo con el equipo.</div></div></div>
+  <div class="channel"><div class="ch-ico" style="background:rgba(0,136,204,.12)">✈</div><div><div class="ch-name">Telegram</div><div class="ch-handle">@Perep10</div><div class="ch-desc">Canal de notificaciones y contacto directo. Novedades de la academia, nuevas clases publicadas.</div></div></div>
+  <div class="channel"><div class="ch-ico" style="background:rgba(0,0,0,.06)">🎵</div><div><div class="ch-name">TikTok</div><div class="ch-handle">@ninjapokeracademy</div><div class="ch-desc">Clips cortos, highlights y contenido viral. Canal de adquisición de nueva audiencia.</div></div></div>
+  <div class="callout info"><strong>Automatización:</strong> Cuando se publica un artículo o clase nueva, el sitio envía automáticamente un aviso a Telegram y Discord con título, extracto y enlace. Sin intervención manual. Aprobación del contenido siempre antes de publicar.</div>
+</section>
+
+<!-- S6 -->
+<section class="sec" id="s6">
+  <div class="eyebrow">SEO y posicionamiento</div>
+  <h2 class="sec-title">Estrategia SEO — explicado desde cero</h2>
+  <p class="sec-lead">SEO es lo que hace que alguien que busca "escuela de poker" en Google encuentre Ninja Poker Academy antes que a la competencia. No requiere que hagas nada especial — el sistema lo trabaja automáticamente.</p>
+
+  <div class="callout ok"><strong>Keyword principal:</strong> <strong>"escuela de poker"</strong> — así busca la gente. No "academia de poker" (más débil). No "aprender poker" (demasiado genérico). Todos los competidores que posicionan bien en Google usan exactamente "escuela de poker" en su título y primer párrafo. NPA también lo hará.</div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">¿Qué es el SEO en términos simples?</div>
+      <div class="card-body">
+        Google lee el contenido de tu web y decide si es relevante cuando alguien busca algo. Cuanto más y mejor contenido tengas sobre un tema, más arriba apareces.<br><br>
+        NPA tiene una ventaja enorme: <strong>clases diarias en YouTube</strong>. Cada video se convierte en un artículo escrito con Claude. Cada artículo posiciona en Google. El contenido crece solo, de forma sistemática, con muy poco esfuerzo manual.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">Las keywords que trabajaremos</div>
+      <div class="card-body">
+        <strong>Principal:</strong> escuela de poker, escuela de poker online<br>
+        <strong>Secundaria:</strong> academia de poker, aprender poker online<br>
+        <strong>Long tail:</strong> análisis de manos poker, mental game poker, leaks en poker, estadísticas poker, bankroll management<br>
+        <strong>Específicas de NPA:</strong> clases de poker gratis, poker desde cero, análisis de manos gratis
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Cómo funciona el SEO automático de NPA</div>
+    <div class="card-body">
+      1. El equipo sube un video a YouTube sobre, por ejemplo, "cómo gestionar el bankroll"<br>
+      2. El sistema detecta el video nuevo automáticamente<br>
+      3. Claude genera un artículo sobre ese tema: título con la keyword, estructura correcta, contenido original — con el video embebido al final<br>
+      4. El artículo entra en Payload como borrador. El equipo lo revisa y aprueba<br>
+      5. Se publica en <code>/estrategia/gestion-del-bankroll/</code><br>
+      6. Google lo indexa. Alguien busca "gestión del bankroll poker" → encuentra NPA → ve el artículo → ve el video → entra en Discord<br><br>
+      <strong>Resultado:</strong> cada clase sube = una nueva oportunidad de aparecer en Google. Sin trabajo extra.
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card">
+      <div class="card-head">Auditoría de competidores</div>
+      <div class="card-body">Se analizaron ZerosPoker, MentoPoker, EducaPoker, PicharaPoker, FormaPoker, PolarPoker Academy y PokerStrategy. Conclusión: todos los que posicionan en top 3 usan "escuela de poker" como keyword principal y tienen contenido de video + artículo combinado.</div>
+    </div>
+    <div class="card">
+      <div class="card-head">Ventaja de NPA sobre todos</div>
+      <div class="card-body">Ningún competidor tiene el flujo YouTube→artículo automatizado. Ninguno tiene Next.js (todos usan WordPress lento). NPA será la web más rápida del sector y la que más contenido SEO genera de forma sistemática.</div>
+    </div>
+    <div class="card">
+      <div class="card-head">Tiempo para ver resultados</div>
+      <div class="card-body">Google tarda 3–6 meses en posicionar contenido nuevo. Por eso la consistencia importa más que la velocidad. Con 2–3 artículos nuevos por semana (uno por cada video publicado), en 6 meses NPA estará visible en búsquedas relevantes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- S7 -->
+<section class="sec" id="s7">
+  <div class="eyebrow">Arquitectura</div>
+  <h2 class="sec-title">Estructura de URLs</h2>
+  <p class="sec-lead">Solo español. El español es la raíz del dominio. URLs limpias, sin tilde, semánticas. Cada URL comunica exactamente lo que hay dentro.</p>
+  <table class="tbl">
+    <thead><tr><th>Sección</th><th>URL</th><th>Qué hay dentro</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Home</strong></td><td><code>/</code></td><td>Portada. Hero "Aprende a jugar póker online, gratis". Pilares de la academia. Últimas clases y artículos. CTA a Discord.</td></tr>
+      <tr><td><strong>Clases</strong></td><td><code>/clases/</code></td><td>Videoteca de YouTube organizada por nivel (básico / intermedio / avanzado) y modalidad (cash / torneos / mental game / estadísticas).</td></tr>
+      <tr><td><strong>Clase individual</strong></td><td><code>/clases/[slug]/</code></td><td>Video embebido de YouTube + descripción + nivel + categoría + artículo de estrategia relacionado.</td></tr>
+      <tr><td><strong>Estrategia</strong></td><td><code>/estrategia/</code></td><td>Artículos SEO generados a partir de los videos. Conceptos, análisis de manos, mental game, bankroll. Todo evergreen, todo educativo.</td></tr>
+      <tr><td><strong>Artículo individual</strong></td><td><code>/estrategia/[slug]/</code></td><td>Artículo con el video embebido. Sin tilde en slug. "póker" → <code>poker</code> en la URL.</td></tr>
+      <tr><td><strong>Comunidad</strong></td><td><code>/comunidad/</code></td><td>Links a Discord, Telegram, YouTube, Instagram, TikTok. Widget de Discord embebido.</td></tr>
+      <tr><td><strong>Sobre nosotros</strong></td><td><code>/sobre-nosotros/</code></td><td>Historia de la academia. Equipo. Filosofía: educación, comunidad, mejora continua.</td></tr>
+      <tr><td><strong>Contacto</strong></td><td><code>/contacto/</code></td><td>Formulario simple + todos los canales sociales. El contacto real es por redes.</td></tr>
+      <tr><td><strong>Privacidad</strong></td><td><code>/privacidad/</code></td><td>Política de Privacidad RGPD completa.</td></tr>
+      <tr><td><strong>Cookies</strong></td><td><code>/cookies/</code></td><td>Política de Cookies con control de preferencias.</td></tr>
+      <tr><td><strong>Términos</strong></td><td><code>/terminos/</code></td><td>Términos y Condiciones.</td></tr>
+      <tr><td><strong>Juego responsable</strong></td><td><code>/juego-responsable/</code></td><td>Recursos de ayuda, organismos de apoyo, límites.</td></tr>
+      <tr><td><strong>Aviso legal</strong></td><td><code>/aviso-legal/</code></td><td>Datos del titular. Requerido por la LSSICE en España.</td></tr>
+      <tr><td><strong>Panel CMS</strong></td><td><code>/[ruta-personalizada]/</code></td><td>Panel de Payload CMS. Ruta no obvia, nunca <code>/admin/</code>. Solo acceso interno.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- S8 -->
+<section class="sec" id="s8">
+  <div class="eyebrow">Diseño web</div>
+  <h2 class="sec-title">Navegación del sitio</h2>
+  <p class="sec-lead">Navegación decidida con base en los datos de la competencia. Simple, clara, orientada a lo que el usuario busca. Basada en lo que funciona en MentoPoker, ZerosPoker y EducaPoker.</p>
+  <div class="nav-preview">
+    <div class="nav-item active">Ninja Poker Academy</div>
+    <div class="nav-item">Clases</div>
+    <div class="nav-item">Estrategia</div>
+    <div class="nav-item">Comunidad</div>
+    <div class="nav-item">Contacto</div>
+    <div class="nav-item" style="margin-left:auto;color:var(--rd)">☀ / 🌙</div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">Clases — /clases/</div>
+      <div class="card-body">
+        La videoteca de YouTube de NPA. Todos los videos organizados y accesibles desde la web.<br><br>
+        <strong>Filtros:</strong> Nivel (Básico / Intermedio / Avanzado) · Modalidad (Cash / Torneos / Mental Game / Estadísticas / Análisis de Manos)<br><br>
+        Cada clase muestra el video embebido y enlaza al artículo de estrategia relacionado. Un usuario puede verlo en la web o ir a YouTube — ambas opciones disponibles.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">Estrategia — /estrategia/</div>
+      <div class="card-body">
+        Los artículos SEO. Todo el conocimiento de NPA en formato escrito, posicionando en Google.<br><br>
+        <strong>Categorías:</strong> Estrategia básica · Estrategia avanzada · Análisis de manos · Mental game · Estadísticas · Bankroll management<br><br>
+        Cada artículo tiene el video embebido de la clase correspondiente. El lector que llegue de Google ve el contenido escrito Y el video. Doble valor, doble engagement.
+      </div>
+    </div>
+  </div>
+  <div class="callout"><strong>La conexión clave:</strong> Clases y Estrategia se retroalimentan. Un artículo en /estrategia/ enlaza a la clase en /clases/. Una clase en /clases/ enlaza al artículo en /estrategia/. El usuario navega entre los dos naturalmente. Google ve una red de contenido coherente y relevante.</div>
+</section>
+
+<!-- S9 -->
+<section class="sec" id="s9">
+  <div class="eyebrow">Payload CMS</div>
+  <h2 class="sec-title">Collections — estructura de datos</h2>
+  <p class="sec-lead">Solo las colecciones necesarias para el lanzamiento. Sin sobreingeniería. Todo lo que no se usa en producción no existe todavía.</p>
+  <table class="tbl">
+    <thead><tr><th>Collection</th><th>Slug técnico</th><th>Para qué sirve</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Videos</strong></td><td><code>videos</code></td><td>El corazón del sitio. Cada video de YouTube tiene su entrada: URL, título, nivel, modalidad, transcripción, artículo relacionado vinculado.</td></tr>
+      <tr><td><strong>Artículos (estrategia)</strong></td><td><code>posts</code></td><td>Los artículos SEO de /estrategia/. Estado draft/published. Vinculados a un video. Generados por Claude, aprobados por el editor.</td></tr>
+      <tr><td><strong>Categorías</strong></td><td><code>categories</code></td><td>Taxonomía para artículos y videos: estrategia básica, análisis de manos, mental game, estadísticas, bankroll.</td></tr>
+      <tr><td><strong>Tags</strong></td><td><code>tags</code></td><td>Etiquetas transversales: cash game, torneos, preflop, postflop, GTO, leaks, etc.</td></tr>
+      <tr><td><strong>Autores</strong></td><td><code>authors</code></td><td>Perfil del autor/profesor. Nombre, bio, foto, redes. Relación con artículos.</td></tr>
+      <tr><td><strong>Suscriptores</strong></td><td><code>subscribers</code></td><td>Lista de newsletter. Email, fecha de suscripción, estado (activo/baja). RGPD compliant.</td></tr>
+      <tr><td><strong>Páginas</strong></td><td><code>pages</code></td><td>Home, Comunidad, Sobre nosotros, páginas legales. Editables desde el panel.</td></tr>
+      <tr><td><strong>Media</strong></td><td><code>media</code></td><td>Gestión de imágenes. Optimización automática vía next/image.</td></tr>
+      <tr><td><strong>Usuarios</strong></td><td><code>users</code></td><td>Panel nativo de Payload. Roles: admin y editor únicamente.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout warn"><strong>Lo que NO existe todavía:</strong> students, backing-applications, área de alumno, sistema de membresías, pasarela de pago. Todo eso es futuro. El lanzamiento es limpio y funcional.</div>
+</section>
+
+<!-- S10 -->
+<section class="sec" id="s10">
+  <div class="eyebrow">Payload CMS</div>
+  <h2 class="sec-title">Collection Videos — campos detallados</h2>
+  <p class="sec-lead">La colección Videos es el núcleo del sitio. Todo el contenido de NPA parte de aquí. Cada video de YouTube tiene su entrada completa en Payload.</p>
+  <div class="field-grid">
+    <div class="field-item"><div class="field-name">Título</div><div class="field-type">text · required</div><div class="field-desc">Título del video tal como aparece en YouTube.</div></div>
+    <div class="field-item"><div class="field-name">Slug</div><div class="field-type">text · unique · auto</div><div class="field-desc">Generado automáticamente desde el título. Sin tilde.</div></div>
+    <div class="field-item"><div class="field-name">URL de YouTube</div><div class="field-type">text · required</div><div class="field-desc">URL completa del video en YouTube para el embed.</div></div>
+    <div class="field-item"><div class="field-name">YouTube ID</div><div class="field-type">text · auto</div><div class="field-desc">Extraído automáticamente de la URL para el iframe.</div></div>
+    <div class="field-item"><div class="field-name">Descripción corta</div><div class="field-type">textarea</div><div class="field-desc">Extracto para listados y SEO. 150–160 caracteres.</div></div>
+    <div class="field-item"><div class="field-name">Transcripción</div><div class="field-type">richText</div><div class="field-desc">Transcripción del video. Base para que Claude genere el artículo.</div></div>
+    <div class="field-item"><div class="field-name">Nivel</div><div class="field-type">select · required</div><div class="field-desc">Básico / Intermedio / Avanzado.</div></div>
+    <div class="field-item"><div class="field-name">Modalidad</div><div class="field-type">select · required</div><div class="field-desc">Cash / Torneos / Mental Game / Estadísticas / Análisis de Manos / General.</div></div>
+    <div class="field-item"><div class="field-name">Categoría</div><div class="field-type">relation → categories</div><div class="field-desc">Categoría principal del video.</div></div>
+    <div class="field-item"><div class="field-name">Tags</div><div class="field-type">relation → tags · many</div><div class="field-desc">Etiquetas múltiples para filtrado.</div></div>
+    <div class="field-item"><div class="field-name">Artículo relacionado</div><div class="field-type">relation → posts</div><div class="field-desc">El artículo de /estrategia/ generado desde este video.</div></div>
+    <div class="field-item"><div class="field-name">Fecha de publicación</div><div class="field-type">date</div><div class="field-desc">Fecha en que se publicó en YouTube.</div></div>
+    <div class="field-item"><div class="field-name">Thumbnail</div><div class="field-type">relation → media</div><div class="field-desc">Imagen de portada. Se puede extraer de YouTube automáticamente.</div></div>
+    <div class="field-item"><div class="field-name">Estado</div><div class="field-type">select</div><div class="field-desc">draft / published. Solo publicados aparecen en el sitio.</div></div>
+  </div>
+</section>
+
+<!-- S11 -->
+<section class="sec" id="s11">
+  <div class="eyebrow">Contenido</div>
+  <h2 class="sec-title">Flujo YouTube → Artículo de Estrategia</h2>
+  <p class="sec-lead">Este es el motor de crecimiento SEO de NPA. Cada video publicado en YouTube genera automáticamente un artículo de estrategia optimizado para Google. Con video embebido. Revisado y aprobado por el equipo antes de publicar.</p>
+
+  <div class="flow">
+    <div class="fl-step">Video nuevo en YouTube</div><div class="fl-arr">→</div>
+    <div class="fl-step hl">Sistema detecta automáticamente</div><div class="fl-arr">→</div>
+    <div class="fl-step">Título + descripción + transcripción</div><div class="fl-arr">→</div>
+    <div class="fl-step hl">Claude genera artículo SEO</div><div class="fl-arr">→</div>
+    <div class="fl-step">Payload: estado "draft"</div><div class="fl-arr">→</div>
+    <div class="fl-step hl">Editor revisa y aprueba</div><div class="fl-arr">→</div>
+    <div class="fl-step">Publicado en /estrategia/</div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">Qué genera Claude exactamente</div>
+      <div class="card-body">
+        — <strong>Título SEO:</strong> con la keyword principal del tema<br>
+        — <strong>Meta description:</strong> 150–160 caracteres, con keyword<br>
+        — <strong>Introducción:</strong> contexto del tema, por qué importa<br>
+        — <strong>Cuerpo del artículo:</strong> los conceptos del video en formato escrito, con H2 y H3<br>
+        — <strong>Sección con el video embebido:</strong> "Aprende esto en nuestra clase completa"<br>
+        — <strong>Conclusión + CTA:</strong> enlace al Discord para practicar y preguntar dudas<br>
+        — <strong>Slug:</strong> sin tilde, con keyword
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">Lo que el artículo NO es</div>
+      <div class="card-body">
+        — No es una transcripción literal del video<br>
+        — No es un resumen sin valor<br>
+        — No duplica el contenido de YouTube<br><br>
+        <strong>Es un artículo original</strong> que desarrolla el tema del video en formato escrito, con su propio valor educativo. Alguien que lo lea aprende igual que alguien que ve el video. Los dos formatos se complementan y se enlazan mutuamente.
+      </div>
+    </div>
+  </div>
+  <div class="callout ok"><strong>Efecto compuesto:</strong> Con 3 videos/semana → 3 artículos/semana → 12/mes → 144/año. Cada uno posicionando en Google por sus propias keywords. En 12 meses, NPA tiene más contenido SEO relevante que cualquier competidor pequeño en el sector hispanohablante.</div>
+</section>
+
+<!-- S12 -->
+<section class="sec" id="s12">
+  <div class="eyebrow">Automatización IA</div>
+  <h2 class="sec-title">Pipeline de IA completo</h2>
+  <p class="sec-lead">Tres pipelines de contenido automatizados. En todos, Claude genera — el equipo aprueba. Nunca publicación directa sin revisión humana.</p>
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">Pipeline 1 — YouTube → Artículo</div>
+      <div class="card-body">
+        Detección automática de video nuevo → Claude genera artículo → draft en Payload → editor aprueba → publicado en /estrategia/ con video embebido.<br><br>
+        <strong>Técnica:</strong> YouTube Data API v3 o RSS polling del canal @ninjapokeracademy.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">Pipeline 2 — Keyword → Artículo</div>
+      <div class="card-body">
+        El editor introduce una keyword + tema en Payload → endpoint llama a Claude API → Claude genera artículo completo optimizado → draft en Payload → editor revisa y publica.<br><br>
+        Para cubrir keywords que no tienen un video aún.
+      </div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">Pipeline 3 — Repurposing a redes</div>
+      <div class="card-body">
+        Artículo publicado → Claude genera variantes para Instagram (caption + hashtags) y TikTok (texto corto) → cola de aprobación en Payload → el equipo revisa y publica manualmente.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">Internal linking automático</div>
+      <div class="card-body">
+        Al publicar un artículo, Claude sugiere 3–5 enlaces internos a artículos existentes relacionados. El editor confirma cuáles añadir. Mejora la malla SEO progresivamente con cada publicación.
+      </div>
+    </div>
+  </div>
+  <div class="callout danger"><strong>Regla de oro:</strong> Claude genera borradores. Los borradores entran en Payload con estado <code>draft</code>. Ningún contenido se publica sin que un humano lo haya leído y aprobado explícitamente. Sin excepciones.</div>
+</section>
+
+<!-- S13 -->
+<section class="sec" id="s13">
+  <div class="eyebrow">Automatización IA</div>
+  <h2 class="sec-title">Newsletter automática</h2>
+  <p class="sec-lead">La newsletter se genera sola a partir del contenido publicado. El equipo revisa el borrador y decide si envía.</p>
+  <div class="flow">
+    <div class="fl-step">Cron job semanal</div><div class="fl-arr">→</div>
+    <div class="fl-step hl">Recoge últimos artículos y clases publicados</div><div class="fl-arr">→</div>
+    <div class="fl-step">Claude redacta la newsletter</div><div class="fl-arr">→</div>
+    <div class="fl-step hl">Draft en Payload</div><div class="fl-arr">→</div>
+    <div class="fl-step">Editor aprueba</div><div class="fl-arr">→</div>
+    <div class="fl-step hl">Resend envía a suscriptores</div>
+  </div>
+  <div class="card">
+    <div class="card-head">Estructura de la newsletter</div>
+    <div class="card-body">
+      — Saludo con el nombre del suscriptor<br>
+      — Nuevas clases de la semana: título, nivel y enlace<br>
+      — Artículos de estrategia publicados: extracto y enlace<br>
+      — Sección "de la comunidad": highlight de Discord/Telegram<br>
+      — CTA: unirse a Discord o ver todas las clases<br>
+      — Footer con enlace de baja, política de privacidad y datos del responsable
+    </div>
+  </div>
+</section>
+
+<!-- S14 -->
+<section class="sec" id="s14">
+  <div class="eyebrow">Legal</div>
+  <h2 class="sec-title">Verificación de edad — 18+</h2>
+  <p class="sec-lead">El póker online está restringido a mayores de 18 años en todos los países. La verificación de edad es obligatoria desde el primer día.</p>
+  <div class="card">
+    <div class="card-head">Implementación del Age Gate</div>
+    <div class="card-body">
+      — Modal de bloqueo en la <strong>primera visita</strong> (sin cookie previa)<br>
+      — Bloquea todo el scroll y contenido hasta que el usuario confirme<br>
+      — Texto: <em>"Este sitio está destinado exclusivamente a mayores de 18 años. ¿Confirmas que tienes 18 años o más?"</em><br>
+      — Dos opciones: "Sí, tengo 18 años o más" / "No, soy menor de edad"<br>
+      — Si confirma: cookie <code>age_verified=true</code> por 365 días<br>
+      — Si rechaza: redirección a página de salida informativa<br>
+      — No se puede cerrar con Escape ni clic fuera del modal<br>
+      — Accesible con teclado y lectores de pantalla (WCAG 2.1 AA)
+    </div>
+  </div>
+  <div class="callout danger"><strong>Nota técnica:</strong> La cookie de age gate es técnicamente esencial — no es de tracking. No aparece en el banner de cookies de Klaro. Su única función es protección de menores.</div>
+</section>
+
+<!-- S15 -->
+<section class="sec" id="s15">
+  <div class="eyebrow">Legal</div>
+  <h2 class="sec-title">Cookies y RGPD</h2>
+  <p class="sec-lead">Cumplimiento completo con el Reglamento General de Protección de Datos. GA4 y Bing solo se activan con consentimiento explícito del usuario.</p>
+  <table class="tbl">
+    <thead><tr><th>Categoría</th><th>Qué incluye</th><th>Requiere consentimiento</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Esenciales</strong></td><td>Sesión, age_verified, preferencias de tema (dark/light). Necesarias para el funcionamiento básico.</td><td><span class="badge b-ok">No — siempre activas</span></td></tr>
+      <tr><td><strong>Analítica</strong></td><td>Google Analytics 4, Bing Analytics. Miden tráfico y comportamiento. Sin identificación personal.</td><td><span class="badge b-rd">Sí — opt-in requerido</span></td></tr>
+      <tr><td><strong>Marketing</strong></td><td>No activas en fase inicial.</td><td><span class="badge b-gy">No aplica ahora</span></td></tr>
+    </tbody>
+  </table>
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">Klaro — implementación</div>
+      <div class="card-body">
+        — Self-hosted, sin pagos, sin vendor lock-in<br>
+        — Banner aparece tras el age gate en primera visita<br>
+        — "Aceptar todo" / "Rechazar todo" / "Personalizar"<br>
+        — GA4 y Bing NO cargan sin opt-in<br>
+        — Preferencias editables desde el footer en todo momento
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">Derechos RGPD del usuario</div>
+      <div class="card-body">
+        — <strong>Acceso:</strong> solicitar sus datos<br>
+        — <strong>Rectificación:</strong> corregir datos incorrectos<br>
+        — <strong>Supresión:</strong> derecho al olvido<br>
+        — <strong>Portabilidad:</strong> exportar sus datos<br>
+        — <strong>Oposición:</strong> rechazar tratamiento con fines de marketing<br>
+        — Canal: <code>privacidad@ninjapokeracademy.com</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S16 -->
+<section class="sec" id="s16">
+  <div class="eyebrow">Legal</div>
+  <h2 class="sec-title">Juego responsable</h2>
+  <p class="sec-lead">NPA promueve activamente el juego responsable. Sin promesas de ganancias, sin lenguaje que incite al juego compulsivo.</p>
+  <ul class="ulist">
+    <li><strong>Página /juego-responsable/</strong> accesible desde el footer en todas las páginas del sitio.</li>
+    <li><strong>Aviso en el footer:</strong> "El póker implica riesgo económico. Juega de forma responsable. Solo mayores de 18 años."</li>
+    <li><strong>Sin promesas de ganancias:</strong> prohibido "gana dinero", "ingresos garantizados", "sin riesgo".</li>
+    <li><strong>Links a organismos de ayuda:</strong> Jugadores Anónimos, GamCare, BeGambleAware.</li>
+    <li><strong>Lenguaje correcto:</strong> "mejora tu juego", "aprende a tomar mejores decisiones", "gestiona tu bankroll". Nunca promesas económicas.</li>
+  </ul>
+</section>
+
+<!-- S17 -->
+<section class="sec" id="s17">
+  <div class="eyebrow">Legal</div>
+  <h2 class="sec-title">Regulación del juego online por país</h2>
+  <p class="sec-lead">NPA es una plataforma educativa. No gestiona depósitos ni opera juego. Pero el sector está regulado y hay que protegerse.</p>
+  <div class="callout warn"><strong>Disclaimer obligatorio en footer y en /terminos/:</strong> "El juego de póker online puede estar regulado o restringido en tu país o región. Es tu responsabilidad conocer y cumplir la legislación local aplicable. Ninja Poker Academy es una plataforma educativa — no es una sala de juego y no ofrece servicios de apuestas."</div>
+  <table class="tbl">
+    <thead><tr><th>Región</th><th>Situación</th><th>Acción en NPA</th></tr></thead>
+    <tbody>
+      <tr><td><strong>España</strong></td><td>Regulado (DGOJ). La educación de póker es libre.</td><td>Aviso de regulación local. Link a DGOJ en /juego-responsable/.</td></tr>
+      <tr><td><strong>México</strong></td><td>Legal con regulación federal. Salas en zona gris.</td><td>Aviso genérico. El jugador verifica su situación local.</td></tr>
+      <tr><td><strong>Argentina</strong></td><td>Regulado por provincias.</td><td>Aviso de regulación provincial.</td></tr>
+      <tr><td><strong>Colombia</strong></td><td>Regulado (Coljuegos).</td><td>Link a Coljuegos en /juego-responsable/.</td></tr>
+      <tr><td><strong>Resto LATAM</strong></td><td>Varía por país.</td><td>Disclaimer genérico en footer y /terminos/.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- S18 -->
+<section class="sec" id="s18">
+  <div class="eyebrow">Legal</div>
+  <h2 class="sec-title">Páginas legales obligatorias</h2>
+  <p class="sec-lead">Cinco páginas legales desde el día 1. Templates generados por Claude — el operador aporta los datos reales del responsable.</p>
+  <table class="tbl">
+    <thead><tr><th>Página</th><th>URL</th><th>Contenido clave</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Política de Privacidad</strong></td><td><code>/privacidad/</code></td><td>Responsable del tratamiento, datos recogidos, finalidad, derechos RGPD, contacto.</td></tr>
+      <tr><td><strong>Política de Cookies</strong></td><td><code>/cookies/</code></td><td>Listado de cookies, proveedor, duración, finalidad. Link para gestionar preferencias.</td></tr>
+      <tr><td><strong>Términos y Condiciones</strong></td><td><code>/terminos/</code></td><td>Uso del sitio, contenido educativo, responsabilidad, ley aplicable, disclaimer de regulación.</td></tr>
+      <tr><td><strong>Juego Responsable</strong></td><td><code>/juego-responsable/</code></td><td>Recursos de ayuda, señales de juego problemático, organismos de apoyo.</td></tr>
+      <tr><td><strong>Aviso Legal</strong></td><td><code>/aviso-legal/</code></td><td>Datos del titular: nombre legal, NIF/CIF, domicilio. Requerido por LSSICE en España.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout danger"><strong>Bloqueante para el lanzamiento:</strong> (1) Crear email <code>privacidad@ninjapokeracademy.com</code> con Cloudflare Email Routing → 363color@gmail.com. (2) Aportar nombre legal, NIF/CIF y domicilio fiscal. Con esos dos pasos, Claude genera todas las páginas legales completas y el sitio puede lanzarse.</div>
+</section>
+
+<!-- S19 -->
+<section class="sec" id="s19">
+  <div class="eyebrow">Analytics</div>
+  <h2 class="sec-title">Google Search Console</h2>
+  <p class="sec-lead">La herramienta más importante para SEO. Muestra cómo Google ve el sitio, qué keywords lo encuentran y qué páginas posicionan. Gratis.</p>
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">Configuración inicial</div>
+      <div class="card-body">
+        1. Ir a <strong>search.google.com/search-console</strong><br>
+        2. Añadir propiedad: <code>https://ninjapokeracademy.com</code><br>
+        3. Verificar por <strong>registro DNS en Cloudflare</strong> (método más fiable)<br>
+        4. Enviar sitemap: <code>/sitemap.xml</code> (generado automáticamente)<br>
+        5. Activar Core Web Vitals<br>
+        6. Revisar informe de cobertura 48h después del lanzamiento
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">Qué revisar semanalmente</div>
+      <div class="card-body">
+        — <strong>Rendimiento:</strong> impresiones, clics, posición media por keyword<br>
+        — <strong>Cobertura:</strong> páginas indexadas vs. con errores<br>
+        — <strong>Core Web Vitals:</strong> LCP, INP, CLS en móvil y escritorio<br>
+        — <strong>Keywords:</strong> por cuáles búsquedas aparece NPA<br>
+        — <strong>Páginas que suben:</strong> artículos que empiezan a posicionar
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S20 -->
+<section class="sec" id="s20">
+  <div class="eyebrow">Analytics</div>
+  <h2 class="sec-title">Google Analytics 4</h2>
+  <p class="sec-lead">Mide el comportamiento de los usuarios: qué páginas visitan, cuánto tiempo pasan, desde dónde llegan. Solo se activa con consentimiento explícito (Klaro).</p>
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">Configuración inicial</div>
+      <div class="card-body">
+        1. Crear propiedad en <strong>analytics.google.com</strong><br>
+        2. URL: <code>ninjapokeracademy.com</code><br>
+        3. Obtener Measurement ID: <code>G-XXXXXXXXXX</code><br>
+        4. Integrar en Next.js vía <code>@next/third-parties/google</code><br>
+        5. Cargar <strong>solo después del opt-in</strong> en Klaro<br>
+        6. Activar anonimización de IP (obligatorio RGPD)
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">Eventos personalizados clave</div>
+      <div class="card-body">
+        — <code>video_play</code>: reproducción de clase<br>
+        — <code>subscribe_newsletter</code>: suscripción a newsletter<br>
+        — <code>discord_click</code>: clic en enlace a Discord<br>
+        — <code>telegram_click</code>: clic en enlace a Telegram<br>
+        — <code>article_read</code>: artículo de estrategia leído completo<br>
+        — <code>filter_used</code>: uso de filtros en /clases/
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S21 -->
+<section class="sec" id="s21">
+  <div class="eyebrow">Analytics</div>
+  <h2 class="sec-title">Bing Webmaster Tools</h2>
+  <p class="sec-lead">Bing representa entre 5–10% de las búsquedas en español. Su herramienta es gratuita y complementa a Google Search Console. Con IndexNow, cada artículo publicado se indexa en Bing en minutos.</p>
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">Configuración inicial</div>
+      <div class="card-body">
+        1. Ir a <strong>bing.com/webmasters</strong><br>
+        2. Añadir sitio: <code>https://ninjapokeracademy.com</code><br>
+        3. Verificar por DNS en Cloudflare<br>
+        4. Enviar sitemap: <code>/sitemap.xml</code><br>
+        5. Importar desde Google Search Console (opción nativa)<br>
+        6. Activar IndexNow
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">IndexNow — indexación instantánea</div>
+      <div class="card-body">
+        Cuando Payload publica un artículo o clase, el hook <code>afterPublish</code> notifica automáticamente a Bing con la URL nueva.<br><br>
+        Resultado: en lugar de esperar días a que Bing rastree el sitio, el contenido nuevo aparece en Bing en <strong>minutos</strong>. Sin coste. Sin trabajo manual.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S22 -->
+<section class="sec" id="s22">
+  <div class="eyebrow">Diseño</div>
+  <h2 class="sec-title">Design system — identidad visual</h2>
+  <p class="sec-lead">Branding fuerte: rojo intenso, negro profundo, estética ninja. Dark mode por defecto — alineado con la identidad del proyecto.</p>
+  <table class="tbl">
+    <thead><tr><th>Token</th><th>Valor</th><th>Uso</th></tr></thead>
+    <tbody>
+      <tr><td><strong>--color-red</strong></td><td><code>#CC1A1A</code></td><td>Color de marca. CTAs, acentos, links activos, elementos destacados.</td></tr>
+      <tr><td><strong>--color-red-hover</strong></td><td><code>#E53030</code></td><td>Hover en dark mode.</td></tr>
+      <tr><td><strong>--color-black</strong></td><td><code>#0D0D0D</code></td><td>Fondo principal dark mode.</td></tr>
+      <tr><td><strong>--color-surface</strong></td><td><code>#161616</code></td><td>Cards y componentes en dark mode.</td></tr>
+      <tr><td><strong>--color-text-primary</strong></td><td><code>#F3F0EB</code></td><td>Texto principal en dark mode.</td></tr>
+      <tr><td><strong>--border-radius-md</strong></td><td><code>8px</code></td><td>Cards, inputs, botones.</td></tr>
+      <tr><td><strong>--border-radius-lg</strong></td><td><code>12px</code></td><td>Secciones y contenedores.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Dark mode nativo:</strong> El sitio es dark por defecto. Light mode disponible como opción. El toggle se guarda en localStorage. La preferencia del sistema operativo se detecta en la carga inicial.</div>
+</section>
+
+<!-- S23 -->
+<section class="sec" id="s23">
+  <div class="eyebrow">Contenido</div>
+  <h2 class="sec-title">Reglas de estilo editorial</h2>
+  <p class="sec-lead">Reglas fijas que aplica Claude en cada generación y el editor en cada revisión. Consistencia total en todo el contenido.</p>
+  <ul class="ulist">
+    <li><strong>Idioma exclusivo:</strong> Solo español. Tecnicismos del póker son aceptados: "hand", "stack", "equity", "leak", "GTO".</li>
+    <li><strong>"Póker" con tilde</strong> en todo el contenido editorial. "Poker" sin tilde en URLs, slugs, meta titles y keywords.</li>
+    <li><strong>Keyword principal en el H1 y en los primeros 100 caracteres</strong> del artículo. Siempre.</li>
+    <li><strong>Voz directa y cercana:</strong> la academia habla de tú a tú. Sin distancia corporativa. Trato cercano y familiar — como dice la descripción oficial.</li>
+    <li><strong>Sin promesas económicas:</strong> nunca "ganarás dinero", "ingresos garantizados". El lenguaje correcto: "mejora tu juego", "toma mejores decisiones", "entiende el juego a otro nivel".</li>
+    <li><strong>Estructura de artículos:</strong> H1 único con keyword → introducción → H2 por sección → párrafos cortos (3–4 líneas) → video embebido → CTA a Discord.</li>
+    <li><strong>Fechas de actualización visibles</strong> en cada artículo. El contenido evergreen se marca cuando se revisa.</li>
+    <li><strong>Autoría:</strong> cada artículo tiene un autor asignado. No se publica contenido anónimo.</li>
+  </ul>
+</section>
+
+<!-- S24 -->
+<section class="sec" id="s24">
+  <div class="eyebrow">Por confirmar</div>
+  <h2 class="sec-title">Decisiones pendientes</h2>
+  <table class="tbl">
+    <thead><tr><th>Decisión</th><th>Fase</th><th>Notas</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Crear emails con Cloudflare Email Routing</strong></td><td><span class="badge b-rd">Bloqueante</span></td><td>hola@, privacidad@, bancaje@ninjapokeracademy.com → 363color@gmail.com. Necesario antes de generar páginas legales.</td></tr>
+      <tr><td><strong>Datos del responsable legal</strong></td><td><span class="badge b-rd">Bloqueante</span></td><td>Nombre legal, NIF/CIF, domicilio fiscal. Sin esto no hay Privacidad ni Aviso Legal válidos.</td></tr>
+      <tr><td><strong>Crear repositorio GitHub</strong></td><td><span class="badge b-am">Fase 0</span></td><td>ninja-poker-academy. Ramas: main y develop. Carpeta /docs/ para esta documentación.</td></tr>
+      <tr><td><strong>Activar Cloudflare DNS</strong></td><td><span class="badge b-am">Fase 0</span></td><td>Cambiar nameservers en el registrador. Cuenta 363color@gmail.com — misma para APD, GPD y NPA.</td></tr>
+      <tr><td><strong>Verificar dominio en Resend</strong></td><td><span class="badge b-am">Fase 0</span></td><td>SPF + DKIM + DMARC. Necesario antes de enviar cualquier email.</td></tr>
+      <tr><td><strong>Ruta personalizada del panel CMS</strong></td><td><span class="badge b-am">Fase 1</span></td><td>Nunca /admin/. Configurar en Payload una ruta no obvia. Documentar internamente.</td></tr>
+      <tr><td><strong>Keyword research completo</strong></td><td><span class="badge b-am">Fase 0</span></td><td>50–100 keywords objetivo. Clusters: escuela poker, estrategia, análisis manos, mental game, bankroll.</td></tr>
+      <tr><td><strong>Diseño visual final</strong></td><td><span class="badge b-nv">Fase 2</span></td><td>Sobre el design system documentado. Decisión final en fase frontend.</td></tr>
+      <tr><td><strong>Sistema de membresías / área privada</strong></td><td><span class="badge b-gy">Futuro</span></td><td>Cuando el tráfico orgánico esté consolidado. No en el alcance inicial.</td></tr>
+      <tr><td><strong>Versión EN del sitio</strong></td><td><span class="badge b-gy">Futuro</span></td><td>Solo español hasta consolidar el proyecto.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- S25 -->
+<section class="sec" id="s25">
+  <div class="eyebrow">Setup</div>
+  <h2 class="sec-title">Subir a GitHub y publicar online</h2>
+  <p class="sec-lead">La documentación y el roadmap se hospedan en GitHub Pages — gratis, siempre accesibles con URL pública. El código del proyecto vive en el mismo repositorio.</p>
+  <div class="card">
+    <div class="card-head">Paso 1 — Crear el repositorio en GitHub</div>
+    <div class="card-body">
+      1. Ir a <strong>github.com</strong> → iniciar sesión con <code>363color@gmail.com</code><br>
+      2. Click en <strong>"New repository"</strong><br>
+      3. Nombre: <code>ninja-poker-academy</code><br>
+      4. Visibilidad: <strong>Public</strong> (necesario para GitHub Pages gratuito)<br>
+      5. Marcar <strong>"Add a README file"</strong><br>
+      6. Click <strong>"Create repository"</strong>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">Paso 2 — Subir los archivos de documentación</div>
+    <div class="card-body">
+      <strong>Desde el navegador (sin instalar nada):</strong><br>
+      1. En el repo, click en <strong>"Add file" → "Upload files"</strong><br>
+      2. Arrastrar <code>npa-documentacion.html</code> y <code>npa-roadmap.html</code><br>
+      3. Mensaje de commit: <em>"docs: add documentation and roadmap"</em><br>
+      4. Click <strong>"Commit changes"</strong>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">Paso 3 — Activar GitHub Pages</div>
+    <div class="card-body">
+      1. En el repo → <strong>Settings → Pages</strong><br>
+      2. Source: <strong>"Deploy from a branch"</strong><br>
+      3. Branch: <strong>main</strong> · Folder: <strong>/ (root)</strong><br>
+      4. Click <strong>"Save"</strong><br>
+      5. En 1–2 minutos, URL disponible:<br>
+      <code>https://TU-USUARIO.github.io/ninja-poker-academy/npa-documentacion.html</code><br>
+      <code>https://TU-USUARIO.github.io/ninja-poker-academy/npa-roadmap.html</code>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">Paso 4 — (Opcional) URL personalizada</div>
+    <div class="card-body">
+      Para acceder como <code>docs.ninjapokeracademy.com</code>:<br>
+      1. GitHub Pages Settings → "Custom domain" → <code>docs.ninjapokeracademy.com</code><br>
+      2. Cloudflare DNS → añadir registro CNAME:<br>
+      &nbsp;&nbsp;Nombre: <code>docs</code> · Destino: <code>TU-USUARIO.github.io</code> · Proxy: nube gris (DNS only)<br>
+      3. Esperar 5–15 min. Activar "Enforce HTTPS" en GitHub Pages.
+    </div>
+  </div>
+  <div class="callout ok"><strong>Para actualizar:</strong> Cada vez que se genere una versión nueva de los archivos, se reemplazan en GitHub con Upload files. GitHub Pages publica el cambio en 1–2 minutos.</div>
+</section>
+
+<hr>
+<p class="footer-note">Ninja Poker Academy — Documentación del Proyecto · ninjapokeracademy.com · Elaborado con Claude (Anthropic)<br>
+Stack: Next.js 14 + Payload CMS 3.0 + PostgreSQL + Cloudflare · Analytics: GA4 + GSC + Bing · Email: Resend · IA: Claude API<br>
+Keyword principal: "escuela de poker" · Secciones: /clases/ + /estrategia/ · Dark mode nativo · RGPD · 18+</p>
+</div>
+</div>
+<script>
+function toggleTheme(){const b=document.body,i=document.getElementById('tico');b.getAttribute('data-theme')==='dark'?(b.setAttribute('data-theme','light'),i.textContent='🌙'):(b.setAttribute('data-theme','dark'),i.textContent='☀');}
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){document.body.setAttribute('data-theme','light');document.getElementById('tico').textContent='🌙';}
+const secs=document.querySelectorAll('.sec');const links=document.querySelectorAll('.sb-nav a');
+window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(s.getBoundingClientRect().top<100)cur=s.id});links.forEach(l=>{l.classList.toggle('on',l.getAttribute('href')==='#'+cur)});},{passive:true});
+</script>
+</body>
+</html>
