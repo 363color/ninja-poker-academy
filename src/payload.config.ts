@@ -8,6 +8,7 @@ import { Categories } from './collections/Categories'
 import { Videos } from './collections/Videos'
 import { Tags } from './collections/Tags'
 import { Subscribers } from './collections/Subscribers'
+import { Authors } from './collections/Authors'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
@@ -66,7 +67,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URL || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Videos, Tags, Subscribers],
+  collections: [Pages, Posts, Media, Categories, Users, Videos, Tags, Subscribers, Authors],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins,
