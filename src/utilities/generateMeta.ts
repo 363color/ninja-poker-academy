@@ -24,7 +24,8 @@ export const generateMeta = async (args: {
 }): Promise<Metadata> => {
   const { doc } = args
 
-  const ogImage = getImageURL(doc?.meta?.image)
+  // @ts-ignore - meta.image exists at runtime via seoPlugin
+  const ogImage = getImageURL((doc?.meta as any)?.image)
 
   const title = doc?.meta?.title
     ? doc?.meta?.title + ' | Payload Website Template'

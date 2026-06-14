@@ -14,7 +14,9 @@ import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+  return doc?.title
+    ? `${doc.title} | Ninja Poker Academy`
+    : 'Ninja Poker Academy — Escuela de Póker Online'
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
@@ -51,6 +53,7 @@ export const plugins: Plugin[] = [
     generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
   }),
   seoPlugin({
+    collections: ['pages', 'posts', 'videos'],
     generateTitle,
     generateURL,
   }),

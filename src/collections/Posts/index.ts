@@ -43,7 +43,6 @@ export const Posts: CollectionConfig<'posts'> = {
     slug: true,
     categories: true,
     meta: {
-      image: true,
       description: true,
     },
   },
