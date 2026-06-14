@@ -72,6 +72,9 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    videos: Video;
+    tags: Tag;
+    subscribers: Subscriber;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -94,6 +97,9 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
+    subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -783,6 +789,66 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: number;
+  title: string;
+  /**
+   * El ID del video de YouTube (ej: dQw4w9WgXcQ)
+   */
+  youtubeId?: string | null;
+  /**
+   * URL completa del video (se extrae el ID automáticamente)
+   */
+  youtubeUrl?: string | null;
+  /**
+   * Solo si el video no está en YouTube
+   */
+  videoFile?: (number | null) | Media;
+  description?: string | null;
+  thumbnail?: (number | null) | Media;
+  categories?: (number | Category)[] | null;
+  tags?: (number | Tag)[] | null;
+  duration?: number | null;
+  status?: ('draft' | 'published' | 'archived') | null;
+  publishedAt?: string | null;
+  /**
+   * Artículo de estrategia generado a partir de este video
+   */
+  relatedArticle?: (number | null) | Post;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  name: string;
+  /**
+   * URL amigable (ej: texas-holdem)
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers".
+ */
+export interface Subscriber {
+  id: number;
+  email: string;
+  name?: string | null;
+  status?: ('active' | 'inactive' | 'unsubscribed') | null;
+  source?: ('web' | 'youtube' | 'discord' | 'manual') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -990,6 +1056,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: number | Video;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: number | Tag;
+      } | null)
+    | ({
+        relationTo: 'subscribers';
+        value: number | Subscriber;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1355,6 +1433,48 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  title?: T;
+  youtubeId?: T;
+  youtubeUrl?: T;
+  videoFile?: T;
+  description?: T;
+  thumbnail?: T;
+  categories?: T;
+  tags?: T;
+  duration?: T;
+  status?: T;
+  publishedAt?: T;
+  relatedArticle?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers_select".
+ */
+export interface SubscribersSelect<T extends boolean = true> {
+  email?: T;
+  name?: T;
+  status?: T;
+  source?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
