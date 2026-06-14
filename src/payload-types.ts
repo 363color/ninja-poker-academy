@@ -797,28 +797,62 @@ export interface Video {
   id: number;
   title: string;
   /**
-   * El ID del video de YouTube (ej: dQw4w9WgXcQ)
+   * Se genera automáticamente desde el título. Puedes editarlo manualmente.
    */
-  youtubeId?: string | null;
+  slug?: string | null;
   /**
-   * URL completa del video (se extrae el ID automáticamente)
+   * Pega la URL completa del video de YouTube
    */
   youtubeUrl?: string | null;
   /**
-   * Solo si el video no está en YouTube
+   * Se extrae automáticamente de la URL. También puedes escribirlo manualmente.
    */
-  videoFile?: (number | null) | Media;
-  description?: string | null;
-  thumbnail?: (number | null) | Media;
+  youtubeId?: string | null;
+  /**
+   * Máximo 160 caracteres. Aparece en listados y cards.
+   */
+  descripcionCorta?: string | null;
+  /**
+   * Transcripción completa del video. Usada por el pipeline de Claude para generar artículos SEO.
+   */
+  transcripcion?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  nivel?: ('basico' | 'intermedio' | 'avanzado') | null;
+  modalidad?: ('cash' | 'torneos' | 'mental-game' | 'estadisticas' | 'analisis-manos') | null;
   categories?: (number | Category)[] | null;
   tags?: (number | Tag)[] | null;
-  duration?: number | null;
-  status?: ('draft' | 'published' | 'archived') | null;
-  publishedAt?: string | null;
   /**
-   * Artículo de estrategia generado a partir de este video
+   * Artículo SEO generado a partir de este video
    */
-  relatedArticle?: (number | null) | Post;
+  articuloRelacionado?: (number | null) | Post;
+  thumbnail?: (number | null) | Media;
+  /**
+   * Título optimizado para Google. Máximo 60 caracteres.
+   */
+  metaTitle?: string | null;
+  /**
+   * Descripción para Google. Máximo 160 caracteres.
+   */
+  metaDescription?: string | null;
+  /**
+   * Palabras clave separadas por comas
+   */
+  metaKeywords?: string | null;
+  publishedAt?: string | null;
+  status?: ('draft' | 'published' | 'archived') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1462,17 +1496,22 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface VideosSelect<T extends boolean = true> {
   title?: T;
-  youtubeId?: T;
+  slug?: T;
   youtubeUrl?: T;
-  videoFile?: T;
-  description?: T;
-  thumbnail?: T;
+  youtubeId?: T;
+  descripcionCorta?: T;
+  transcripcion?: T;
+  nivel?: T;
+  modalidad?: T;
   categories?: T;
   tags?: T;
-  duration?: T;
-  status?: T;
+  articuloRelacionado?: T;
+  thumbnail?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  metaKeywords?: T;
   publishedAt?: T;
-  relatedArticle?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }
