@@ -4,7 +4,7 @@ export const Videos: CollectionConfig = {
   slug: 'videos',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'youtubeId', 'status', 'publishedAt'],
+    defaultColumns: ['title', 'nivel', 'modalidad', 'status', 'publishedAt'],
   },
   access: {
     read: () => true,
@@ -17,40 +17,98 @@ export const Videos: CollectionConfig = {
       label: 'Título',
     },
     {
-      name: 'youtubeId',
+      name: 'slug',
       type: 'text',
-      label: 'YouTube ID',
+      label: 'Slug',
       admin: {
-        description: 'El ID del video de YouTube (ej: dQw4w9WgXcQ)',
+        description: 'Se genera automáticamente desde el título. Puedes editarlo manualmente.',
+      },
+      hooks: {
+        beforeValidate: [
+          ({ value, data }) => {
+            if (!value && data?.title) {
+              return data.title
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim()
+            }
+            return value
+          },
+        ],
       },
     },
     {
       name: 'youtubeUrl',
       type: 'text',
-      label: 'YouTube URL',
+      label: 'URL de YouTube',
       admin: {
-        description: 'URL completa del video (se extrae el ID automáticamente)',
+        description: 'Pega la URL completa del video de YouTube',
       },
     },
     {
-      name: 'videoFile',
-      type: 'upload',
-      relationTo: 'media',
-      label: 'Archivo de video (subida directa)',
+      name: 'youtubeId',
+      type: 'text',
+      label: 'YouTube ID',
       admin: {
-        description: 'Solo si el video no está en YouTube',
+        description: 'Se extrae automáticamente de la URL. También puedes escribirlo manualmente.',
+      },
+      hooks: {
+        beforeValidate: [
+          ({ value, data }) => {
+            if (data?.youtubeUrl) {
+              const url = data.youtubeUrl
+              const match = url.match(
+                /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+              )
+              if (match) return match[1]
+            }
+            return value
+          },
+        ],
       },
     },
     {
-      name: 'description',
+      name: 'descripcionCorta',
       type: 'textarea',
-      label: 'Descripción',
+      label: 'Descripción corta',
+      admin: {
+        description: 'Máximo 160 caracteres. Aparece en listados y cards.',
+      },
     },
     {
-      name: 'thumbnail',
-      type: 'upload',
-      relationTo: 'media',
-      label: 'Miniatura',
+      name: 'transcripcion',
+      type: 'richText',
+      label: 'Transcripción',
+      admin: {
+        description:
+          'Transcripción completa del video. Usada por el pipeline de Claude para generar artículos SEO.',
+      },
+    },
+    {
+      name: 'nivel',
+      type: 'select',
+      label: 'Nivel',
+      options: [
+        { label: 'Básico', value: 'basico' },
+        { label: 'Intermedio', value: 'intermedio' },
+        { label: 'Avanzado', value: 'avanzado' },
+      ],
+    },
+    {
+      name: 'modalidad',
+      type: 'select',
+      label: 'Modalidad',
+      options: [
+        { label: 'Cash Game', value: 'cash' },
+        { label: 'Torneos', value: 'torneos' },
+        { label: 'Mental Game', value: 'mental-game' },
+        { label: 'Estadísticas', value: 'estadisticas' },
+        { label: 'Análisis de Manos', value: 'analisis-manos' },
+      ],
     },
     {
       name: 'categories',
@@ -67,20 +125,43 @@ export const Videos: CollectionConfig = {
       label: 'Tags',
     },
     {
-      name: 'duration',
-      type: 'number',
-      label: 'Duración (segundos)',
+      name: 'articuloRelacionado',
+      type: 'relationship',
+      relationTo: 'posts',
+      label: 'Artículo relacionado',
+      admin: {
+        description: 'Artículo SEO generado a partir de este video',
+      },
     },
     {
-      name: 'status',
-      type: 'select',
-      label: 'Estado',
-      defaultValue: 'draft',
-      options: [
-        { label: 'Borrador', value: 'draft' },
-        { label: 'Publicado', value: 'published' },
-        { label: 'Archivado', value: 'archived' },
-      ],
+      name: 'thumbnail',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Thumbnail',
+    },
+    {
+      name: 'metaTitle',
+      type: 'text',
+      label: 'Meta Título (SEO)',
+      admin: {
+        description: 'Título optimizado para Google. Máximo 60 caracteres.',
+      },
+    },
+    {
+      name: 'metaDescription',
+      type: 'textarea',
+      label: 'Meta Descripción (SEO)',
+      admin: {
+        description: 'Descripción para Google. Máximo 160 caracteres.',
+      },
+    },
+    {
+      name: 'metaKeywords',
+      type: 'text',
+      label: 'Keywords (SEO)',
+      admin: {
+        description: 'Palabras clave separadas por comas',
+      },
     },
     {
       name: 'publishedAt',
@@ -93,13 +174,15 @@ export const Videos: CollectionConfig = {
       },
     },
     {
-      name: 'relatedArticle',
-      type: 'relationship',
-      relationTo: 'posts',
-      label: 'Artículo relacionado',
-      admin: {
-        description: 'Artículo de estrategia generado a partir de este video',
-      },
+      name: 'status',
+      type: 'select',
+      label: 'Estado',
+      defaultValue: 'draft',
+      options: [
+        { label: 'Borrador', value: 'draft' },
+        { label: 'Publicado', value: 'published' },
+        { label: 'Archivado', value: 'archived' },
+      ],
     },
   ],
 }
