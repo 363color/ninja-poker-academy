@@ -45,10 +45,6 @@ const klaroConfig = {
         description:
           'Mide el tráfico y el comportamiento de los visitantes para mejorar el sitio. IP anonimizado (RGPD).',
       },
-      bingAnalytics: {
-        title: 'Bing Webmaster Tools',
-        description: 'Analítica de búsqueda de Microsoft Bing.',
-      },
     },
   },
 
@@ -82,13 +78,6 @@ const klaroConfig = {
           'ad_personalization': 'denied'
         });
       `,
-      required: false,
-      optOut: false,
-    },
-    {
-      name: 'bingAnalytics',
-      title: 'Bing Webmaster Tools',
-      purposes: ['analitica'],
       required: false,
       optOut: false,
     },
