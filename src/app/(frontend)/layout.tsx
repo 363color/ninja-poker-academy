@@ -17,7 +17,7 @@ import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
 import { AgeGate } from '@/components/AgeGate'
-
+import { CookieConsent } from '@/components/CookieConsent'
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
 
@@ -30,6 +30,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <AgeGate />
+        <CookieConsent />
         <Providers>
           <AdminBar
             adminBarProps={{

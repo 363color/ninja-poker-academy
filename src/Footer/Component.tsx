@@ -5,6 +5,7 @@ import React from 'react'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
+import { CookiePreferencesButton } from '@/components/CookieConsent/PreferencesButton'
 
 export async function Footer() {
   const footerData = await getCachedGlobal('footer', 1)()
@@ -24,6 +25,7 @@ export async function Footer() {
             {navItems.map(({ link }, i) => {
               return <CMSLink className="text-white" key={i} {...link} />
             })}
+            <CookiePreferencesButton />
           </nav>
         </div>
       </div>
