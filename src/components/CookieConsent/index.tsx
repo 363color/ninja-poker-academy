@@ -9,6 +9,7 @@ export const CookieConsent: React.FC = () => {
       const klaroConfig = (await import('./klaro-config')).default
       ;(window as any).klaro = klaro
       ;(window as any).klaroConfig = klaroConfig
+      ;(window as any).GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
       klaro.setup(klaroConfig)
     }
     initKlaro()
@@ -22,3 +23,4 @@ export const openKlaroModal = () => {
     ;(window as any).klaro.show()
   }
 }
+

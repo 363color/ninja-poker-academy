@@ -41,8 +41,8 @@ const klaroConfig = {
         analitica: 'Analítica',
       },
       googleAnalytics: {
-        title: 'Google Analytics',
-        description: 'Mide el tráfico y el comportamiento de los visitantes para mejorar el sitio.',
+        title: 'Google Analytics 4',
+        description: 'Mide el tráfico y el comportamiento de los visitantes para mejorar el sitio. IP anonimizado (RGPD).',
       },
       bingAnalytics: {
         title: 'Bing Webmaster Tools',
@@ -54,7 +54,7 @@ const klaroConfig = {
   services: [
     {
       name: 'googleAnalytics',
-      title: 'Google Analytics',
+      title: 'Google Analytics 4',
       purposes: ['analitica'],
       cookies: [
         [/^_ga/, '/', 'ninjapokeracademy.com'],
@@ -65,16 +65,24 @@ const klaroConfig = {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('consent', 'update', {
-          'analytics_storage': 'granted'
+          'analytics_storage': 'granted',
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
         });
-        gtag('js', new Date());
-        gtag('config', 'G-S461J43CV5', { 'anonymize_ip': true });
+        gtag('config', window.GA_MEASUREMENT_ID || '', {
+          'anonymize_ip': true,
+          'allow_google_signals': false
+        });
       `,
       onDecline: `
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('consent', 'update', {
-          'analytics_storage': 'denied'
+          'analytics_storage': 'denied',
+          'ad_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied'
         });
       `,
       required: false,
