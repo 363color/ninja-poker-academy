@@ -42,7 +42,8 @@ const klaroConfig = {
       },
       googleAnalytics: {
         title: 'Google Analytics 4',
-        description: 'Mide el tráfico y el comportamiento de los visitantes para mejorar el sitio. IP anonimizado (RGPD).',
+        description:
+          'Mide el tráfico y el comportamiento de los visitantes para mejorar el sitio. IP anonimizado (RGPD).',
       },
       bingAnalytics: {
         title: 'Bing Webmaster Tools',
@@ -69,10 +70,6 @@ const klaroConfig = {
           'ad_storage': 'granted',
           'ad_user_data': 'granted',
           'ad_personalization': 'granted'
-        });
-        gtag('config', window.GA_MEASUREMENT_ID || '', {
-          'anonymize_ip': true,
-          'allow_google_signals': false
         });
       `,
       onDecline: `
