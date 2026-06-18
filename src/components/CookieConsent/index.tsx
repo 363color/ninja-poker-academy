@@ -23,4 +23,3 @@ export const openKlaroModal = () => {
     ;(window as any).klaro.show()
   }
 }
-
