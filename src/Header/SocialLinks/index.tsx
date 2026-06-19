@@ -4,7 +4,15 @@ import React from 'react'
 import Link from 'next/link'
 import { SiYoutube, SiInstagram, SiDiscord, SiTelegram, SiTiktok } from 'react-icons/si'
 
-export const SocialLinks: React.FC = () => {
+interface SocialLinksProps {
+  className?: string
+  linkClassName?: string
+}
+
+export const SocialLinks: React.FC<SocialLinksProps> = ({
+  className = 'hidden lg:flex gap-4 items-center',
+  linkClassName = 'text-foreground hover:text-npa-red transition-colors',
+}) => {
   const socials = [
     { name: 'YouTube', url: 'https://youtube.com/@ninjapokeracademy', Icon: SiYoutube },
     { name: 'Instagram', url: 'https://instagram.com/ninjapokeracademy', Icon: SiInstagram },
@@ -14,7 +22,7 @@ export const SocialLinks: React.FC = () => {
   ]
 
   return (
-    <div className="hidden lg:flex gap-4 items-center">
+    <div className={className}>
       {socials.map(({ name, url, Icon }) => (
         <Link
           key={name}
@@ -22,7 +30,7 @@ export const SocialLinks: React.FC = () => {
           target={url !== '#' ? '_blank' : undefined}
           rel={url !== '#' ? 'noopener noreferrer' : undefined}
           aria-label={name}
-          className="text-foreground hover:text-npa-red transition-colors"
+          className={linkClassName}
         >
           <Icon size={20} />
         </Link>
