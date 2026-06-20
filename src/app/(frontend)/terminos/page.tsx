@@ -60,13 +60,12 @@ export default function TerminosPage() {
               Al acceder a este sitio web, declaras haber leído, comprendido y aceptado los
               presentes Términos y Condiciones en su versión vigente, así como nuestra{' '}
               <a href="/privacidad">Política de Privacidad</a> y nuestra{' '}
-              <a href="/cookies">Política de Cookies</a>. Si no estás de acuerdo con alguno de
-              estos términos, deberás abstenerte de utilizar el sitio.
+              <a href="/cookies">Política de Cookies</a>. Si no estás de acuerdo con alguno de estos
+              términos, deberás abstenerte de utilizar el sitio.
             </p>
             <p>
-              El acceso a este sitio está restringido a personas mayores de{' '}
-              <strong>[EDAD MÍNIMA LEGAL]</strong> años. Al utilizar el sitio, confirmas que
-              cumples este requisito de edad.
+              El acceso a este sitio está restringido a personas mayores de <strong>18</strong>{' '}
+              años. Al utilizar el sitio, confirmas que cumples este requisito de edad.
             </p>
           </section>
 
@@ -119,9 +118,7 @@ export default function TerminosPage() {
                 Notificarnos inmediatamente ante cualquier uso no autorizado de tu cuenta a través
                 de <a href="mailto:[EMAIL DE CONTACTO]">[EMAIL DE CONTACTO]</a>.
               </li>
-              <li>
-                No ceder ni compartir tu cuenta con terceros.
-              </li>
+              <li>No ceder ni compartir tu cuenta con terceros.</li>
             </ul>
             <p>
               La Empresa se reserva el derecho de suspender o cancelar cuentas que incumplan estas
@@ -175,9 +172,7 @@ export default function TerminosPage() {
               <li>
                 Intentar acceder de forma no autorizada a sistemas o bases de datos del sitio.
               </li>
-              <li>
-                Introducir virus, malware u otro software dañino.
-              </li>
+              <li>Introducir virus, malware u otro software dañino.</li>
               <li>
                 Realizar scraping, extracción masiva de datos o cualquier acción que pueda
                 perjudicar el funcionamiento del sitio.
@@ -194,8 +189,8 @@ export default function TerminosPage() {
             </p>
             <ul>
               <li>
-                La Empresa no será responsable de daños derivados del uso o imposibilidad de uso
-                del sitio.
+                La Empresa no será responsable de daños derivados del uso o imposibilidad de uso del
+                sitio.
               </li>
               <li>
                 El contenido educativo se ofrece «tal cual» y no constituye asesoramiento
@@ -234,8 +229,8 @@ export default function TerminosPage() {
             <h2>11. Contacto</h2>
             <p>
               Para cualquier consulta sobre estos Términos y Condiciones, puedes contactarnos en{' '}
-              <a href="mailto:[EMAIL DE CONTACTO]">[EMAIL DE CONTACTO]</a> o en la dirección
-              postal indicada en el <a href="/aviso-legal">Aviso Legal</a>.
+              <a href="mailto:[EMAIL DE CONTACTO]">[EMAIL DE CONTACTO]</a> o en la dirección postal
+              indicada en el <a href="/aviso-legal">Aviso Legal</a>.
             </p>
           </section>
         </article>

@@ -36,6 +36,10 @@ const nextConfig: NextConfig = {
           protocol: url.protocol.replace(':', '') as 'http' | 'https',
         }
       }),
+      {
+        hostname: 'img.youtube.com',
+        protocol: 'https',
+      },
     ],
   },
   webpack: (webpackConfig) => {

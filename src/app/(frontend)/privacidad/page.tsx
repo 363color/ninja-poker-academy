@@ -92,9 +92,9 @@ export default function PrivacidadPage() {
                 interacciones con la plataforma.
               </li>
               <li>
-                <strong>Datos de pago:</strong> en caso de compra, los datos son procesados de
-                forma segura a través de pasarelas de pago certificadas. No almacenamos números de
-                tarjeta directamente.
+                <strong>Datos de pago:</strong> en caso de compra, los datos son procesados de forma
+                segura a través de pasarelas de pago certificadas. No almacenamos números de tarjeta
+                directamente.
               </li>
             </ul>
           </section>
@@ -118,16 +118,15 @@ export default function PrivacidadPage() {
                 previo.
               </li>
               <li>
-                <strong>Análisis estadístico y mejora del servicio</strong> mediante herramientas
-                de analítica web — interés legítimo del responsable.
+                <strong>Análisis estadístico y mejora del servicio</strong> mediante herramientas de
+                analítica web — interés legítimo del responsable.
               </li>
               <li>
                 <strong>Cumplimiento de obligaciones legales</strong> — obligación legal.
               </li>
               <li>
                 <strong>Verificación de edad</strong> para garantizar que los usuarios tienen al
-                menos <strong>[EDAD MÍNIMA LEGAL]</strong> años — cumplimiento legal y protección
-                de menores.
+                menos <strong>18</strong> años — cumplimiento legal y protección de menores.
               </li>
             </ul>
           </section>
@@ -225,8 +224,8 @@ export default function PrivacidadPage() {
                 común y lectura mecánica.
               </li>
               <li>
-                <strong>Oposición:</strong> oponerte al tratamiento basado en interés legítimo o
-                con fines de marketing directo.
+                <strong>Oposición:</strong> oponerte al tratamiento basado en interés legítimo o con
+                fines de marketing directo.
               </li>
               <li>
                 <strong>Decisiones automatizadas:</strong> no ser objeto de decisiones basadas
@@ -236,8 +235,8 @@ export default function PrivacidadPage() {
             </ul>
             <p>
               Para ejercer estos derechos, escríbenos a{' '}
-              <a href="mailto:[EMAIL DE CONTACTO]">[EMAIL DE CONTACTO]</a> indicando tu nombre,
-              el derecho que deseas ejercer y adjuntando una copia de tu documento de identidad.
+              <a href="mailto:[EMAIL DE CONTACTO]">[EMAIL DE CONTACTO]</a> indicando tu nombre, el
+              derecho que deseas ejercer y adjuntando una copia de tu documento de identidad.
               Responderemos en el plazo máximo establecido por la normativa aplicable. Si consideras
               que el tratamiento de tus datos vulnera la normativa, tienes derecho a presentar una
               reclamación ante la autoridad de control competente.
@@ -259,15 +258,16 @@ export default function PrivacidadPage() {
               Podemos actualizar esta Política de Privacidad periódicamente para reflejar cambios en
               nuestras prácticas o en la normativa aplicable. Te notificaremos sobre cambios
               significativos mediante un aviso destacado en el sitio web o, si corresponde, por
-              correo electrónico. La fecha de la última revisión aparece al inicio de este documento.
+              correo electrónico. La fecha de la última revisión aparece al inicio de este
+              documento.
             </p>
           </section>
 
           <section id="contacto">
             <h2>10. Contacto</h2>
             <p>
-              Para cualquier consulta relacionada con esta política o con el tratamiento de tus datos
-              personales, puedes dirigirte a:
+              Para cualquier consulta relacionada con esta política o con el tratamiento de tus
+              datos personales, puedes dirigirte a:
             </p>
             <ul>
               <li>

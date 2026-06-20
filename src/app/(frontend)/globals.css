@@ -102,8 +102,8 @@
   --npa-red-light: oklch(45% 0.18 25deg / 12%);
   --npa-black: oklch(8% 0 0deg); /* #0D0D0D */
   --npa-black-elevated: oklch(11% 0 0deg); /* #1A1A1A aprox */
-  --npa-cream: oklch(95.5% 0.01 90deg); /* #F3F0EB */
-  --npa-cream-muted: oklch(80% 0.015 85deg); /* #C9C4BC aprox */
+  --npa-cream: oklch(100% 0 0deg); /* #FFFFFF - blanco puro */
+  --npa-cream-muted: oklch(75% 0 0deg); /* #B8B8B8 aprox - gris neutro frío */
 }
 
 /* ============================================
@@ -152,6 +152,11 @@
    Dark mode (default)
    ============================================ */
 [data-theme='dark'] {
+  /* Rojo más saturado/vibrante sobre fondo negro */
+  --npa-red: oklch(62% 0.22 25deg);
+  --npa-red-hover: oklch(54% 0.22 25deg);
+  --npa-red-light: oklch(62% 0.22 25deg / 15%);
+
   --background: var(--npa-black);
   --foreground: var(--npa-cream);
   --card: var(--npa-black-elevated);
@@ -168,8 +173,9 @@
   --accent-foreground: var(--npa-red);
   --destructive: oklch(39.6% 0.141 25.723deg);
   --destructive-foreground: oklch(63.7% 0.237 25.331deg);
-  --border: oklch(20% 0 0deg);
-  --input: oklch(20% 0 0deg);
+  /* Borde más visible contra fondo negro (20% → 30%) */
+  --border: oklch(30% 0 0deg);
+  --input: oklch(30% 0 0deg);
   --ring: var(--npa-red);
   --chart-1: oklch(48.8% 0.243 264.376deg);
   --chart-2: oklch(69.6% 0.17 162.48deg);
@@ -182,7 +188,7 @@
   --sidebar-primary-foreground: var(--npa-cream);
   --sidebar-accent: var(--npa-red-light);
   --sidebar-accent-foreground: var(--npa-red);
-  --sidebar-border: oklch(20% 0 0deg);
+  --sidebar-border: oklch(30% 0 0deg);
   --sidebar-ring: var(--npa-red);
   --success: oklch(45% 0.1 145deg);
   --warning: oklch(45% 0.1 70deg);

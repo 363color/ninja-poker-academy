@@ -40,9 +40,7 @@ export function Footer() {
 
           {/* Col 2: Social links */}
           <div className="flex flex-col gap-5">
-            <p className="text-xs uppercase tracking-widest text-white/40 font-display">
-              Síguenos
-            </p>
+            <p className="text-xs uppercase tracking-widest text-white/40 font-display">Síguenos</p>
             <SocialLinks
               className="flex flex-wrap gap-5 items-center"
               linkClassName="text-white/60 hover:text-white transition-colors"
@@ -54,14 +52,13 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <span className="text-2xl font-display font-bold text-npa-red leading-none">+18</span>
               <span className="text-sm text-white/60">
-                Solo para mayores de{' '}
-                <strong className="text-white/80">[EDAD MÍNIMA LEGAL]</strong> años
+                Solo para mayores de <strong className="text-white/80">18</strong> años
               </span>
             </div>
             <p className="text-xs text-white/50 leading-relaxed">
               El juego en línea puede estar sujeto a restricciones según tu país de residencia.
-              Verifica las leyes locales antes de participar. Este sitio opera bajo la regulación
-              de <strong className="text-white/70">[ORGANISMO REGULADOR LOCAL]</strong>.
+              Verifica las leyes locales antes de participar. Este sitio opera bajo la regulación de{' '}
+              <strong className="text-white/70">[ORGANISMO REGULADOR LOCAL]</strong>.
             </p>
             <div className="flex items-center gap-4 mt-1">
               <Link
@@ -98,9 +95,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-          <p>
-            © {new Date().getFullYear()} [NOMBRE DE LA EMPRESA]. Todos los derechos reservados.
-          </p>
+          <p>© {new Date().getFullYear()} [NOMBRE DE LA EMPRESA]. Todos los derechos reservados.</p>
           <div className="flex items-center gap-4">
             <CookiePreferencesButton />
             <ThemeSelector />

@@ -60,7 +60,9 @@ export default function JuegoResponsablePage() {
               prácticas de juego responsable. Esto incluye:
             </p>
             <ul>
-              <li>Restricción de acceso a menores de <strong>[EDAD MÍNIMA LEGAL]</strong> años.</li>
+              <li>
+                Restricción de acceso a menores de <strong>18</strong> años.
+              </li>
               <li>Difusión de información sobre riesgos asociados al juego.</li>
               <li>Provisión de enlaces a recursos de ayuda profesional.</li>
               <li>
@@ -80,15 +82,13 @@ export default function JuegoResponsablePage() {
           <section id="verificacion-edad">
             <h2>2. Verificación de edad</h2>
             <p>
-              El acceso a este sitio está restringido a personas mayores de{' '}
-              <strong>[EDAD MÍNIMA LEGAL]</strong> años. Al registrarte o acceder al contenido,
-              confirmas que cumples este requisito. Nos reservamos el derecho de solicitar
-              documentación que acredite la edad en cualquier momento y de suspender el acceso si
-              detectamos que un usuario es menor de edad.
+              El acceso a este sitio está restringido a personas mayores de <strong>18</strong>{' '}
+              años. Al registrarte o acceder al contenido, confirmas que cumples este requisito. Nos
+              reservamos el derecho de solicitar documentación que acredite la edad en cualquier
+              momento y de suspender el acceso si detectamos que un usuario es menor de edad.
             </p>
             <p>
-              Si eres menor de <strong>[EDAD MÍNIMA LEGAL]</strong> años, abandona este sitio
-              inmediatamente.
+              Si eres menor de <strong>18</strong> años, abandona este sitio inmediatamente.
             </p>
           </section>
 
@@ -104,13 +104,9 @@ export default function JuegoResponsablePage() {
                 Sentir la necesidad de apostar cantidades cada vez mayores para obtener la misma
                 emoción.
               </li>
-              <li>
-                Intentar recuperar pérdidas apostando más («perseguir pérdidas»).
-              </li>
+              <li>Intentar recuperar pérdidas apostando más («perseguir pérdidas»).</li>
               <li>Mentir a familiares o amigos sobre el tiempo o el dinero dedicado al juego.</li>
-              <li>
-                Descuidar responsabilidades laborales, familiares o sociales por el juego.
-              </li>
+              <li>Descuidar responsabilidades laborales, familiares o sociales por el juego.</li>
               <li>Sentir ansiedad, irritabilidad o depresión relacionada con el juego.</li>
               <li>Usar el juego como forma de escapar de problemas o emociones negativas.</li>
             </ul>
@@ -152,8 +148,8 @@ export default function JuegoResponsablePage() {
               </li>
             </ul>
             <p>
-              Si utilizas alguna de estas herramientas, te recomendamos también bloquear el acceso
-              a sitios de juego en tu dispositivo mediante programas de filtrado, como{' '}
+              Si utilizas alguna de estas herramientas, te recomendamos también bloquear el acceso a
+              sitios de juego en tu dispositivo mediante programas de filtrado, como{' '}
               <a href="https://www.gamban.com" target="_blank" rel="noopener noreferrer">
                 Gamban
               </a>
@@ -212,8 +208,8 @@ export default function JuegoResponsablePage() {
                     BeGambleAware
                   </p>
                   <p className="text-sm text-foreground/60 mt-1">
-                    Información, recursos y herramientas para ayudarte a tomar decisiones
-                    informadas sobre el juego y encontrar apoyo si lo necesitas.
+                    Información, recursos y herramientas para ayudarte a tomar decisiones informadas
+                    sobre el juego y encontrar apoyo si lo necesitas.
                   </p>
                   <p className="text-xs text-npa-red mt-2">begambleaware.org →</p>
                 </div>
@@ -239,8 +235,8 @@ export default function JuegoResponsablePage() {
           <section id="menores">
             <h2>7. Protección de menores</h2>
             <p>
-              Nos tomamos muy en serio la protección de los menores de edad. Si tienes menores en
-              tu hogar, te recomendamos:
+              Nos tomamos muy en serio la protección de los menores de edad. Si tienes menores en tu
+              hogar, te recomendamos:
             </p>
             <ul>
               <li>
@@ -250,9 +246,7 @@ export default function JuegoResponsablePage() {
                 Mantener tus dispositivos y cuentas protegidos con contraseñas que los menores no
                 puedan conocer.
               </li>
-              <li>
-                Hablar abiertamente con los menores sobre los riesgos del juego de azar.
-              </li>
+              <li>Hablar abiertamente con los menores sobre los riesgos del juego de azar.</li>
             </ul>
             <p>
               Si detectamos que un menor ha accedido a nuestro sitio, suspenderemos su acceso de

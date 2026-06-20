@@ -57,8 +57,8 @@ export default function AvisoLegalPage() {
                 <strong>Denominación social:</strong> [NOMBRE DE LA EMPRESA]
               </li>
               <li>
-                <strong>Número de registro / identificación fiscal:</strong>{' '}
-                [NÚMERO DE REGISTRO/RUC/NIT]
+                <strong>Número de registro / identificación fiscal:</strong> [NÚMERO DE
+                REGISTRO/RUC/NIT]
               </li>
               <li>
                 <strong>Domicilio social:</strong> [DIRECCIÓN], [PAÍS]
@@ -101,10 +101,12 @@ export default function AvisoLegalPage() {
             </p>
             <p>Queda expresamente prohibido:</p>
             <ul>
-              <li>El acceso al sitio por parte de menores de <strong>[EDAD MÍNIMA LEGAL]</strong> años.</li>
               <li>
-                Realizar acciones que puedan dañar, inutilizar, sobrecargar o deteriorar el sitio
-                o los sistemas informáticos de terceros.
+                El acceso al sitio por parte de menores de <strong>18</strong> años.
+              </li>
+              <li>
+                Realizar acciones que puedan dañar, inutilizar, sobrecargar o deteriorar el sitio o
+                los sistemas informáticos de terceros.
               </li>
               <li>
                 Intentar acceder sin autorización a sistemas, datos o áreas restringidas del sitio.
@@ -133,8 +135,8 @@ export default function AvisoLegalPage() {
             </p>
             <p>
               Las marcas, nombres comerciales y signos distintivos que aparecen en el sitio son
-              propiedad de [NOMBRE DE LA EMPRESA] o de sus legítimos titulares. Su uso no
-              autorizado está expresamente prohibido.
+              propiedad de [NOMBRE DE LA EMPRESA] o de sus legítimos titulares. Su uso no autorizado
+              está expresamente prohibido.
             </p>
           </section>
 
@@ -162,14 +164,14 @@ export default function AvisoLegalPage() {
             <p>
               <strong>[NOMBRE DE LA EMPRESA]</strong> no garantiza la disponibilidad y continuidad
               del funcionamiento del sitio web. Tampoco garantiza la ausencia de errores en el
-              contenido ni que el sitio esté libre de virus u otros elementos que puedan causar daños
-              en los sistemas informáticos de los usuarios.
+              contenido ni que el sitio esté libre de virus u otros elementos que puedan causar
+              daños en los sistemas informáticos de los usuarios.
             </p>
             <p>
-              El titular no será responsable, en la medida máxima permitida por la ley aplicable,
-              de ningún daño o perjuicio —incluyendo daños económicos, pérdida de datos o
-              interrupción de actividad— derivado del acceso o uso del sitio, de la imposibilidad de
-              acceder a él, o de la confianza depositada en la información contenida en el mismo.
+              El titular no será responsable, en la medida máxima permitida por la ley aplicable, de
+              ningún daño o perjuicio —incluyendo daños económicos, pérdida de datos o interrupción
+              de actividad— derivado del acceso o uso del sitio, de la imposibilidad de acceder a
+              él, o de la confianza depositada en la información contenida en el mismo.
             </p>
           </section>
 
