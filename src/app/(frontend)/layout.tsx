@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
-import { JetBrains_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -21,10 +21,14 @@ import { AgeGate } from '@/components/AgeGate'
 import { CookieConsent } from '@/components/CookieConsent'
 import { GoogleAnalytics } from '@/components/GoogleAnalytics'
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['700', '800'],
-  variable: '--font-jetbrains-mono',
+const interdisplay = localFont({
+  src: [
+    { path: '../../../public/fonts/Interdisplay-400.ttf', weight: '400' },
+    { path: '../../../public/fonts/Interdisplay-500.ttf', weight: '500' },
+    { path: '../../../public/fonts/Interdisplay-600.ttf', weight: '600' },
+    { path: '../../../public/fonts/Interdisplay-700.ttf', weight: '700' },
+  ],
+  variable: '--font-display',
 })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -32,7 +36,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html
-      className={cn(GeistSans.variable, GeistMono.variable, jetbrainsMono.variable)}
+      className={cn(GeistSans.variable, GeistMono.variable, interdisplay.variable)}
       lang="es"
       suppressHydrationWarning
     >
@@ -66,6 +70,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
