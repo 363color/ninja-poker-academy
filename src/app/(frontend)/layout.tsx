@@ -42,6 +42,31 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     >
       <head>
         <InitTheme />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Ninja Poker Academy',
+              url: 'https://ninjapokeracademy.com',
+              logo: 'https://ninjapokeracademy.com/media/Ninja-Poker-Academy-Avatar-transparente.png',
+              description:
+                'Ninja Poker Academy: academia de póker online en español. Clases diarias, revisión de manos y comunidad activa para jugadores de todos los niveles.',
+              sameAs: [
+                'https://www.youtube.com/@ninjapokeracademy',
+                'https://www.instagram.com/ninjapokeracademy',
+                'https://www.tiktok.com/@ninjapokeracademy',
+                'https://t.me/ninjapokeracademy',
+              ],
+              contactPoint: {
+                '@type': 'ContactPoint',
+                contactType: 'customer support',
+                url: 'https://ninjapokeracademy.com/contacto/',
+              },
+            }),
+          }}
+        />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

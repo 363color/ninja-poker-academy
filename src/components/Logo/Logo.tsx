@@ -15,7 +15,7 @@ export const Logo = (props: Props) => {
   return (
     <Image
       alt="Ninja Poker Academy Logo"
-      src="/media/Ninja-Poker-Academy-Avatar-transparente.png"
+      src="/media/logo-npa.png"
       width={width}
       height={height}
       priority={priority}
