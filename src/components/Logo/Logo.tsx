@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import clsx from 'clsx'
 import React from 'react'
 
@@ -10,16 +9,14 @@ interface Props {
 }
 
 export const Logo = (props: Props) => {
-  const { width = 64, height = 64, priority = false, className } = props
-
+  const { width = 64, height = 64, className } = props
   return (
-    <Image
-      alt="Ninja Poker Academy Logo"
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      alt="Ninja Poker Academy"
       src="/media/logo-npa.png"
-      width={width}
-      height={height}
-      priority={priority}
-      className={clsx('h-auto w-auto', className)}
+      style={{ width, height, objectFit: 'contain' }}
+      className={clsx(className)}
     />
   )
 }
