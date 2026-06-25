@@ -4,7 +4,7 @@ import { getServerSideURL } from './getURL'
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
   description:
-    'Ninja Poker Academy: academia de póker online en español. Clases diarias, revisión de manos y comunidad activa para jugadores de todos los niveles.',
+    'Academia de póker online en español. Clases diarias de cash game, revisión de manos y comunidad activa para jugadores de todos los niveles.',
   images: [
     {
       url: `${getServerSideURL()}/og-image.png`,
