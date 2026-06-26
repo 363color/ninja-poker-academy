@@ -95,13 +95,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
+  title: {
+    default: 'Academia de Poker Online en Español | Ninja Poker Academy',
+    template: '%s | Ninja Poker Academy',
+  },
+  description:
+    'Ninja Poker Academy: academia de póker online en español. Clases diarias, revisión de manos y comunidad activa para jugadores de todos los niveles.',
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    creator: '@ninjapokeracademy',
+    site: '@ninjapokeracademy',
   },
 }

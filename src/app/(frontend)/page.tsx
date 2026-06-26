@@ -473,16 +473,7 @@ export default function HomePage() {
         <div className="container">
           <div className="pvp">
             <div className="spl">
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',
-                  gap: 32,
-                  marginBottom: 48,
-                }}
-                className="sr"
-              >
+              <div className="feat-top sr">
                 <div>
                   <div className="sect-label">Estrategia</div>
                   <h2>Últimos artículos</h2>
@@ -628,7 +619,7 @@ export default function HomePage() {
         <div className="container">
           <div className="pvp">
             <div className="spl">
-              <div style={{ textAlign: 'center', marginBottom: 56 }} className="sr">
+              <div style={{ textAlign: 'left', marginBottom: 56 }} className="why-top sr">
                 <div className="sect-label">Explora por tema</div>
                 <h2>
                   Mejora tus habilidades
