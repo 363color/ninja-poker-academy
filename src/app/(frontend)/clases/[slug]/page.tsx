@@ -118,11 +118,35 @@ export async function generateMetadata({
   const { slug } = await params
   const video = await fetchVideoBySlug(slug)
   if (!video) return { title: 'Clase no encontrada | Ninja Poker Academy' }
+  const desc =
+    video.descripcionCorta ||
+    `Clase de cash game: ${video.title}. Aprende póker online gratis con Ninja Poker Academy.`
   return {
     title: `${video.title} | Ninja Poker Academy`,
-    description:
-      video.descripcionCorta ||
-      `Clase de cash game: ${video.title}. Aprende póker online gratis con Ninja Poker Academy.`,
+    description: desc,
+    openGraph: {
+      title: `${video.title} | Ninja Poker Academy`,
+      description: desc,
+      images: video.youtubeId
+        ? [
+            {
+              url: `https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`,
+              width: 1280,
+              height: 720,
+              alt: video.title,
+            },
+          ]
+        : [{ url: 'https://ninjapokeracademy.com/og-image.png', width: 1200, height: 630 }],
+      type: 'video.other',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${video.title} | Ninja Poker Academy`,
+      description: desc,
+      images: video.youtubeId
+        ? [`https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`]
+        : ['https://ninjapokeracademy.com/og-image.png'],
+    },
   }
 }
 
