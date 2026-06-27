@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { Zap, BookOpen, BarChart2 } from 'lucide-react'
+import Link from 'next/link'
 
 import { getMeUser } from '@/utilities/getMeUser'
 import { Badge, type BadgeVariant } from '@/components/Badge'
 import { Button } from '@/components/Button'
 import { ArticleCard } from '@/components/ArticleCard'
-import { ClassCard } from '@/components/ClassCard'
 import { Input } from '@/components/Input'
 import { FilterPillsDemo } from './FilterPillsDemo'
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-// ── helpers ──────────────────────────────────────────────────────────────────
+// ── helpers ───────────────────────────────────────────────────────────────────
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -37,7 +37,24 @@ function Swatch({ label, bg, hex }: { label: string; bg: string; hex: string }) 
   )
 }
 
-// ── page ─────────────────────────────────────────────────────────────────────
+function Arr11() {
+  return (
+    <svg
+      width="11"
+      height="11"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  )
+}
+
+// ── page ──────────────────────────────────────────────────────────────────────
 
 export default async function StyleGuidePage() {
   await getMeUser({ nullUserRedirect: '/admin' })
@@ -50,6 +67,23 @@ export default async function StyleGuidePage() {
     'grabada',
     'teoria',
     'analisis',
+  ]
+
+  const SAMPLE_CARDS = [
+    {
+      youtubeId: 'dQw4w9WgXcQ',
+      nivel: 'basico',
+      nivelLabel: 'Básico',
+      title: 'Blind vs Blind: la guerra de los ciegos en cash game',
+      slug: '#',
+    },
+    {
+      youtubeId: 'dQw4w9WgXcQ',
+      nivel: 'avanzado',
+      nivelLabel: 'Avanzado',
+      title: 'Spot de torneo: ICM pressure en final table',
+      slug: '#',
+    },
   ]
 
   return (
@@ -85,7 +119,7 @@ export default async function StyleGuidePage() {
         <div className="flex flex-col gap-4">
           <div>
             <p className="text-[10px] text-foreground/40 mb-1 font-mono">
-              font-display / JetBrains Mono — display/headings
+              font-display / Interdisplay — display/headings
             </p>
             <p className="font-display font-bold text-4xl leading-none">ABCDEFGHIJKLMNOP</p>
             <p className="font-display font-bold text-4xl leading-none">abcdefghijklmnop</p>
@@ -127,22 +161,68 @@ export default async function StyleGuidePage() {
       {/* ── Button ── */}
       <Section title="Button">
         <div className="flex flex-col gap-6">
-          {/* estados */}
           <div className="flex flex-wrap gap-3 items-center">
             <Button>Normal</Button>
             <Button active>Activo (rojo)</Button>
             <Button disabled>Disabled</Button>
           </div>
-          {/* tamaños */}
           <div className="flex flex-wrap items-center gap-3">
             <Button size="sm">Small</Button>
             <Button size="md">Medium</Button>
             <Button size="lg">Large</Button>
           </div>
-          {/* como link */}
           <div>
             <Button href="#">Como enlace (href)</Button>
           </div>
+        </div>
+      </Section>
+
+      {/* ── Botones NPA ── */}
+      <Section title="Botones NPA (globals.css)">
+        <div className="flex flex-wrap gap-4 items-center">
+          <Link href="#" className="btn red">
+            <span className="btn-text">Quiero unirme</span>
+            <span className="btn-fill" />
+            <span className="btn-circle">
+              <span className="btn-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" className="btn-arrow" />
+                </svg>
+              </span>
+            </span>
+          </Link>
+          <Link href="#" className="btn">
+            <span className="btn-text">Negro (default)</span>
+            <span className="btn-fill" />
+            <span className="btn-circle">
+              <span className="btn-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" className="btn-arrow" />
+                </svg>
+              </span>
+            </span>
+          </Link>
+          <Link href="#" className="btn-ghost">
+            Ver todas →
+          </Link>
         </div>
       </Section>
 
@@ -156,9 +236,66 @@ export default async function StyleGuidePage() {
         </div>
       </Section>
 
-      {/* ── FilterPills ── */}
-      <Section title="FilterPills">
+      {/* ── Pills ── */}
+      <Section title="Filter Pills">
         <FilterPillsDemo />
+        <div>
+          <p className="text-[10px] text-foreground/40 mb-3 font-mono">Pills CSS (globals.css)</p>
+          <div className="pills">
+            <div className="pill on">Todos</div>
+            <div className="pill">Preflop</div>
+            <div className="pill">Postflop</div>
+            <div className="pill">Mental game</div>
+            <div className="pill">Bankroll</div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ── Badges CSS ── */}
+      <Section title="Badges CSS (globals.css)">
+        <div className="flex flex-wrap gap-3">
+          <span className="badge basico">Básico</span>
+          <span className="badge intermedio">Intermedio</span>
+          <span className="badge avanzado">Avanzado</span>
+          <span className="badge en-vivo">En vivo</span>
+          <span className="badge grabada">Grabada</span>
+          <span className="badge teoria">Teoría</span>
+          <span className="badge analisis">Análisis</span>
+        </div>
+      </Section>
+
+      {/* ── Course Card ── */}
+      <Section title="Course Card (globals.css)">
+        <div className="courses-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+          {SAMPLE_CARDS.map((card, i) => (
+            <div key={i} className="course-card">
+              <div className="c-img-wrap">
+                <div
+                  className="c-img"
+                  style={{
+                    background: `url(https://img.youtube.com/vi/${card.youtubeId}/mqdefault.jpg) center/cover no-repeat`,
+                  }}
+                />
+                <div className="c-img-badges">
+                  <span className={`badge ${card.nivel}`}>{card.nivelLabel}</span>
+                </div>
+              </div>
+              <div className="c-body">
+                <div className="c-title">{card.title}</div>
+                <div className="c-instructor">
+                  <div className="c-av">P</div>
+                  <span className="c-name">Perep · NPA</span>
+                </div>
+              </div>
+              <Link href={card.slug} className="c-cta">
+                Ver clase
+                <span className="c-cta-arr">
+                  <Arr11 />
+                </span>
+              </Link>
+            </div>
+          ))}
+        </div>
       </Section>
 
       {/* ── ArticleCard ── */}
@@ -178,28 +315,6 @@ export default async function StyleGuidePage() {
             date="2025-06-01"
             category="Análisis"
             readTime="8 min"
-            href="#"
-          />
-        </div>
-      </Section>
-
-      {/* ── ClassCard ── */}
-      <Section title="ClassCard">
-        <div className="grid sm:grid-cols-2 gap-6">
-          <ClassCard
-            title="Blind vs Blind: la guerra de los ciegos"
-            youtubeId="dQw4w9WgXcQ"
-            badges={[{ variant: 'intermedio' }, { variant: 'teoria' }]}
-            teacher="Perep"
-            duration="38:24"
-            href="#"
-          />
-          <ClassCard
-            title="Spot de torneo: ICM pressure en final table"
-            youtubeId="dQw4w9WgXcQ"
-            badges={[{ variant: 'avanzado' }, { variant: 'analisis' }]}
-            teacher="Perep"
-            duration="52:10"
             href="#"
           />
         </div>

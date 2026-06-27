@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
 import { FAQAccordion } from './_components/FAQAccordion'
@@ -93,7 +94,68 @@ function BtnDark({ href, children }: { href: string; children: React.ReactNode }
   )
 }
 
-// ── Page ──────────────────────────────────────────────────────────────────────
+// ── Video helpers ─────────────────────────────────────────────────────────────
+
+interface Video {
+  id: string
+  title: string
+  slug: string
+  youtubeId?: string
+  nivel?: string
+  modalidad?: string
+}
+
+function nivelClass(nivel?: string): string {
+  if (nivel === 'basico') return 'basico'
+  if (nivel === 'intermedio') return 'intermedio'
+  if (nivel === 'avanzado') return 'avanzado'
+  return 'basico'
+}
+
+function nivelLabel(nivel?: string): string {
+  if (nivel === 'basico') return 'Básico'
+  if (nivel === 'intermedio') return 'Intermedio'
+  if (nivel === 'avanzado') return 'Avanzado'
+  return ''
+}
+
+function modalidadClass(modalidad?: string): string {
+  if (modalidad === 'cash') return 'teoria'
+  if (modalidad === 'analisis-manos') return 'analisis'
+  if (modalidad === 'estadisticas') return 'analisis'
+  if (modalidad === 'mental-game') return 'teoria'
+  if (modalidad === 'postflop') return 'grabada'
+  return 'grabada'
+}
+
+function modalidadLabel(modalidad?: string): string {
+  if (modalidad === 'cash') return 'Preflop'
+  if (modalidad === 'analisis-manos') return 'Análisis de manos'
+  if (modalidad === 'estadisticas') return 'Estadísticas'
+  if (modalidad === 'mental-game') return 'Mental game'
+  if (modalidad === 'postflop') return 'Postflop'
+  return ''
+}
+
+async function fetchLatestVideos(): Promise<Video[]> {
+  try {
+    const h = await headers()
+    const host = h.get('host') || 'localhost:3000'
+    const protocol = host.includes('localhost') ? 'http' : 'https'
+    const base = `${protocol}://${host}`
+    const res = await fetch(
+      `${base}/api/videos?limit=3&sort=-createdAt&where[status][equals]=published`,
+      { cache: 'no-store' },
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.docs || []
+  } catch {
+    return []
+  }
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────────────────
 
 const FAQ_ITEMS = [
   {
@@ -114,7 +176,7 @@ const FAQ_ITEMS = [
   {
     question: '¿La academia es solo de cash game?',
     answer:
-      "Sí. Ninja Poker Academy es 100% cash game (NL Hold\'em). No cubrimos torneos, MTTs, Spins ni PLO.",
+      "Sí. Ninja Poker Academy es 100% cash game (NL Hold'em). No cubrimos torneos, MTTs, Spins ni PLO.",
   },
   {
     question: '¿Qué es el bancaje y cómo funciona?',
@@ -128,7 +190,11 @@ const FAQ_ITEMS = [
   },
 ]
 
-export default function HomePage() {
+// ── Page ──────────────────────────────────────────────────────────────────────
+
+export default async function HomePage() {
+  const videos = await fetchLatestVideos()
+
   return (
     <>
       {/* ══ HERO ══ */}
@@ -137,7 +203,6 @@ export default function HomePage() {
           <div className="pvp">
             <div className="hero-content">
               <div className="hero-top">
-                {/* Eyebrow */}
                 <div className="hero-pill sr">
                   <div className="hero-avatars">
                     <div className="hero-av">🥷</div>
@@ -148,31 +213,23 @@ export default function HomePage() {
                     <strong>Ninja Poker Academy</strong> · Escuela de Póker Online
                   </span>
                 </div>
-
-                {/* H1 */}
                 <div className="hero-h1 sr">
                   <h1>
                     Academia de póker online para <em>jugadores ganadores</em>
                   </h1>
                 </div>
-
-                {/* Subtítulo */}
                 <div className="hero-sub sr">
                   <p className="p1">
                     Aprende cash game con clases en vivo, revisión de manos y el seguimiento real
                     que necesitas para mejorar tu winrate.
                   </p>
                 </div>
-
-                {/* CTAs */}
                 <div className="hero-ctas sr">
                   <BtnRed href="/contacto">Quiero unirme</BtnRed>
                   <Link href="/clases" className="btn-ghost">
                     Ver clases gratis <Arr13 />
                   </Link>
                 </div>
-
-                {/* Burbujas */}
                 <div className="hero-bubbles" aria-hidden="true">
                   <div className="bubble _1">
                     <div className="bubble-icon">📅</div>
@@ -208,7 +265,6 @@ export default function HomePage() {
                         <p>Preflop · Postflop · Estadísticas · Mental game</p>
                       </div>
                     </Link>
-
                     <div className="hero-video-card" id="hvc">
                       <div className="hero-vid-play">
                         <svg
@@ -219,7 +275,6 @@ export default function HomePage() {
                         </svg>
                       </div>
                     </div>
-
                     <Link href="/estrategia" className="hero-card" id="hcr">
                       <div
                         className="hero-card-img"
@@ -256,13 +311,24 @@ export default function HomePage() {
                     de póker
                   </h2>
                   <div className="pills">
-                    <div className="pill on">Todos</div>
-                    <div className="pill">Preflop</div>
-                    <div className="pill">Postflop</div>
-                    <div className="pill">Análisis de manos</div>
-                    <div className="pill">Estadísticas</div>
-                    <div className="pill">Mental game</div>
-                    <div className="pill">Bankroll</div>
+                    <Link href="/clases" className="pill on">
+                      Todos
+                    </Link>
+                    <Link href="/clases?tema=cash" className="pill">
+                      Preflop
+                    </Link>
+                    <Link href="/clases?tema=postflop" className="pill">
+                      Postflop
+                    </Link>
+                    <Link href="/clases?tema=analisis-manos" className="pill">
+                      Análisis de manos
+                    </Link>
+                    <Link href="/clases?tema=estadisticas" className="pill">
+                      Estadísticas
+                    </Link>
+                    <Link href="/clases?tema=mental-game" className="pill">
+                      Mental game
+                    </Link>
                   </div>
                 </div>
                 <Link
@@ -275,79 +341,42 @@ export default function HomePage() {
               </div>
 
               <div className="courses-grid">
-                {[
-                  {
-                    bg: 'linear-gradient(135deg,#0d0202,#1e0505)',
-                    badges: [
-                      ['basico', 'Básico'],
-                      ['en-vivo', 'En vivo'],
-                    ],
-                    title: 'Fundamentos del preflop: rangos de apertura por posición en cash game',
-                    time: '38 min',
-                    topic: ['teoria', 'Teoría'],
-                    delay: 'sr-d1',
-                  },
-                  {
-                    bg: 'linear-gradient(135deg,#0d1a05,#1a3208)',
-                    badges: [
-                      ['intermedio', 'Intermedio'],
-                      ['grabada', 'Grabada'],
-                    ],
-                    title: 'Cómo leer el HUD: los stats más importantes en NL50',
-                    time: '52 min',
-                    topic: ['analisis', 'Análisis'],
-                    delay: 'sr-d2',
-                  },
-                  {
-                    bg: 'linear-gradient(135deg,#05102a,#0a2040)',
-                    badges: [
-                      ['avanzado', 'Avanzado'],
-                      ['grabada', 'Grabada'],
-                    ],
-                    title:
-                      'Bluff catching en el river: cómo leer al villano y tomar la decisión correcta',
-                    time: '44 min',
-                    topic: ['analisis', 'Análisis'],
-                    delay: 'sr-d3',
-                  },
-                  {
-                    bg: 'linear-gradient(135deg,#1a0d05,#301a08)',
-                    badges: [
-                      ['basico', 'Todos los niveles'],
-                      ['en-vivo', 'En vivo'],
-                    ],
-                    title: 'Gestión del tilt: técnicas para mantener el foco en sesiones largas',
-                    time: '35 min',
-                    topic: ['teoria', 'Teoría'],
-                    delay: 'sr-d4',
-                  },
-                ].map((c, i) => (
-                  <div key={i} className={`course-card sr ${c.delay}`}>
+                {videos.map((video) => (
+                  <div key={video.id} className="course-card sr">
                     <div className="c-img-wrap">
-                      <div className="c-img" style={{ background: c.bg }}>
-                        ▶
+                      <div
+                        className="c-img"
+                        style={{
+                          background: video.youtubeId
+                            ? `url(https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg) center/cover no-repeat`
+                            : 'linear-gradient(135deg,#0d0202,#1e0505)',
+                        }}
+                      >
+                        {!video.youtubeId && (
+                          <span style={{ color: 'rgba(255,255,255,.3)', fontSize: '2rem' }}>▶</span>
+                        )}
                       </div>
                       <div className="c-img-badges">
-                        {c.badges.map(([cls, label]) => (
-                          <span key={cls} className={`badge ${cls}`}>
-                            {label}
+                        {video.nivel && (
+                          <span className={`badge ${nivelClass(video.nivel)}`}>
+                            {nivelLabel(video.nivel)}
                           </span>
-                        ))}
+                        )}
+                        {video.modalidad && (
+                          <span className={`badge ${modalidadClass(video.modalidad)}`}>
+                            {modalidadLabel(video.modalidad)}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className="c-body">
-                      <div className="c-title">{c.title}</div>
-                      <div className="c-meta">
-                        <span className="c-meta-item">⏱ {c.time}</span>
-                        <span className="c-dot" />
-                        <span className={`badge ${c.topic[0]}`}>{c.topic[1]}</span>
-                      </div>
+                      <div className="c-title">{video.title}</div>
                       <div className="c-instructor">
                         <div className="c-av">P</div>
-                        <span className="c-name">Nuestro equipo · NPA</span>
+                        <span className="c-name">Perep · NPA</span>
                       </div>
                     </div>
-                    <Link href="/clases" className="c-cta">
+                    <Link href={`/clases/${video.slug}`} className="c-cta">
                       Ver clase
                       <span className="c-cta-arr">
                         <Arr11 />
@@ -500,7 +529,7 @@ export default function HomePage() {
                   },
                   {
                     emoji: '🧠',
-                    bg: 'linear-gradient(135deg,#05102a,#0a2050)',
+                    bg: 'linear-gradient(135deg,#0a0a1a,#10103a)',
                     tag: 'Mental game',
                     time: '8 min',
                     title: 'Por qué el tilt destruye tu winrate y cómo eliminarlo de raíz',
@@ -509,17 +538,17 @@ export default function HomePage() {
                   },
                   {
                     emoji: '💰',
-                    bg: 'linear-gradient(135deg,#1a0505,#300a0a)',
+                    bg: 'linear-gradient(135deg,#1a0d05,#301a08)',
                     tag: 'Bankroll',
                     time: '5 min',
                     title: 'Gestión de bankroll para subir de NL25 a NL50 sin arruinarte',
                     desc: 'Subir de límites sin una gestión correcta del bankroll puede costarte todo lo ganado.',
                     d: 'sr-d3',
                   },
-                ].map((a) => (
-                  <div key={a.title} className={`art-card sr ${a.d}`}>
-                    <div className="art-img" style={{ background: a.bg }}>
-                      <span style={{ fontSize: '3rem' }}>{a.emoji}</span>
+                ].map((a, i) => (
+                  <div key={i} className={`art-card sr ${a.d}`}>
+                    <div className="art-img" style={{ background: a.bg, fontSize: '3rem' }}>
+                      {a.emoji}
                     </div>
                     <div className="art-body">
                       <div className="art-meta">
@@ -540,14 +569,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ PROCESS / ¿CÓMO FUNCIONA? ══ */}
-      <section className="process" id="proc">
+      {/* ══ CÓMO FUNCIONA ══ */}
+      <section className="process">
         <div className="process-img-block">
-          <div className="process-section-img">
-            <div style={{ fontSize: '8rem', opacity: 0.15 }}>🥷</div>
-          </div>
+          <div className="process-section-img" />
           <div className="process-overlay" />
-          <div className="process-circles">
+          <div className="process-circles" aria-hidden="true">
             <div className="process-circles-inner">
               <div className="pc-ring _3" />
               <div className="pc-ring _2" />
@@ -555,14 +582,16 @@ export default function HomePage() {
               <div className="pc-center">🥷</div>
             </div>
           </div>
-          <div className="process-top">
-            <h2 style={{ color: '#fff' }}>¿Cómo funciona?</h2>
+          <div className="process-top sr">
+            <div className="sect-label" style={{ color: 'rgba(255,255,255,.4)' }}>
+              El proceso
+            </div>
+            <h2>¿Cómo funciona?</h2>
             <p className="p2" style={{ color: 'rgba(255,255,255,.55)' }}>
               Empieza en minutos. Sin burocracia.
             </p>
           </div>
         </div>
-
         <div className="process-cards">
           <div className="process-card">
             <div className="pc-emoji">✉️</div>

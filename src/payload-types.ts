@@ -832,18 +832,6 @@ export interface Video {
    */
   articuloRelacionado?: (number | null) | Post;
   thumbnail?: (number | null) | Media;
-  /**
-   * Título optimizado para Google. Máximo 60 caracteres.
-   */
-  metaTitle?: string | null;
-  /**
-   * Descripción para Google. Máximo 160 caracteres.
-   */
-  metaDescription?: string | null;
-  /**
-   * Palabras clave separadas por comas
-   */
-  metaKeywords?: string | null;
   publishedAt?: string | null;
   status?: ('draft' | 'published' | 'archived') | null;
   meta?: {
@@ -1503,9 +1491,6 @@ export interface VideosSelect<T extends boolean = true> {
   tags?: T;
   articuloRelacionado?: T;
   thumbnail?: T;
-  metaTitle?: T;
-  metaDescription?: T;
-  metaKeywords?: T;
   publishedAt?: T;
   status?: T;
   meta?:

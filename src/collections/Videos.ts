@@ -140,30 +140,6 @@ export const Videos: CollectionConfig = {
       label: 'Thumbnail',
     },
     {
-      name: 'metaTitle',
-      type: 'text',
-      label: 'Meta Título (SEO)',
-      admin: {
-        description: 'Título optimizado para Google. Máximo 60 caracteres.',
-      },
-    },
-    {
-      name: 'metaDescription',
-      type: 'textarea',
-      label: 'Meta Descripción (SEO)',
-      admin: {
-        description: 'Descripción para Google. Máximo 160 caracteres.',
-      },
-    },
-    {
-      name: 'metaKeywords',
-      type: 'text',
-      label: 'Keywords (SEO)',
-      admin: {
-        description: 'Palabras clave separadas por comas',
-      },
-    },
-    {
       name: 'publishedAt',
       type: 'date',
       label: 'Fecha de publicación',
