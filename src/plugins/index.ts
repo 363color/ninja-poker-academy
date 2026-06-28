@@ -27,10 +27,11 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 export const plugins: Plugin[] = [
   s3Storage({
     collections: {
-      media: true,
+      media: {
+        generateFileURL: ({ filename }) => `https://media.ninjapokeracademy.com/${filename}`,
+      },
     },
     bucket: process.env.S3_BUCKET || '',
-    baseUrl: 'https://media.ninjapokeracademy.com',
     config: {
       credentials: {
         accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
