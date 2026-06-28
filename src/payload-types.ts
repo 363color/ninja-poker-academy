@@ -253,6 +253,17 @@ export interface Post {
     title?: string | null;
     description?: string | null;
   };
+  checklist?: {
+    paso1?: boolean | null;
+    paso2?: boolean | null;
+    paso3?: boolean | null;
+    paso4?: boolean | null;
+    paso5?: boolean | null;
+    paso6?: boolean | null;
+    paso7?: boolean | null;
+    paso8?: boolean | null;
+    paso9?: boolean | null;
+  };
   publishedAt?: string | null;
   authors?: (number | User)[] | null;
   populatedAuthors?:
@@ -1321,6 +1332,19 @@ export interface PostsSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+      };
+  checklist?:
+    | T
+    | {
+        paso1?: T;
+        paso2?: T;
+        paso3?: T;
+        paso4?: T;
+        paso5?: T;
+        paso6?: T;
+        paso7?: T;
+        paso8?: T;
+        paso9?: T;
       };
   publishedAt?: T;
   authors?: T;
