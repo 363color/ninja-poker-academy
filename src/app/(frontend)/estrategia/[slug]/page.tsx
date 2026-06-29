@@ -406,16 +406,7 @@ export default async function EstrategiaSlugPage({
       <section>
         <div className="container">
           <div className="pvp">
-            <div
-              style={{
-                paddingTop: 0,
-                paddingBottom: 64,
-                display: 'grid',
-                gridTemplateColumns: '1fr 280px',
-                gap: 64,
-                alignItems: 'start',
-              }}
-            >
+            <div className="article-layout">
               {/* ── Columna principal ── */}
               <div>
                 {/* Share arriba */}
@@ -596,16 +587,7 @@ export default async function EstrategiaSlugPage({
               </div>
 
               {/* ── Sidebar ── */}
-              <aside
-                style={{
-                  position: 'sticky',
-                  top: 100,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 16,
-                  paddingTop: 56,
-                }}
-              >
+              <aside className="article-sidebar">
                 {/* CTA */}
                 <div
                   style={{
@@ -927,6 +909,21 @@ export default async function EstrategiaSlugPage({
         .article-content blockquote { border-left: 3px solid #CC1A1A; margin: 32px 0; padding: 16px 20px; background: #f4f4f4; border-radius: 0 var(--r-l) var(--r-l) 0; font-style: italic; color: #575757; }
         .article-content a { color: #CC1A1A; text-decoration: underline; }
         .article-content hr { border: none; border-top: 1px solid #e7e6e6; margin: 48px 0; }
+
+        /* ── Layout responsive ── */
+        .article-layout { display: grid; grid-template-columns: 1fr 280px; gap: 64px; align-items: start; padding-top: 0; padding-bottom: 64px; }
+        .article-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 16px; padding-top: 56px; }
+
+        @media (max-width: 1024px) {
+          .article-layout { grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px; }
+          .article-sidebar { position: static; top: auto; padding-top: 0; }
+        }
+        @media (max-width: 768px) {
+          .article-layout { gap: 32px; padding-bottom: 40px; }
+          .article-content { font-size: 15px; }
+          .article-content h2 { font-size: 22px !important; margin: 36px 0 12px !important; }
+          .article-content h3 { font-size: 18px !important; margin: 28px 0 10px !important; }
+        }
       `}</style>
     </main>
   )
