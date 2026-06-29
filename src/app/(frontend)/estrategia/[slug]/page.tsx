@@ -287,76 +287,66 @@ export default async function EstrategiaSlugPage({
   }
 
   return (
-    <main className="bg-background min-h-screen" style={{ paddingTop: 80 }}>
+    <main className="bg-white min-h-screen" style={{ paddingTop: 80 }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
       {/* ══ CABECERA ══ */}
-      <section className="featured">
+      <section
+        style={{ background: 'linear-gradient(180deg, var(--npa-cream, #F3F0EB) 0%, #fff 100%)' }}
+      >
         <div className="container">
           <div className="pvp">
             <div style={{ paddingTop: 48, paddingBottom: 0 }}>
-              {/* Breadcrumb */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  fontSize: 13,
-                  color: '#b8b7b7',
-                  marginBottom: 24,
-                }}
-              >
-                <Link href="/estrategia" style={{ color: '#b8b7b7', textDecoration: 'none' }}>
-                  Estrategia
-                </Link>
-                {cat && (
-                  <>
-                    <span>›</span>
-                    <Link
-                      href={`/estrategia?categoria=${cat.slug}`}
-                      style={{ color: '#b8b7b7', textDecoration: 'none' }}
-                    >
-                      {cat.title}
-                    </Link>
-                  </>
-                )}
-                <span>›</span>
-                <span
-                  style={{
-                    color: '#575757',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                    maxWidth: 300,
-                  }}
-                >
-                  {post.title}
-                </span>
-              </div>
-
-              {/* Categoría pill */}
-              {cat && (
-                <Link
-                  href={`/estrategia?categoria=${cat.slug}`}
+              {/* Breadcrumb pill */}
+              <div style={{ marginBottom: 28 }}>
+                <div
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 6,
-                    fontSize: 11,
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    letterSpacing: '.1em',
-                    color: '#CC1A1A',
-                    textDecoration: 'none',
-                    marginBottom: 16,
+                    background: '#fff',
+                    border: '1px solid #e7e6e6',
+                    borderRadius: 999,
+                    padding: '6px 14px',
+                    fontSize: 12,
+                    color: '#b8b7b7',
+                    boxShadow: '0 1px 4px rgba(0,0,0,.06)',
                   }}
                 >
-                  {cat.title}
-                </Link>
-              )}
+                  <Link
+                    href="/estrategia"
+                    style={{ color: '#b8b7b7', textDecoration: 'none', fontWeight: 500 }}
+                  >
+                    Estrategia
+                  </Link>
+                  {cat && (
+                    <>
+                      <span style={{ opacity: 0.4 }}>›</span>
+                      <Link
+                        href={`/estrategia?categoria=${cat.slug}`}
+                        style={{ color: '#CC1A1A', textDecoration: 'none', fontWeight: 600 }}
+                      >
+                        {cat.title}
+                      </Link>
+                    </>
+                  )}
+                  <span style={{ opacity: 0.4 }}>›</span>
+                  <span
+                    style={{
+                      color: '#575757',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      maxWidth: 260,
+                    }}
+                  >
+                    {post.title}
+                  </span>
+                </div>
+              </div>
 
               {/* Título */}
               <h1
@@ -381,7 +371,7 @@ export default async function EstrategiaSlugPage({
                   gap: 16,
                   fontSize: 13,
                   color: '#b8b7b7',
-                  marginBottom: 40,
+                  marginBottom: 10,
                   flexWrap: 'wrap',
                 }}
               >
@@ -402,31 +392,11 @@ export default async function EstrategiaSlugPage({
                   >
                     {author?.name?.[0] || 'P'}
                   </span>
-                  {author?.name || 'Perep'} · NPA
+                  {author?.name || 'Perep'}
                 </span>
                 {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
                 <span>⏱ {readTime} min de lectura</span>
               </div>
-
-              {/* Imagen portada */}
-              {post.heroImage?.url && (
-                <div
-                  style={{
-                    width: '100%',
-                    aspectRatio: '16/6',
-                    borderRadius: 'var(--r-l)',
-                    overflow: 'hidden',
-                    marginBottom: 0,
-                    background: '#f4f4f4',
-                  }}
-                >
-                  <img
-                    src={post.heroImage.url}
-                    alt={post.heroImage.alt || post.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -438,7 +408,7 @@ export default async function EstrategiaSlugPage({
           <div className="pvp">
             <div
               style={{
-                paddingTop: 48,
+                paddingTop: 0,
                 paddingBottom: 64,
                 display: 'grid',
                 gridTemplateColumns: '1fr 280px',
@@ -448,6 +418,31 @@ export default async function EstrategiaSlugPage({
             >
               {/* ── Columna principal ── */}
               <div>
+                {/* Share arriba */}
+                <div style={{ marginBottom: 24 }}>
+                  <ArticleShareButtons shareUrl={shareUrl} shareText={shareText} />
+                </div>
+
+                {/* Imagen portada — 16/9 */}
+                {post.heroImage?.url && (
+                  <div
+                    style={{
+                      width: '100%',
+                      aspectRatio: '16/9',
+                      borderRadius: 'var(--r-l)',
+                      overflow: 'hidden',
+                      marginBottom: 32,
+                      background: '#f4f4f4',
+                    }}
+                  >
+                    <img
+                      src={post.heroImage.url}
+                      alt={post.heroImage.alt || post.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  </div>
+                )}
+
                 {/* Descripción destacada */}
                 {post.meta?.description && (
                   <div
@@ -475,7 +470,59 @@ export default async function EstrategiaSlugPage({
                   dangerouslySetInnerHTML={{ __html: contentHtml }}
                 />
 
-                {/* Botones compartir — Client Component */}
+                {/* Caja autor */}
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: 20,
+                    padding: '28px 24px',
+                    background: '#f9f9f9',
+                    border: '1px solid #e7e6e6',
+                    borderRadius: 'var(--r-l)',
+                    margin: '48px 0 32px',
+                  }}
+                >
+                  <div
+                    style={{
+                      flexShrink: 0,
+                      width: 64,
+                      height: 64,
+                      borderRadius: '50%',
+                      background: 'rgba(204,26,26,.12)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: 22,
+                      fontWeight: 700,
+                      color: '#CC1A1A',
+                    }}
+                  >
+                    {author?.name?.[0] || 'P'}
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <div
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 600,
+                        textTransform: 'uppercase',
+                        letterSpacing: '.12em',
+                        color: '#b8b7b7',
+                      }}
+                    >
+                      Sobre el autor
+                    </div>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: '#1d1d1d' }}>
+                      {author?.name || 'Perep'}
+                    </div>
+                    <p style={{ fontSize: 13, color: '#575757', lineHeight: 1.7, margin: 0 }}>
+                      Coach principal de Ninja Poker Academy. Especialista en cash game NL
+                      Hold&apos;em, análisis de rangos y mental game. Más de 10 años jugando y
+                      enseñando póker online en español.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Botones compartir — abajo */}
                 <ArticleShareButtons shareUrl={shareUrl} shareText={shareText} />
 
                 {/* Newsletter inline */}
@@ -556,6 +603,7 @@ export default async function EstrategiaSlugPage({
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 16,
+                  paddingTop: 56,
                 }}
               >
                 {/* CTA */}
@@ -637,7 +685,7 @@ export default async function EstrategiaSlugPage({
                   </Link>
                 </div>
 
-                {/* Info artículo */}
+                {/* Más artículos */}
                 <div
                   style={{
                     background: '#fff',
@@ -646,42 +694,94 @@ export default async function EstrategiaSlugPage({
                     padding: 20,
                   }}
                 >
-                  <div className="sect-label" style={{ marginBottom: 12 }}>
-                    Sobre este artículo
+                  <div className="sect-label" style={{ marginBottom: 14 }}>
+                    Más artículos
                   </div>
-                  <div
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {[
+                      {
+                        slug: 'rangos-de-apertura-cash-game',
+                        cat: 'Preflop',
+                        title: 'Cómo construir rangos de apertura en cash game',
+                      },
+                      {
+                        slug: 'habitos-previos-juego-evitar-tilt-poker',
+                        cat: 'Mental game',
+                        title: '7 hábitos previos al juego para evitar el tilt',
+                      },
+                      {
+                        slug: 'bankroll-management-nl25-nl50',
+                        cat: 'Bankroll',
+                        title: '¿Tienes el bankroll para ganar en NL25 y NL50?',
+                      },
+                      {
+                        slug: 'errores-partidas-cash-poker',
+                        cat: 'Análisis de manos',
+                        title: '8 errores comunes en partidas de cash',
+                      },
+                      {
+                        slug: 'cbet-postflop-cash-game',
+                        cat: 'Postflop',
+                        title: 'Dominando las apuestas de continuación (c-bet)',
+                      },
+                    ]
+                      .filter((a) => a.slug !== post.slug)
+                      .slice(0, 4)
+                      .map((a, i, arr) => (
+                        <Link
+                          key={a.slug}
+                          href={`/estrategia/${a.slug}`}
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 3,
+                            textDecoration: 'none',
+                            padding: '12px 0',
+                            borderBottom: i < arr.length - 1 ? '1px solid #f0f0f0' : 'none',
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: 10,
+                              fontWeight: 600,
+                              textTransform: 'uppercase',
+                              letterSpacing: '.08em',
+                              color: '#CC1A1A',
+                            }}
+                          >
+                            {a.cat}
+                          </span>
+                          <span
+                            style={{
+                              fontSize: 13,
+                              fontWeight: 600,
+                              color: '#1d1d1d',
+                              lineHeight: 1.4,
+                            }}
+                          >
+                            {a.title}
+                          </span>
+                        </Link>
+                      ))}
+                  </div>
+                  <Link
+                    href="/estrategia"
                     style={{
                       display: 'flex',
-                      flexDirection: 'column',
-                      gap: 8,
-                      fontSize: 13,
-                      color: '#575757',
+                      alignItems: 'center',
+                      gap: 6,
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: '#CC1A1A',
+                      textDecoration: 'none',
+                      marginTop: 14,
                     }}
                   >
-                    {cat && (
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: '#b8b7b7' }}>Categoría</span>
-                        <span style={{ fontWeight: 500 }}>{cat.title}</span>
-                      </div>
-                    )}
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: '#b8b7b7' }}>Lectura</span>
-                      <span style={{ fontWeight: 500 }}>{readTime} min</span>
-                    </div>
-                    {post.publishedAt && (
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: '#b8b7b7' }}>Publicado</span>
-                        <span style={{ fontWeight: 500 }}>{formatDate(post.publishedAt)}</span>
-                      </div>
-                    )}
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: '#b8b7b7' }}>Autor</span>
-                      <span style={{ fontWeight: 500 }}>{author?.name || 'Perep'}</span>
-                    </div>
-                  </div>
+                    Ver todos <Arr11 />
+                  </Link>
                 </div>
 
-                {/* Ver clases relacionadas */}
+                {/* Ver clases */}
                 <Link
                   href={cat ? `/clases?tema=${cat.slug}` : '/clases'}
                   style={{

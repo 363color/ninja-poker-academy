@@ -40,6 +40,10 @@ const nextConfig: NextConfig = {
         hostname: 'img.youtube.com',
         protocol: 'https',
       },
+      {
+        hostname: 'media.ninjapokeracademy.com',
+        protocol: 'https',
+      },
     ],
   },
   webpack: (webpackConfig) => {

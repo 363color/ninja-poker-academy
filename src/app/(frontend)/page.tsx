@@ -3,6 +3,10 @@ import { headers } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
 import { FAQAccordion } from './_components/FAQAccordion'
+import { ArticleCard } from './_components/ArticleCard'
+import type { ArticleCardData } from './_components/ArticleCard'
+import { ClassCard } from './_components/ClassCard'
+import type { ClassCardData } from './_components/ClassCard'
 
 export const metadata: Metadata = {
   title: 'Academia de Poker Online en Español | Ninja Poker Academy',
@@ -96,48 +100,7 @@ function BtnDark({ href, children }: { href: string; children: React.ReactNode }
 
 // ── Video helpers ─────────────────────────────────────────────────────────────
 
-interface Video {
-  id: string
-  title: string
-  slug: string
-  youtubeId?: string
-  nivel?: string
-  modalidad?: string
-}
-
-function nivelClass(nivel?: string): string {
-  if (nivel === 'basico') return 'basico'
-  if (nivel === 'intermedio') return 'intermedio'
-  if (nivel === 'avanzado') return 'avanzado'
-  return 'basico'
-}
-
-function nivelLabel(nivel?: string): string {
-  if (nivel === 'basico') return 'Básico'
-  if (nivel === 'intermedio') return 'Intermedio'
-  if (nivel === 'avanzado') return 'Avanzado'
-  return ''
-}
-
-function modalidadClass(modalidad?: string): string {
-  if (modalidad === 'cash') return 'teoria'
-  if (modalidad === 'analisis-manos') return 'analisis'
-  if (modalidad === 'estadisticas') return 'analisis'
-  if (modalidad === 'mental-game') return 'teoria'
-  if (modalidad === 'postflop') return 'grabada'
-  return 'grabada'
-}
-
-function modalidadLabel(modalidad?: string): string {
-  if (modalidad === 'cash') return 'Preflop'
-  if (modalidad === 'analisis-manos') return 'Análisis de manos'
-  if (modalidad === 'estadisticas') return 'Estadísticas'
-  if (modalidad === 'mental-game') return 'Mental game'
-  if (modalidad === 'postflop') return 'Postflop'
-  return ''
-}
-
-async function fetchLatestVideos(): Promise<Video[]> {
+async function fetchLatestVideos(): Promise<ClassCardData[]> {
   try {
     const h = await headers()
     const host = h.get('host') || 'localhost:3000'
@@ -145,6 +108,26 @@ async function fetchLatestVideos(): Promise<Video[]> {
     const base = `${protocol}://${host}`
     const res = await fetch(
       `${base}/api/videos?limit=3&sort=-createdAt&where[status][equals]=published`,
+      { cache: 'no-store' },
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.docs || []
+  } catch {
+    return []
+  }
+}
+
+// ── Article helpers ───────────────────────────────────────────────────────────
+
+async function fetchLatestArticles(): Promise<ArticleCardData[]> {
+  try {
+    const h = await headers()
+    const host = h.get('host') || 'localhost:3000'
+    const protocol = host.includes('localhost') ? 'http' : 'https'
+    const base = `${protocol}://${host}`
+    const res = await fetch(
+      `${base}/api/posts?limit=3&sort=-createdAt&where[_status][equals]=published&depth=1`,
       { cache: 'no-store' },
     )
     if (!res.ok) return []
@@ -194,6 +177,7 @@ const FAQ_ITEMS = [
 
 export default async function HomePage() {
   const videos = await fetchLatestVideos()
+  const articles = await fetchLatestArticles()
 
   return (
     <>
@@ -342,47 +326,7 @@ export default async function HomePage() {
 
               <div className="courses-grid">
                 {videos.map((video) => (
-                  <div key={video.id} className="course-card sr">
-                    <div className="c-img-wrap">
-                      <div
-                        className="c-img"
-                        style={{
-                          background: video.youtubeId
-                            ? `url(https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg) center/cover no-repeat`
-                            : 'linear-gradient(135deg,#0d0202,#1e0505)',
-                        }}
-                      >
-                        {!video.youtubeId && (
-                          <span style={{ color: 'rgba(255,255,255,.3)', fontSize: '2rem' }}>▶</span>
-                        )}
-                      </div>
-                      <div className="c-img-badges">
-                        {video.nivel && (
-                          <span className={`badge ${nivelClass(video.nivel)}`}>
-                            {nivelLabel(video.nivel)}
-                          </span>
-                        )}
-                        {video.modalidad && (
-                          <span className={`badge ${modalidadClass(video.modalidad)}`}>
-                            {modalidadLabel(video.modalidad)}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="c-body">
-                      <div className="c-title">{video.title}</div>
-                      <div className="c-instructor">
-                        <div className="c-av">P</div>
-                        <span className="c-name">Perep · NPA</span>
-                      </div>
-                    </div>
-                    <Link href={`/clases/${video.slug}`} className="c-cta">
-                      Ver clase
-                      <span className="c-cta-arr">
-                        <Arr11 />
-                      </span>
-                    </Link>
-                  </div>
+                  <ClassCard key={video.id} video={video} />
                 ))}
               </div>
             </div>
@@ -517,52 +461,14 @@ export default async function HomePage() {
               </div>
 
               <div className="art-grid">
-                {[
-                  {
-                    emoji: '🃏',
-                    bg: 'linear-gradient(135deg,#0d1a05,#1a3208)',
-                    tag: 'Preflop',
-                    time: '6 min',
-                    title: 'Cómo construir un rango de apertura sólido en cash game por posición',
-                    desc: 'El preflop es la base de todo. Si abres rangos incorrectos en UTG, todo lo que hagas después estará comprometido.',
-                    d: 'sr-d1',
-                  },
-                  {
-                    emoji: '🧠',
-                    bg: 'linear-gradient(135deg,#0a0a1a,#10103a)',
-                    tag: 'Mental game',
-                    time: '8 min',
-                    title: 'Por qué el tilt destruye tu winrate y cómo eliminarlo de raíz',
-                    desc: 'El tilt no es solo enfadarse. Es cualquier estado emocional que altera tu proceso de decisión.',
-                    d: 'sr-d2',
-                  },
-                  {
-                    emoji: '💰',
-                    bg: 'linear-gradient(135deg,#1a0d05,#301a08)',
-                    tag: 'Bankroll',
-                    time: '5 min',
-                    title: 'Gestión de bankroll para subir de NL25 a NL50 sin arruinarte',
-                    desc: 'Subir de límites sin una gestión correcta del bankroll puede costarte todo lo ganado.',
-                    d: 'sr-d3',
-                  },
-                ].map((a, i) => (
-                  <div key={i} className={`art-card sr ${a.d}`}>
-                    <div className="art-img" style={{ background: a.bg, fontSize: '3rem' }}>
-                      {a.emoji}
+                {articles.map((article, i) => {
+                  const delay = i === 0 ? 'sr-d1' : i === 1 ? 'sr-d2' : 'sr-d3'
+                  return (
+                    <div key={article.id} className={`sr ${delay}`}>
+                      <ArticleCard post={article} />
                     </div>
-                    <div className="art-body">
-                      <div className="art-meta">
-                        <span className="art-tag">{a.tag}</span>
-                        <span className="art-time">⏱ {a.time}</span>
-                      </div>
-                      <div className="art-title">{a.title}</div>
-                      <p className="art-sum">{a.desc}</p>
-                      <Link href="/estrategia" className="art-cta">
-                        Leer más <Arr11 />
-                      </Link>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           </div>

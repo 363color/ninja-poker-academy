@@ -284,7 +284,7 @@ export default async function StyleGuidePage() {
                 <div className="c-title">{card.title}</div>
                 <div className="c-instructor">
                   <div className="c-av">P</div>
-                  <span className="c-name">Perep · NPA</span>
+                  <span className="c-name">Perep</span>
                 </div>
               </div>
               <Link href={card.slug} className="c-cta">

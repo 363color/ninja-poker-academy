@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
+import { ClassCard } from '../_components/ClassCard'
 
 export const metadata: Metadata = {
   title: 'Clases de Póker Online Gratis | Ninja Poker Academy',
@@ -142,36 +143,6 @@ function Arr13() {
       <path d="M5 12h14M12 5l7 7-7 7" />
     </svg>
   )
-}
-
-function nivelClass(n?: string) {
-  return n === 'intermedio' ? 'intermedio' : n === 'avanzado' ? 'avanzado' : 'basico'
-}
-function nivelLabel(n?: string) {
-  return n === 'basico'
-    ? 'Básico'
-    : n === 'intermedio'
-      ? 'Intermedio'
-      : n === 'avanzado'
-        ? 'Avanzado'
-        : ''
-}
-function modalidadClass(m?: string) {
-  return m === 'analisis-manos' || m === 'estadisticas'
-    ? 'analisis'
-    : m === 'postflop'
-      ? 'grabada'
-      : 'teoria'
-}
-function modalidadLabel(m?: string) {
-  const map: Record<string, string> = {
-    cash: 'Preflop',
-    'analisis-manos': 'Análisis de manos',
-    estadisticas: 'Estadísticas',
-    'mental-game': 'Mental game',
-    postflop: 'Postflop',
-  }
-  return map[m || ''] || ''
 }
 
 function Pagination({
@@ -455,61 +426,7 @@ export default async function ClasesPage({ searchParams }: PageProps) {
               <>
                 <div className="courses-grid">
                   {videos.map((video) => (
-                    <div key={video.id} className="course-card">
-                      <Link href={`/clases/${video.slug}`} style={{ display: 'contents' }}>
-                        <div className="c-img-wrap">
-                          <div
-                            className="c-img"
-                            style={{
-                              background: video.youtubeId
-                                ? `url(https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg) center/cover no-repeat`
-                                : 'linear-gradient(135deg,#0d0202,#1e0505)',
-                            }}
-                          >
-                            {!video.youtubeId && (
-                              <span style={{ color: 'rgba(255,255,255,.3)', fontSize: '2rem' }}>
-                                ▶
-                              </span>
-                            )}
-                          </div>
-                          <div className="c-img-badges">
-                            {video.nivel && (
-                              <span className={`badge ${nivelClass(video.nivel)}`}>
-                                {nivelLabel(video.nivel)}
-                              </span>
-                            )}
-                            {video.modalidad && (
-                              <span className={`badge ${modalidadClass(video.modalidad)}`}>
-                                {modalidadLabel(video.modalidad)}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                        <div className="c-body">
-                          <div className="c-title">{video.title}</div>
-                          {video.descripcionCorta && (
-                            <div className="c-meta">
-                              <span
-                                className="c-meta-item"
-                                style={{ fontSize: 12, color: '#b8b7b7' }}
-                              >
-                                {video.descripcionCorta}
-                              </span>
-                            </div>
-                          )}
-                          <div className="c-instructor">
-                            <div className="c-av">P</div>
-                            <span className="c-name">Perep · NPA</span>
-                          </div>
-                        </div>
-                      </Link>
-                      <Link href={`/clases/${video.slug}`} className="c-cta">
-                        Ver clase{' '}
-                        <span className="c-cta-arr">
-                          <Arr11 />
-                        </span>
-                      </Link>
-                    </div>
+                    <ClassCard key={video.id} video={video} />
                   ))}
                 </div>
                 <Pagination

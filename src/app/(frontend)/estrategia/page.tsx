@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
+import { ArticleCard } from '../_components/ArticleCard'
 
 export const metadata: Metadata = {
   title: 'Estrategia de Póker Online | Ninja Poker Academy',
@@ -94,38 +95,6 @@ function buildUrl(p: { categoria?: string; pagina?: number; busqueda?: string })
   return `/estrategia${qs ? `?${qs}` : ''}`
 }
 
-function estimateReadTime(content: unknown): number {
-  if (!content) return 3
-  const text = JSON.stringify(content)
-  const words = text.split(/\s+/).length
-  return Math.max(1, Math.round(words / 200))
-}
-
-function formatDate(d?: string) {
-  if (!d) return ''
-  return new Date(d).toLocaleDateString('es-ES', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
-}
-
-function Arr11() {
-  return (
-    <svg
-      width="11"
-      height="11"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 12h14M12 5l7 7-7 7" />
-    </svg>
-  )
-}
 function Arr13() {
   return (
     <svg
@@ -417,47 +386,9 @@ export default async function EstrategiaPage({ searchParams }: PageProps) {
             ) : (
               <>
                 <div className="art-grid">
-                  {posts.map((post) => {
-                    const cat = post.categories?.[0]
-                    const readTime = estimateReadTime(post.content)
-                    const imgUrl = post.heroImage?.url
-                    return (
-                      <Link
-                        key={post.id}
-                        href={`/estrategia/${post.slug}`}
-                        className="art-card"
-                        style={{ textDecoration: 'none', color: 'inherit' }}
-                      >
-                        <div
-                          className="art-img"
-                          style={{
-                            background: imgUrl
-                              ? `url(${imgUrl}) center/cover no-repeat`
-                              : 'linear-gradient(135deg,#0d1a05,#1a3208)',
-                            fontSize: imgUrl ? undefined : '3rem',
-                          }}
-                        >
-                          {!imgUrl && '📝'}
-                        </div>
-                        <div className="art-body">
-                          <div className="art-meta">
-                            {cat && <span className="art-tag">{cat.title}</span>}
-                            <span className="art-time">⏱ {readTime} min</span>
-                            {post.publishedAt && (
-                              <span className="art-time">{formatDate(post.publishedAt)}</span>
-                            )}
-                          </div>
-                          <div className="art-title">{post.title}</div>
-                          {post.meta?.description && (
-                            <p className="art-sum">{post.meta.description}</p>
-                          )}
-                          <div className="art-cta">
-                            Leer más <Arr11 />
-                          </div>
-                        </div>
-                      </Link>
-                    )
-                  })}
+                  {posts.map((post) => (
+                    <ArticleCard key={post.id} post={post} />
+                  ))}
                 </div>
                 <Pagination
                   page={page}

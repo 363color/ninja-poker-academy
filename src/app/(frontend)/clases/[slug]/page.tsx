@@ -286,7 +286,7 @@ export default async function ClaseSlugPage({ params }: { params: Promise<{ slug
                     >
                       P
                     </span>
-                    Perep · NPA
+                    Perep
                   </span>
                   {video.publishedAt && <span>{formatDate(video.publishedAt)}</span>}
                   {video.youtubeId && (
@@ -533,7 +533,7 @@ export default async function ClaseSlugPage({ params }: { params: Promise<{ slug
                         <div className="c-title">{rel.title}</div>
                         <div className="c-instructor">
                           <div className="c-av">P</div>
-                          <span className="c-name">Perep · NPA</span>
+                          <span className="c-name">Perep</span>
                         </div>
                       </div>
                     </Link>
