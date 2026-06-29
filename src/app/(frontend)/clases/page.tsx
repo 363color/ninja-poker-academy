@@ -4,6 +4,13 @@ import Link from 'next/link'
 import React from 'react'
 import { ClassCard } from '../_components/ClassCard'
 
+function nivelLabel(n?: string) {
+  if (n === 'basico') return 'Básico'
+  if (n === 'intermedio') return 'Intermedio'
+  if (n === 'avanzado') return 'Avanzado'
+  return ''
+}
+
 export const metadata: Metadata = {
   title: 'Clases de Póker Online Gratis | Ninja Poker Academy',
   description:
