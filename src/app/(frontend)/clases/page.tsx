@@ -531,11 +531,7 @@ export default async function ClasesPage({ searchParams }: PageProps) {
               <div className="cta-deco d1" />
               <div className="cta-deco d2" />
               <div className="sect-label">Únete hoy</div>
-              <h2>
-                ¿Listo para mejorar
-                <br />
-                tu juego en serio?
-              </h2>
+              <h2>¿Listo para mejorar tu juego en serio?</h2>
               <p className="p1" style={{ color: 'var(--text-03)', maxWidth: '40ch' }}>
                 Cuéntanos dónde estás. Nuestro equipo te ayuda a llegar donde quieres estar en el
                 póker.

@@ -340,23 +340,22 @@ html[data-theme='dark'], html[data-theme='light'] { opacity: initial; }
 .c-cta:hover .c-cta-arr svg { color: #fff; }
 
 /* ── WHY / PILARES ── */
-.why-wrap { display: flex; flex-direction: column; gap: 32px; }
-.why-top h2 { font-size: clamp(28px, 4vw, 48px); line-height: 1.16em; font-weight: 700; margin: 0 0 16px; }
-.why-cards-block { display: grid; grid-template-columns: 1fr minmax(0, 500px) 1fr; gap: 24px; align-items: center; }
-.why-col { display: flex; flex-direction: column; gap: 20px; }
-.why-card { background: #fff; border: 1px solid #e7e6e6; border-radius: var(--r-l); padding: 24px; display: flex; flex-direction: column; gap: 24px; transition: box-shadow .2s, border-color .2s; }
-.why-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); border-color: #CC1A1A; }
-.why-card-icon-block { width: 49px; height: 49px; border-radius: 60px; background: #f4f4f4; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-.why-card-body h4 { font-size: 18px; font-weight: 600; margin: 0 0 8px; color: #1d1d1d; }
-.why-card-body p { font-size: 14px; line-height: 1.65; color: #575757; margin: 0; }
-.why-center-col { border-radius: 24px; width: 100%; height: 490px; overflow: hidden; }
-.why-center-img { background: linear-gradient(135deg, #1a0505 0%, #2d0808 40%, #0d0d0d 100%); width: 100%; height: 100%; display: flex; align-items: center; flex-direction: column; justify-content: center; gap: 16px; }
-.why-center-emoji { font-size: 6rem; }
-.why-center-label { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); }
-.why-cta-band { background: #0D0D0D; border-radius: 24px; padding: 56px 40px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; }
-.why-cta-inner { display: flex; flex-direction: column; align-items: center; gap: 24px; }
-.why-cta-band h3 { color: #fff; font-size: 28px; font-weight: 600; margin: 0; }
-.why-cta-band p { color: rgba(255,255,255,.55); max-width: 480px; font-size: 16px; line-height: 1.65; margin: 0; }
+.pilares-grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: auto auto; gap: 16px; }
+.pilar-card { background: #fff; border: 1px solid #e7e6e6; border-radius: var(--r-l); padding: 28px; display: flex; flex-direction: column; gap: 14px; transition: box-shadow .2s, transform .2s; }
+.pilar-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); transform: translateY(-2px); }
+.pilar-0 { grid-column: span 3; background: linear-gradient(135deg, #fff 60%, rgba(204,26,26,.04)); }
+.pilar-1 { grid-column: span 3; }
+.pilar-2 { grid-column: span 2; }
+.pilar-3 { grid-column: span 2; }
+.pilar-4 { grid-column: span 2; }
+.pilar-5 { grid-column: span 3; }
+.pilar-6 { grid-column: span 3; background: #0D0D0D; }
+.pilar-6 .pilar-title { color: #fff !important; }
+.pilar-6 .pilar-desc { color: rgba(255,255,255,.55) !important; }
+.pilar-6 .pilar-icon { background: rgba(204,26,26,.2) !important; }
+.pilar-icon { width: 52px; height: 52px; border-radius: 14px; background: rgba(204,26,26,.08); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.pilar-title { font-size: 17px; font-weight: 700; color: #1d1d1d; margin: 0; }
+.pilar-desc { font-size: 14px; color: #575757; line-height: 1.65; margin: 0; flex: 1; }
 
 /* ── ARTICLES ── */
 .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -459,7 +458,6 @@ section.cta-final  { background: #ffffff; }
 
 /* Tamaños h2 de sección — global, aplica a todos los breakpoints */
 .feat-top h2,
-.why-top h2,
 .faq-left h2,
 .nl-text h2,
 .cta-card h2,
@@ -489,9 +487,8 @@ section.cta-final  { background: #ffffff; }
 .feat-bottom-cta { display: flex; justify-content: center; margin-top: 32px; }
 
   /* Pilares */
-  .why-cards-block { grid-template-columns: 1fr 1fr; gap: 16px; }
-  .why-center-col { display: none; }
-  .why-top { text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .pilares-grid { grid-template-columns: repeat(2, 1fr); }
+  .pilar-0, .pilar-1, .pilar-2, .pilar-3, .pilar-4, .pilar-5, .pilar-6 { grid-column: span 1; }
 
   /* Artículos */
  
@@ -546,14 +543,7 @@ section.cta-final  { background: #ffffff; }
 .courses-grid { grid-template-columns: 1fr; }
 
   /* Pilares */
-  .why-cards-block { grid-template-columns: 1fr; gap: 12px; }
-  .why-center-col { display: none; }
-  .why-card { flex-direction: row; gap: 16px; padding: 20px; align-items: flex-start; }
-  .why-card-icon-block { flex-shrink: 0; width: 40px; height: 40px; font-size: 16px; }
-  .why-card-body h4 { font-size: 15px; margin-bottom: 4px; }
-  .why-card-body p { font-size: 13px; }
-  .why-cta-band { padding: 40px 24px; border-radius: 16px; }
-  .why-cta-band h3 { font-size: 22px; }
+  .pilares-grid { grid-template-columns: 1fr; }
 
   /* Artículos */
   .art-grid { grid-template-columns: 1fr; }

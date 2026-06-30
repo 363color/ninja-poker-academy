@@ -7,6 +7,7 @@ import { ArticleCard } from './_components/ArticleCard'
 import type { ArticleCardData } from './_components/ArticleCard'
 import { ClassCard } from './_components/ClassCard'
 import type { ClassCardData } from './_components/ClassCard'
+import { ProcessImageReveal } from './_components/ProcessImageReveal'
 
 export const metadata: Metadata = {
   title: 'Academia de Poker Online en Español | Ninja Poker Academy',
@@ -239,8 +240,17 @@ export default async function HomePage() {
                 <div className="hero-cards-clip" id="hclip">
                   <div className="hero-cards-grid">
                     <Link href="/clases" className="hero-card" id="hcl">
-                      <div className="hero-card-img">
-                        <div style={{ fontSize: '5rem' }}>📚</div>
+                      <div className="hero-card-img" style={{ padding: 0 }}>
+                        <img
+                          src="https://media.ninjapokeracademy.com/hero-videoteca-poker-online.jpg"
+                          alt="Fichas de Ninja Poker Academy sobre mesa de póker verde"
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            display: 'block',
+                          }}
+                        />
                       </div>
                       <div className="hero-card-overlay" />
                       <div className="hero-card-body">
@@ -249,22 +259,41 @@ export default async function HomePage() {
                         <p>Preflop · Postflop · Estadísticas · Mental game</p>
                       </div>
                     </Link>
-                    <div className="hero-video-card" id="hvc">
-                      <div className="hero-vid-play">
-                        <svg
-                          viewBox="0 0 24 24"
-                          style={{ fill: '#CC1A1A', width: 20, height: 20, marginLeft: 3 }}
-                        >
-                          <polygon points="5,3 19,12 5,21" />
-                        </svg>
-                      </div>
+                    <div
+                      className="hero-video-card"
+                      id="hvc"
+                      style={{ padding: 0, overflow: 'hidden' }}
+                    >
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          display: 'block',
+                        }}
+                      >
+                        <source
+                          src="https://media.ninjapokeracademy.com/hero-video-poker-fichas.webm"
+                          type="video/webm"
+                        />
+                      </video>
                     </div>
                     <Link href="/estrategia" className="hero-card" id="hcr">
-                      <div
-                        className="hero-card-img"
-                        style={{ background: 'linear-gradient(135deg,#1a0a0a,#2d1010)' }}
-                      >
-                        <div style={{ fontSize: '5rem' }}>🧠</div>
+                      <div className="hero-card-img" style={{ padding: 0 }}>
+                        <img
+                          src="https://media.ninjapokeracademy.com/hero-estrategia-poker-estadisticas.jpg"
+                          alt="Jugador de póker online con hoodie jugando cash game de noche con fichas y laptop"
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            display: 'block',
+                          }}
+                        />
                       </div>
                       <div className="hero-card-overlay" />
                       <div className="hero-card-body">
@@ -335,107 +364,72 @@ export default async function HomePage() {
       </section>
 
       {/* ══ LOS 7 PILARES ══ */}
-      <section className="why">
+      <section className="featured">
         <div className="container">
-          <div className="pvp">
-            <div className="spl">
-              <div className="why-wrap">
-                <div className="why-top sr">
-                  <div className="sect-label">Por qué elegirnos</div>
-                  <h2>Lo que incluye la academia</h2>
-                  <p className="p1" style={{ color: 'var(--text-03)', maxWidth: 480 }}>
-                    Todo lo que necesitas para mejorar tu juego, en un solo lugar, sin costes
-                    adicionales.
-                  </p>
+          <div className="pvp spl">
+            <div style={{ textAlign: 'center', marginBottom: 64 }} className="sr">
+              <div className="sect-label">Lo que incluye</div>
+              <h2
+                style={{
+                  fontSize: 'clamp(28px, 4vw, 44px)',
+                  fontWeight: 700,
+                  margin: '0 0 16px',
+                  lineHeight: 1.2,
+                }}
+              >
+                Todo lo que necesitas para mejorar tu juego
+              </h2>
+              <p style={{ fontSize: 16, color: '#575757', maxWidth: 480, margin: '0 auto' }}>
+                Sin cuotas. Sin módulos de pago. Todo incluido desde el primer día.
+              </p>
+            </div>
+            <div className="pilares-grid">
+              {[
+                {
+                  icon: '📅',
+                  title: 'Clases diarias en vivo',
+                  desc: 'De lunes a viernes hay clase. No grabaciones de hace meses — sesiones en directo donde puedes preguntar, participar y aprender en tiempo real. Y si no puedes conectarte, queda grabada.',
+                },
+                {
+                  icon: '🃏',
+                  title: 'Revisión de manos',
+                  desc: 'Mandas tus manos, las analizamos. No teoría genérica — feedback concreto sobre tus decisiones reales en la mesa. Así es como realmente se mejora.',
+                },
+                {
+                  icon: '📊',
+                  title: 'Análisis de estadísticas y HUD',
+                  desc: 'Subimos tu base de datos, analizamos tu HUD y encontramos los leaks que te están costando dinero. Datos reales, mejoras reales.',
+                },
+                {
+                  icon: '🎯',
+                  title: 'Tutorías y seguimiento',
+                  desc: 'No eres un número. Nuestro equipo conoce tu juego, tu nivel y tus objetivos. El seguimiento es personal y continuo.',
+                },
+                {
+                  icon: '🧠',
+                  title: 'Mental game y toma de decisiones',
+                  desc: 'El tilt, la varianza, las rachas malas — trabajamos también la cabeza. Porque el mejor rango del mundo no sirve de nada si no puedes ejecutarlo bajo presión.',
+                },
+                {
+                  icon: '💰',
+                  title: 'Bancaje opcional',
+                  desc: 'Para alumnos que lo necesiten, ofrecemos acceso a bancaje en condiciones competitivas. Completamente opcional y sin condicionar el acceso al resto de la academia.',
+                },
+                {
+                  icon: '🤝',
+                  title: 'Trato cercano y familiar',
+                  desc: 'No somos una academia masiva donde eres invisible. Aquí te conocen por tu nick, saben en qué límite juegas y se alegran cuando subes.',
+                },
+              ].map((p, i) => (
+                <div key={i} className={`pilar-card pilar-${i} sr`}>
+                  <div className="pilar-icon">{p.icon}</div>
+                  <h3 className="pilar-title">{p.title}</h3>
+                  <p className="pilar-desc">{p.desc}</p>
                 </div>
-
-                <div className="why-cards-block">
-                  {/* Left */}
-                  <div className="why-col">
-                    {[
-                      {
-                        icon: '📅',
-                        title: 'Clases diarias',
-                        desc: 'Sesiones en vivo de lunes a viernes. Todas quedan grabadas en la videoteca para verlas cuando quieras.',
-                        d: 'sr-d1',
-                      },
-                      {
-                        icon: '🃏',
-                        title: 'Revisión de manos',
-                        desc: 'Analizamos tus manos reales para identificar errores concretos y mejorar tus decisiones en la mesa.',
-                        d: 'sr-d2',
-                      },
-                      {
-                        icon: '📊',
-                        title: 'Análisis de estadísticas',
-                        desc: 'Subimos tu HUD y analizamos tus bases de datos para detectar leaks y áreas de mejora inmediata.',
-                        d: 'sr-d3',
-                      },
-                    ].map((w) => (
-                      <div key={w.title} className={`why-card sr ${w.d}`}>
-                        <div className="why-card-icon-block">{w.icon}</div>
-                        <div className="why-card-body">
-                          <h4>{w.title}</h4>
-                          <p>{w.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Center */}
-                  <div className="why-center-col sr">
-                    <div className="why-center-img">
-                      <div className="why-center-emoji">🥷</div>
-                      <div className="why-center-label">Ninja Poker Academy</div>
-                    </div>
-                  </div>
-
-                  {/* Right */}
-                  <div className="why-col">
-                    {[
-                      {
-                        icon: '🎯',
-                        title: 'Seguimiento personalizado',
-                        desc: 'Tutorías y seguimiento de nuestro equipo. Un trato tan cercano como el coaching individual.',
-                        d: 'sr-d1',
-                      },
-                      {
-                        icon: '🧠',
-                        title: 'Leaks · Decisiones · Mental game',
-                        desc: 'Trabajamos tus puntos débiles: leaks técnicos, toma de decisiones bajo presión y mentalidad ganadora.',
-                        d: 'sr-d2',
-                      },
-                      {
-                        icon: '💰',
-                        title: 'Bancaje y condiciones',
-                        desc: 'Acceso a bancaje para los alumnos que lo necesiten. Opcional, sin comprometer el aprendizaje.',
-                        d: 'sr-d3',
-                      },
-                    ].map((w) => (
-                      <div key={w.title} className={`why-card sr ${w.d}`}>
-                        <div className="why-card-icon-block">{w.icon}</div>
-                        <div className="why-card-body">
-                          <h4>{w.title}</h4>
-                          <p>{w.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Pilar 7 CTA */}
-                <div className="why-cta-band sr">
-                  <div className="why-cta-inner">
-                    <div style={{ fontSize: '2.5rem' }}>🤝</div>
-                    <h3>Trato cercano y familiar</h3>
-                    <p>
-                      No somos una academia masiva. Cada alumno importa. Nuestro equipo conoce tu
-                      juego, tus objetivos y tu progreso.
-                    </p>
-                    <BtnRed href="/comunidad">Conoce la comunidad</BtnRed>
-                  </div>
-                </div>
-              </div>
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 48 }}>
+              <BtnRed href="/comunidad">Conoce la comunidad</BtnRed>
             </div>
           </div>
         </div>
@@ -479,6 +473,10 @@ export default async function HomePage() {
       <section className="process">
         <div className="process-img-block">
           <div className="process-section-img" />
+          <ProcessImageReveal
+            src="https://media.ninjapokeracademy.com/proceso-jugador-poker-online.jpg"
+            alt="Jugador de póker online exitoso con laptop y fichas"
+          />
           <div className="process-overlay" />
           <div className="process-circles" aria-hidden="true">
             <div className="process-circles-inner">
@@ -517,7 +515,7 @@ export default async function HomePage() {
               <h4>Conversamos</h4>
               <p>
                 Nuestro equipo habla contigo para entender tu nivel y tus objetivos, y asegurarse de
-                que NPA es la academia adecuada para ti.
+                que Ninja Poker Academy es la academia adecuada para ti.
               </p>
             </div>
           </div>
@@ -673,11 +671,7 @@ export default async function HomePage() {
                   <div className="sect-label" style={{ color: 'rgba(255,255,255,.3)' }}>
                     Newsletter
                   </div>
-                  <h2 style={{ color: '#fff' }}>
-                    Estrategia de póker,
-                    <br />
-                    cada semana
-                  </h2>
+                  <h2 style={{ color: '#fff' }}>Estrategia de póker, cada semana</h2>
                   <p className="p2" style={{ color: 'rgba(255,255,255,.55)' }}>
                     Análisis de manos, artículos de estrategia y novedades de la academia. Sin spam.
                   </p>
@@ -703,11 +697,7 @@ export default async function HomePage() {
               <div className="cta-deco d1" />
               <div className="cta-deco d2" />
               <div className="sect-label">Únete hoy</div>
-              <h2>
-                ¿Listo para mejorar
-                <br />
-                tu juego en serio?
-              </h2>
+              <h2>¿Listo para mejorar tu juego en serio?</h2>
               <p className="p1" style={{ color: 'var(--text-03)', maxWidth: '40ch' }}>
                 Cuéntanos dónde estás. Nuestro equipo te ayuda a llegar donde quieres estar en el
                 póker.
