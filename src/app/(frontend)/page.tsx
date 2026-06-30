@@ -143,9 +143,9 @@ async function fetchLatestArticles(): Promise<ArticleCardData[]> {
 
 const FAQ_ITEMS = [
   {
-    question: '¿Qué incluye la membresía de Ninja Poker Academy?',
+    question: '¿Qué incluye unirse a Ninja Poker Academy?',
     answer:
-      'Clases en vivo de lunes a viernes, acceso a la videoteca completa, revisión de tus manos, análisis de tu HUD, seguimiento personalizado de nuestro equipo y acceso al Discord. Todo incluido sin coste adicional.',
+      'Clases en vivo de lunes a viernes, acceso a la videoteca completa, revisión de tus manos, análisis de tu HUD, seguimiento personalizado de nuestro equipo y acceso al Discord. Todo gratis, sin cuotas ni coste adicional.',
   },
   {
     question: '¿Necesito experiencia previa para unirme?',

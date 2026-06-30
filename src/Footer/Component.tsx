@@ -12,6 +12,7 @@ const navLinks = [
   { label: 'Clases', href: '/clases' },
   { label: 'Estrategia', href: '/estrategia' },
   { label: 'Comunidad', href: '/comunidad' },
+  { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
   { label: 'Contacto', href: '/contacto' },
 ]
 
