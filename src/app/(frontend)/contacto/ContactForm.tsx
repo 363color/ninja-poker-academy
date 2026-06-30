@@ -72,7 +72,17 @@ export function ContactForm() {
         body: JSON.stringify(form),
       })
       if (!res.ok) throw new Error('Failed')
-      router.push('/contacto/gracias')
+
+      const params = new URLSearchParams()
+      params.set('nombre', form.nombre)
+      params.set('email', form.email)
+      params.set('nivel', form.nivel)
+      if (form.telegram) params.set('telegram', form.telegram)
+      if (form.instagram) params.set('instagram', form.instagram)
+      if (form.tiktok) params.set('tiktok', form.tiktok)
+      if (form.youtube) params.set('youtube', form.youtube)
+
+      router.push(`/contacto/gracias?${params.toString()}`)
     } catch {
       setStatus('error')
     }

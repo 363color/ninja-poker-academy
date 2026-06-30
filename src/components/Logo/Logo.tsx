@@ -14,7 +14,7 @@ export const Logo = (props: Props) => {
     // eslint-disable-next-line @next/next/no-img-element
     <img
       alt="Ninja Poker Academy"
-      src="/media/logo-npa.png"
+      src="https://media.ninjapokeracademy.com/logo-ninja-poker-academy.png"
       style={{ width, height, objectFit: 'contain' }}
       className={clsx(className)}
     />
