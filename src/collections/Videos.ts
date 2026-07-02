@@ -80,6 +80,15 @@ export const Videos: CollectionConfig = {
       },
     },
     {
+      name: 'resumen',
+      type: 'textarea',
+      label: 'Resumen del video',
+      admin: {
+        description:
+          'Resumen de 300-500 palabras con los puntos clave del video. Generado por el pipeline de IA.',
+      },
+    },
+    {
       name: 'transcripcion',
       type: 'richText',
       label: 'Transcripción',

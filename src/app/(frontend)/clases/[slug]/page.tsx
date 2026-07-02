@@ -12,6 +12,7 @@ interface Video {
   youtubeId?: string
   youtubeUrl?: string
   descripcionCorta?: string
+  resumen?: string
   transcripcion?: unknown
   nivel?: string
   modalidad?: string
@@ -320,6 +321,7 @@ export default async function ClaseSlugPage({ params }: { params: Promise<{ slug
                       fontSize: 16,
                       lineHeight: 1.7,
                       color: '#575757',
+                      marginTop: 24,
                       marginBottom: 32,
                       padding: '20px 24px',
                       background: '#f4f4f4',
@@ -328,6 +330,24 @@ export default async function ClaseSlugPage({ params }: { params: Promise<{ slug
                     }}
                   >
                     {video.descripcionCorta}
+                  </div>
+                )}
+
+                {/* Resumen SEO */}
+                {video.resumen && (
+                  <div
+                    style={{
+                      fontSize: 15,
+                      lineHeight: 1.8,
+                      color: '#575757',
+                      marginBottom: 32,
+                    }}
+                  >
+                    {video.resumen.split('\n\n').map((paragraph, i) => (
+                      <p key={i} style={{ margin: '0 0 16px' }}>
+                        {paragraph}
+                      </p>
+                    ))}
                   </div>
                 )}
 

@@ -774,6 +774,10 @@ export interface Video {
    */
   descripcionCorta?: string | null;
   /**
+   * Resumen de 300-500 palabras con los puntos clave del video. Generado por el pipeline de IA.
+   */
+  resumen?: string | null;
+  /**
    * Transcripción completa del video. Usada por el pipeline de Claude para generar artículos SEO.
    */
   transcripcion?: {
@@ -1412,6 +1416,7 @@ export interface VideosSelect<T extends boolean = true> {
   youtubeUrl?: T;
   youtubeId?: T;
   descripcionCorta?: T;
+  resumen?: T;
   transcripcion?: T;
   nivel?: T;
   modalidad?: T;
