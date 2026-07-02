@@ -35,10 +35,7 @@ interface PayloadVideoResponse {
 
 // ── Categorías ──
 
-async function findOrCreateCategory(
-  payload: PayloadInstance,
-  slug: string,
-): Promise<number> {
+async function findOrCreateCategory(payload: PayloadInstance, slug: string): Promise<number> {
   const existing = await payload.find({
     collection: 'categories',
     where: { slug: { equals: slug } },
@@ -49,9 +46,7 @@ async function findOrCreateCategory(
     return existing.docs[0].id as number
   }
 
-  const title = slug
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, (c) => c.toUpperCase())
+  const title = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 
   console.log(`[Pipeline A] 📂 Categoría nueva: "${title}" (${slug})`)
 
@@ -63,10 +58,7 @@ async function findOrCreateCategory(
   return doc.id as number
 }
 
-async function resolveCategoryIds(
-  payload: PayloadInstance,
-  slugs: string[],
-): Promise<number[]> {
+async function resolveCategoryIds(payload: PayloadInstance, slugs: string[]): Promise<number[]> {
   const ids: number[] = []
   for (const slug of slugs) {
     try {
@@ -80,10 +72,7 @@ async function resolveCategoryIds(
 
 // ── Tags ──
 
-async function findOrCreateTag(
-  payload: PayloadInstance,
-  slug: string,
-): Promise<number> {
+async function findOrCreateTag(payload: PayloadInstance, slug: string): Promise<number> {
   const existing = await payload.find({
     collection: 'tags',
     where: { slug: { equals: slug } },
@@ -95,9 +84,7 @@ async function findOrCreateTag(
   }
 
   // Tags usan "name" (no "title")
-  const name = slug
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, (c) => c.toUpperCase())
+  const name = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 
   console.log(`[Pipeline A] 🏷️ Tag nuevo: "${name}" (${slug})`)
 
@@ -109,10 +96,7 @@ async function findOrCreateTag(
   return doc.id as number
 }
 
-async function resolveTagIds(
-  payload: PayloadInstance,
-  slugs: string[],
-): Promise<number[]> {
+async function resolveTagIds(payload: PayloadInstance, slugs: string[]): Promise<number[]> {
   const ids: number[] = []
   for (const slug of slugs) {
     try {
@@ -144,8 +128,13 @@ export async function createVideoDraft(
       youtubeId: input.youtubeId,
       descripcionCorta: input.descripcionCorta,
       resumen: input.resumen,
-      nivel: input.nivel,
-      modalidad: input.modalidad,
+      nivel: input.nivel as 'basico' | 'intermedio' | 'avanzado',
+      modalidad: input.modalidad as
+        | 'cash'
+        | 'torneos'
+        | 'mental-game'
+        | 'estadisticas'
+        | 'analisis-manos',
       categories: categoryIds,
       tags: tagIds,
       publishedAt: input.publishedAt,
