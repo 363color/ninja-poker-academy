@@ -149,7 +149,7 @@ export async function createVideoDraft(
   return {
     id: String(doc.id),
     title: doc.title,
-    slug: doc.slug,
+    slug: doc.slug || '',
   }
 }
 
