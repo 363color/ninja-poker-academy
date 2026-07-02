@@ -142,7 +142,7 @@ export async function createVideoDraft(
         title: input.metaTitle,
         description: input.metaDescription,
       },
-      _status: 'draft',
+      status: 'draft',
     },
   })
 
