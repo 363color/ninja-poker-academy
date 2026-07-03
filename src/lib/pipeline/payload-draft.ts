@@ -31,7 +31,7 @@ interface CreateVideoDraftInput {
 interface CreateArticleDraftInput {
   title: string
   slug: string
-  content: Record<string, unknown> // Lexical JSON
+  content: any // Lexical JSON
   categorySlugs: string[]
   metaTitle: string
   metaDescription: string
@@ -46,10 +46,7 @@ interface PayloadDocResponse {
 
 // ── Categorías ──
 
-async function findOrCreateCategory(
-  payload: PayloadInstance,
-  slug: string,
-): Promise<number> {
+async function findOrCreateCategory(payload: PayloadInstance, slug: string): Promise<number> {
   const existing = await payload.find({
     collection: 'categories',
     where: { slug: { equals: slug } },
@@ -68,10 +65,7 @@ async function findOrCreateCategory(
   return doc.id as number
 }
 
-async function resolveCategoryIds(
-  payload: PayloadInstance,
-  slugs: string[],
-): Promise<number[]> {
+async function resolveCategoryIds(payload: PayloadInstance, slugs: string[]): Promise<number[]> {
   const ids: number[] = []
   for (const slug of slugs) {
     try {
@@ -85,10 +79,7 @@ async function resolveCategoryIds(
 
 // ── Tags ──
 
-async function findOrCreateTag(
-  payload: PayloadInstance,
-  slug: string,
-): Promise<number> {
+async function findOrCreateTag(payload: PayloadInstance, slug: string): Promise<number> {
   const tagSlug = slug.replace(/\s+/g, '-').toLowerCase()
   const existing = await payload.find({
     collection: 'tags',
@@ -106,10 +97,7 @@ async function findOrCreateTag(
   return doc.id as number
 }
 
-async function resolveTagIds(
-  payload: PayloadInstance,
-  slugs: string[],
-): Promise<number[]> {
+async function resolveTagIds(payload: PayloadInstance, slugs: string[]): Promise<number[]> {
   const ids: number[] = []
   for (const slug of slugs) {
     try {
@@ -123,9 +111,7 @@ async function resolveTagIds(
 
 // ── Video Draft (Pipeline A) ──
 
-export async function createVideoDraft(
-  input: CreateVideoDraftInput,
-): Promise<PayloadDocResponse> {
+export async function createVideoDraft(input: CreateVideoDraftInput): Promise<PayloadDocResponse> {
   const payload = await getPayload({ config })
 
   const categoryIds = await resolveCategoryIds(payload, input.categorySlugs)
@@ -142,7 +128,12 @@ export async function createVideoDraft(
       descripcionCorta: input.descripcionCorta,
       resumen: input.resumen,
       nivel: input.nivel as 'basico' | 'intermedio' | 'avanzado',
-      modalidad: input.modalidad as 'cash' | 'torneos' | 'mental-game' | 'estadisticas' | 'analisis-manos',
+      modalidad: input.modalidad as
+        | 'cash'
+        | 'torneos'
+        | 'mental-game'
+        | 'estadisticas'
+        | 'analisis-manos',
       categories: categoryIds,
       tags: tagIds,
       publishedAt: input.publishedAt,
