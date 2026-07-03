@@ -36,6 +36,7 @@ export function ContactForm() {
     instagram: '',
     tiktok: '',
     youtube: '',
+    discord: '',
     mensaje: '',
     rgpd: false,
   })
@@ -49,7 +50,8 @@ export function ContactForm() {
     if (name === 'email') setEmailError('')
   }
 
-  const tieneRedSocial = form.telegram || form.instagram || form.tiktok || form.youtube
+  const tieneRedSocial =
+    form.discord || form.telegram || form.instagram || form.tiktok || form.youtube
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -77,6 +79,7 @@ export function ContactForm() {
       params.set('nombre', form.nombre)
       params.set('email', form.email)
       params.set('nivel', form.nivel)
+      if (form.discord) params.set('discord', form.discord)
       if (form.telegram) params.set('telegram', form.telegram)
       if (form.instagram) params.set('instagram', form.instagram)
       if (form.tiktok) params.set('tiktok', form.tiktok)
@@ -154,9 +157,19 @@ export function ContactForm() {
           Tus redes sociales <span style={{ color: '#CC1A1A' }}>(al menos una, obligatorio)</span>
         </div>
         <p style={{ fontSize: 12, color: '#575757', margin: '0 0 10px' }}>
-          Nos contactamos por aquí — dejar varias nos ayuda a encontrarte más rápido.
+          Nos contactamos por aquí — Discord es el principal. Deja varias para encontrarte más
+          rápido.
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <input
+            name="discord"
+            type="text"
+            value={form.discord}
+            onChange={handleChange}
+            className="contacto-input"
+            placeholder="Discord (usuario)"
+            style={{ gridColumn: 'span 2', borderColor: '#CC1A1A20', background: '#fff9f9' }}
+          />
           <input
             name="telegram"
             type="text"

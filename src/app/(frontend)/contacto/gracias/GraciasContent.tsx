@@ -43,11 +43,13 @@ export function GraciasContent() {
   const telegram = params.get('telegram') || ''
   const instagram = params.get('instagram') || ''
   const tiktok = params.get('tiktok') || ''
+  const discord = params.get('discord') || ''
   const youtube = params.get('youtube') || ''
 
   const hayDatos = nombre || email
 
   const redes = [
+    discord && { label: 'Discord', value: discord },
     telegram && { label: 'Telegram', value: telegram },
     instagram && { label: 'Instagram', value: instagram },
     tiktok && { label: 'TikTok', value: tiktok },

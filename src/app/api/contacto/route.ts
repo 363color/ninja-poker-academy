@@ -41,6 +41,7 @@ async function notifyTelegram(data: {
   nombre: string
   email: string
   nivelLabel: string
+  discord?: string
   telegram?: string
   instagram?: string
   tiktok?: string
@@ -53,6 +54,7 @@ async function notifyTelegram(data: {
   if (!token || !chatId) return
 
   const redes = [
+    data.discord && `Discord: ${data.discord}`,
     data.telegram && `Telegram: ${data.telegram}`,
     data.instagram && `Instagram: ${data.instagram}`,
     data.tiktok && `TikTok: ${data.tiktok}`,
@@ -113,13 +115,14 @@ export async function POST(req: NextRequest) {
       undefined
 
     const body = await req.json()
-    const { nombre, email, nivel, telegram, instagram, tiktok, youtube, mensaje, rgpd } = body
+    const { nombre, email, nivel, discord, telegram, instagram, tiktok, youtube, mensaje, rgpd } =
+      body
 
     if (!nombre || !email || !nivel || !rgpd) {
       return NextResponse.json({ error: 'Faltan campos requeridos' }, { status: 400 })
     }
 
-    const tieneRedSocial = telegram || instagram || tiktok || youtube
+    const tieneRedSocial = discord || telegram || instagram || tiktok || youtube
     if (!tieneRedSocial) {
       return NextResponse.json({ error: 'Falta al menos una red social' }, { status: 400 })
     }
@@ -131,6 +134,7 @@ export async function POST(req: NextRequest) {
       nombre,
       email,
       nivelLabel,
+      discord,
       telegram,
       instagram,
       tiktok,
