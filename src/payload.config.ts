@@ -26,7 +26,10 @@ export default buildConfig({
   admin: {
     components: {
       beforeLogin: ['@/components/BeforeLogin'],
-      beforeDashboard: ['@/components/BeforeDashboard'],
+      beforeDashboard: [
+        '@/components/BeforeDashboard',
+        '@/components/GenerateFromKeyword/index.tsx#GenerateFromKeyword',
+      ],
       afterNavLinks: ['@/components/StyleGuideNavLink'],
     },
     importMap: {

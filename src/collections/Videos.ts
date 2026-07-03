@@ -134,6 +134,15 @@ export const Videos: CollectionConfig = {
       label: 'Tags',
     },
     {
+      name: 'generateArticle_ui',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/GenerateArticleButton/index.tsx#GenerateArticleButton',
+        },
+      },
+    },
+    {
       name: 'articuloRelacionado',
       type: 'relationship',
       relationTo: 'posts',

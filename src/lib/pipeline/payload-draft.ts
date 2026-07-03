@@ -1,15 +1,16 @@
 /**
  * Payload CMS Draft Creator (Local API)
- * Crea borradores con categorías y tags auto-asignados.
- * Crea categorías/tags que no existan.
+ * Crea borradores de clases y artículos.
  *
- * Ubicación en proyecto: src/lib/pipeline/payload-draft.ts
+ * Ubicación: src/lib/pipeline/payload-draft.ts
  */
 
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
 type PayloadInstance = Awaited<ReturnType<typeof getPayload>>
+
+// ── Tipos ──
 
 interface CreateVideoDraftInput {
   title: string
@@ -27,7 +28,17 @@ interface CreateVideoDraftInput {
   publishedAt: string
 }
 
-interface PayloadVideoResponse {
+interface CreateArticleDraftInput {
+  title: string
+  slug: string
+  content: Record<string, unknown> // Lexical JSON
+  categorySlugs: string[]
+  metaTitle: string
+  metaDescription: string
+  videoId?: number // ID del video origen para enlazar
+}
+
+interface PayloadDocResponse {
   id: string
   title: string
   slug: string
@@ -35,36 +46,38 @@ interface PayloadVideoResponse {
 
 // ── Categorías ──
 
-async function findOrCreateCategory(payload: PayloadInstance, slug: string): Promise<number> {
+async function findOrCreateCategory(
+  payload: PayloadInstance,
+  slug: string,
+): Promise<number> {
   const existing = await payload.find({
     collection: 'categories',
     where: { slug: { equals: slug } },
     limit: 1,
   })
 
-  if (existing.docs.length > 0) {
-    return existing.docs[0].id as number
-  }
+  if (existing.docs.length > 0) return existing.docs[0].id as number
 
   const title = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
-
-  console.log(`[Pipeline A] 📂 Categoría nueva: "${title}" (${slug})`)
+  console.log(`[Pipeline] 📂 Categoría nueva: "${title}" (${slug})`)
 
   const doc = await payload.create({
     collection: 'categories',
     data: { title, slug, generateSlug: false },
   })
-
   return doc.id as number
 }
 
-async function resolveCategoryIds(payload: PayloadInstance, slugs: string[]): Promise<number[]> {
+async function resolveCategoryIds(
+  payload: PayloadInstance,
+  slugs: string[],
+): Promise<number[]> {
   const ids: number[] = []
   for (const slug of slugs) {
     try {
       ids.push(await findOrCreateCategory(payload, slug))
     } catch (error) {
-      console.error(`[Pipeline A] Error categoría "${slug}":`, error)
+      console.error(`[Pipeline] Error categoría "${slug}":`, error)
     }
   }
   return ids
@@ -72,47 +85,47 @@ async function resolveCategoryIds(payload: PayloadInstance, slugs: string[]): Pr
 
 // ── Tags ──
 
-async function findOrCreateTag(payload: PayloadInstance, slug: string): Promise<number> {
+async function findOrCreateTag(
+  payload: PayloadInstance,
+  slug: string,
+): Promise<number> {
+  const tagSlug = slug.replace(/\s+/g, '-').toLowerCase()
   const existing = await payload.find({
     collection: 'tags',
-    where: { slug: { equals: slug } },
+    where: { slug: { equals: tagSlug } },
     limit: 1,
   })
 
-  if (existing.docs.length > 0) {
-    return existing.docs[0].id as number
-  }
+  if (existing.docs.length > 0) return existing.docs[0].id as number
 
-  // Tags usan "name" (no "title")
   const name = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
-
-  console.log(`[Pipeline A] 🏷️ Tag nuevo: "${name}" (${slug})`)
-
   const doc = await payload.create({
     collection: 'tags',
-    data: { name, slug },
+    data: { name, slug: tagSlug },
   })
-
   return doc.id as number
 }
 
-async function resolveTagIds(payload: PayloadInstance, slugs: string[]): Promise<number[]> {
+async function resolveTagIds(
+  payload: PayloadInstance,
+  slugs: string[],
+): Promise<number[]> {
   const ids: number[] = []
   for (const slug of slugs) {
     try {
       ids.push(await findOrCreateTag(payload, slug))
     } catch (error) {
-      console.error(`[Pipeline A] Error tag "${slug}":`, error)
+      console.error(`[Pipeline] Error tag "${slug}":`, error)
     }
   }
   return ids
 }
 
-// ── Draft Creator ──
+// ── Video Draft (Pipeline A) ──
 
 export async function createVideoDraft(
   input: CreateVideoDraftInput,
-): Promise<PayloadVideoResponse> {
+): Promise<PayloadDocResponse> {
   const payload = await getPayload({ config })
 
   const categoryIds = await resolveCategoryIds(payload, input.categorySlugs)
@@ -129,12 +142,7 @@ export async function createVideoDraft(
       descripcionCorta: input.descripcionCorta,
       resumen: input.resumen,
       nivel: input.nivel as 'basico' | 'intermedio' | 'avanzado',
-      modalidad: input.modalidad as
-        | 'cash'
-        | 'torneos'
-        | 'mental-game'
-        | 'estadisticas'
-        | 'analisis-manos',
+      modalidad: input.modalidad as 'cash' | 'torneos' | 'mental-game' | 'estadisticas' | 'analisis-manos',
       categories: categoryIds,
       tags: tagIds,
       publishedAt: input.publishedAt,
@@ -152,6 +160,57 @@ export async function createVideoDraft(
     slug: doc.slug || '',
   }
 }
+
+// ── Article Draft (Pipeline B) ──
+
+export async function createArticleDraft(
+  input: CreateArticleDraftInput,
+): Promise<PayloadDocResponse> {
+  const payload = await getPayload({ config })
+
+  const categoryIds = await resolveCategoryIds(payload, input.categorySlugs)
+
+  // Crear artículo como draft
+  const doc = await payload.create({
+    collection: 'posts',
+    draft: true,
+    data: {
+      title: input.title,
+      slug: input.slug,
+      content: input.content,
+      categories: categoryIds,
+      publishedAt: new Date().toISOString(),
+      meta: {
+        title: input.metaTitle,
+        description: input.metaDescription,
+      },
+    },
+  })
+
+  // Si tiene videoId, enlazar el video con este artículo
+  if (input.videoId) {
+    try {
+      await payload.update({
+        collection: 'videos',
+        id: input.videoId,
+        data: {
+          articuloRelacionado: doc.id,
+        },
+      })
+      console.log(`[Pipeline B] 🔗 Video ${input.videoId} enlazado con artículo ${doc.id}`)
+    } catch (error) {
+      console.error(`[Pipeline B] Error enlazando video:`, error)
+    }
+  }
+
+  return {
+    id: String(doc.id),
+    title: doc.title,
+    slug: doc.slug || '',
+  }
+}
+
+// ── Utilidades ──
 
 export async function getExistingVideoIds(): Promise<string[]> {
   const payload = await getPayload({ config })
