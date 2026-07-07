@@ -145,7 +145,7 @@ export function Footer() {
                 aria-label="GamCare"
               >
                 <Image
-                  src="/media/GamCare.svg"
+                  src="https://media.ninjapokeracademy.com/GamCare.svg"
                   alt="GamCare"
                   width={72}
                   height={28}
@@ -159,7 +159,7 @@ export function Footer() {
                 aria-label="BeGambleAware"
               >
                 <Image
-                  src="/media/gambleaware_logos.svg"
+                  src="https://media.ninjapokeracademy.com/gambleaware_logos.svg"
                   alt="BeGambleAware"
                   width={100}
                   height={28}
