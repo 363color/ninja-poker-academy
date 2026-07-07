@@ -7,7 +7,7 @@ import { NewsletterPill } from '../_components/NewsletterPill'
 export const metadata: Metadata = {
   title: 'Comunidad | Ninja Poker Academy',
   description:
-    'Descubre la experiencia real de Ninja Poker Academy: clases diarias, revisión de manos, análisis HUD, bancaje y una comunidad activa de jugadores ganadores.',
+    'La experiencia real de Ninja Poker Academy: clases en vivo, revisión de manos, análisis HUD, bancaje disponible y una comunidad cercana de jugadores de cash game.',
 }
 
 function Arr13() {
@@ -130,14 +130,6 @@ export default function ComunidadPage() {
                 margin: '0 auto',
               }}
             >
-              <div className="hero-pill" style={{ display: 'inline-flex', marginBottom: 32 }}>
-                <div className="hero-avatars">
-                  <div className="hero-av">🥷</div>
-                  <div className="hero-av">🃏</div>
-                  <div className="hero-av">♠</div>
-                </div>
-                <span>La experiencia real de Ninja Poker Academy</span>
-              </div>
               <h1
                 style={{
                   fontSize: 'clamp(36px, 5vw, 64px)',
@@ -152,9 +144,9 @@ export default function ComunidadPage() {
                 <em style={{ color: '#CC1A1A', fontStyle: 'normal' }}>comunidad</em> ganadora.
               </h1>
               <p style={{ fontSize: 18, lineHeight: 1.7, color: '#575757', margin: '0 0 40px' }}>
-                Clases diarias, revisión de manos, análisis HUD y un equipo que conoce tu juego por
-                tu nombre. Todo lo que necesitas para convertirte en un jugador ganador de cash
-                game.
+                Una comunidad cercana donde se habla de póker y de todo. Clases en vivo durante la
+                semana, revisión de manos, análisis HUD y bancaje disponible. Todo lo que necesitas
+                para romper tus límites en cash game.
               </p>
               <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
                 <BtnRed href="/contacto">Quiero unirme</BtnRed>
@@ -186,10 +178,10 @@ export default function ComunidadPage() {
               }}
             >
               {[
-                { num: '+200', label: 'Clases grabadas' },
-                { num: '5/7', label: 'Días con clase en vivo' },
-                { num: '0€', label: 'Coste para el alumno' },
-                { num: '12 meses', label: 'NL2 a NL100, en promedio' },
+                { num: '🎬', label: 'Clases grabadas' },
+                { num: '📚', label: 'Clase en vivo' },
+                { num: '💼', label: 'Bancaje disponible' },
+                { num: '🎁', label: 'Pack de bienvenida gratis' },
               ].map((s, i) => (
                 <div key={i}>
                   <div
@@ -227,9 +219,9 @@ export default function ComunidadPage() {
                   lineHeight: 1.2,
                 }}
               >
-                De NL2 a NL100.
+                Alumnos reales,
                 <br />
-                En 12 meses.
+                resultados reales.
               </h2>
               <p
                 style={{
@@ -365,8 +357,8 @@ export default function ComunidadPage() {
             </div>
             <div style={{ textAlign: 'center', marginTop: 48 }}>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,.25)', marginBottom: 24 }}>
-                Todos comenzaron desde cero. Ninguno pagó una cuota. El modelo funciona porque
-                nuestros intereses están alineados con los tuyos.
+                Alumnos que empezaron en microlímites y hoy son regulares de NL50 y NL100. Nuestros
+                intereses están alineados con los tuyos.
               </p>
               <BtnRed href="/contacto">Empieza tu historia</BtnRed>
             </div>
@@ -399,8 +391,8 @@ export default function ComunidadPage() {
                   ¿Cómo entro al Discord?
                 </h2>
                 <p style={{ fontSize: 16, color: '#575757', lineHeight: 1.7, margin: '0 0 32px' }}>
-                  No compartimos el invite del Discord públicamente. El proceso es simple y personal
-                  — así nos aseguramos de que cada alumno encaja y recibe la atención que merece.
+                  No compartimos la invitación del Discord públicamente. El proceso es simple y
+                  personal — así garantizamos una comunidad activa y de confianza.
                 </p>
                 <div
                   style={{ display: 'flex', flexDirection: 'column', gap: 24, marginBottom: 40 }}
@@ -419,12 +411,12 @@ export default function ComunidadPage() {
                     {
                       num: '03',
                       title: 'Acceso al Discord',
-                      desc: 'Si encajas, te enviamos el invite manualmente. A partir de ahí eres parte de la comunidad.',
+                      desc: 'Te enviamos la invitación al Discord. A partir de ahí eres parte de la comunidad.',
                     },
                     {
                       num: '04',
                       title: 'Empiezas a mejorar',
-                      desc: 'Clases diarias, revisión de manos, análisis HUD. Todo desde el primer día.',
+                      desc: 'Clases en vivo durante la semana, revisión de manos, análisis HUD. Todo desde el primer día.',
                     },
                   ].map((s) => (
                     <div key={s.num} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
@@ -535,7 +527,7 @@ export default function ComunidadPage() {
                       Acceso privado
                     </div>
                     <div style={{ fontSize: 13, color: '#575757' }}>
-                      El invite solo se comparte manualmente tras conversar con el equipo.
+                      La invitación solo se comparte tras conversar con el equipo.
                     </div>
                   </div>
                 </div>
@@ -613,34 +605,39 @@ export default function ComunidadPage() {
               <FAQAccordion
                 items={[
                   {
-                    question: '¿Cómo es el ambiente dentro de la comunidad?',
+                    question: '¿Cómo es la comunidad de Ninja Poker Academy?',
                     answer:
-                      'Cercano y activo. No es un grupo de cientos de personas en silencio: hay debate constante sobre manos, dudas resueltas al momento y compañeros que juegan los mismos límites que tú.',
+                      'Una comunidad cercana y activa donde se habla de póker y de todo. No es un grupo masivo en silencio: hay debate constante sobre manos, dudas resueltas al momento y compañeros que juegan tus mismos límites en cash game.',
                   },
                   {
-                    question: '¿Por qué no comparten el invite de Discord públicamente?',
+                    question: '¿Quiénes son los instructores de la academia?',
                     answer:
-                      'Para mantener la calidad de la comunidad. Preferimos conocer a cada persona antes de darle acceso, así nos asegura que el grupo se mantiene activo y de confianza.',
+                      'Perep es jugador profesional de midstakes con más de una década de experiencia. Vive del póker. Yani es jugador profesional de NL50 y también vive de esto. No son teóricos: juegan, ganan y enseñan desde la experiencia real en las mesas de cash game.',
                   },
                   {
-                    question: '¿Qué pasa después de escribir por Telegram o Instagram?',
+                    question: '¿Qué incluye la formación dentro de la academia?',
                     answer:
-                      'Conversamos contigo sobre tu nivel y objetivos. Si encajas con la academia, te enviamos el invite de Discord manualmente, normalmente en el mismo día.',
+                      'Clases en vivo casi diarias, coaching grupal cercano con análisis de spots reales, sesiones en vivo, mental game, juego contra recreacionales, revisión de manos, análisis de estadísticas y HUD, seguimiento personalizado y acceso a la videoteca completa con todas las sesiones grabadas.',
                   },
                   {
-                    question: '¿Hay seguimiento real o es un grupo donde nadie responde?',
+                    question: '¿Ofrecen bancaje para jugar?',
                     answer:
-                      'Seguimiento real. Nuestro equipo conoce el nivel de cada alumno y revisa su progreso, no es un canal de mensajes sin moderación.',
+                      'Sí. La academia ofrece bancaje a alumnos que cumplan los requisitos. Te permite desarrollar tu carrera en el póker sin arriesgar tu propio dinero. Es una opción disponible, no obligatoria, y tiene condiciones que se explican al entrar.',
                   },
                   {
-                    question: '¿Los profesores juegan o solo enseñan teoría?',
+                    question: '¿Por qué no comparten la invitación de Discord públicamente?',
                     answer:
-                      'Juegan. Perep y el resto del equipo docente compiten en NL50-NL100 activamente, no son coaches que dejaron de jugar hace años.',
+                      'Para mantener la calidad de la comunidad. Preferimos conocer a cada persona antes de darle acceso. Así garantizamos un grupo activo, de confianza y enfocado en mejorar en cash game.',
                   },
                   {
-                    question: '¿Puedo unirme si ya formo parte de otra escuela de póker?',
+                    question: '¿Puedo unirme si estoy estancado en microlímites?',
                     answer:
-                      'Sí, no hay exclusividad. Lo que sí pedimos es compromiso real con el estudio dentro de nuestra comunidad mientras participes.',
+                      'Precisamente para eso existe Ninja Poker Academy. Alumnos que empezaron en microlímites hoy son regulares de NL50 y NL100. El seguimiento personalizado, la revisión de manos y el coaching grupal están diseñados para ayudarte a romper tu techo actual.',
+                  },
+                  {
+                    question: '¿Cómo me uno a la comunidad?',
+                    answer:
+                      'Escríbenos por Telegram, Instagram o el formulario de contacto. Cuéntanos tu historia en el póker, desde qué país juegas y qué buscas mejorar. Conversamos contigo y te enviamos la invitación de Discord.',
                   },
                 ]}
               />
@@ -665,11 +662,7 @@ export default function ComunidadPage() {
                   </p>
                 </div>
                 <div className="nl-form sr">
-                  <div className="nl-pill">
-                    <input type="email" placeholder="Tu email" className="nl-input" />
-                    <button className="nl-btn">Suscribirme</button>
-                  </div>
-                  <p className="nl-fine">Sin spam. Cancela cuando quieras.</p>
+                  <NewsletterPill />
                 </div>
               </div>
             </div>

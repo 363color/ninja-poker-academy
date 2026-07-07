@@ -8,11 +8,12 @@ import type { ArticleCardData } from './_components/ArticleCard'
 import { ClassCard } from './_components/ClassCard'
 import type { ClassCardData } from './_components/ClassCard'
 import { ProcessImageReveal } from './_components/ProcessImageReveal'
+import { NewsletterPill } from './_components/NewsletterPill'
 
 export const metadata: Metadata = {
   title: 'Academia de Poker Online en Español | Ninja Poker Academy',
   description:
-    'Ninja Poker Academy: academia de póker online en español. Clases diarias, revisión de manos y comunidad activa para jugadores de todos los niveles.',
+    'Ninja Poker Academy: academia de póker online en español. Formación profesional en cash game, revisión de manos y comunidad activa para jugadores de todos los niveles.',
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -143,34 +144,44 @@ async function fetchLatestArticles(): Promise<ArticleCardData[]> {
 
 const FAQ_ITEMS = [
   {
-    question: '¿Qué incluye unirse a Ninja Poker Academy?',
+    question: '¿Qué incluye la formación en Ninja Poker Academy?',
     answer:
-      'Clases en vivo de lunes a viernes, acceso a la videoteca completa, revisión de tus manos, análisis de tu HUD, seguimiento personalizado de nuestro equipo y acceso al Discord. Todo gratis, sin cuotas ni coste adicional.',
+      'Clases en vivo casi diarias de cash game, videoteca completa con todas las sesiones grabadas, revisión personalizada de manos, análisis de estadísticas y HUD, tutorías de seguimiento y acceso a la comunidad privada en Discord. Todo enfocado a que mejores tu winrate y rompas tus límites actuales.',
+  },
+  {
+    question: '¿Quiénes son los instructores?',
+    answer:
+      'Perep es jugador profesional de midstakes con más de una década de experiencia. Vive del póker. Yani es jugador profesional de NL50 y también vive de esto. No son teóricos: juegan, ganan y enseñan desde la experiencia real en las mesas.',
   },
   {
     question: '¿Necesito experiencia previa para unirme?',
     answer:
-      'No. Formamos jugadores desde cero y también ayudamos a mejorar a cualquier persona con experiencia. Lo importante es estar dispuesto a estudiar y recibir feedback honesto sobre tu juego.',
+      'No. Formamos jugadores desde cero y también ayudamos a regulares con experiencia que quieren subir de límites. Lo importante es tener compromiso con el estudio y estar abierto a recibir feedback honesto sobre tu juego.',
   },
   {
-    question: '¿Cuándo son las clases en vivo?',
+    question: '¿Tengo que pagar para entrar a la academia?',
     answer:
-      'Las clases son de lunes a viernes. El horario exacto se comunica dentro de la academia. Todas quedan grabadas si no puedes asistir en directo.',
-  },
-  {
-    question: '¿La academia es solo de cash game?',
-    answer:
-      "Sí. Ninja Poker Academy es 100% cash game (NL Hold'em). No cubrimos torneos, MTTs, Spins ni PLO.",
+      'El modelo de Ninja Poker Academy permite que desarrolles tu carrera en el póker sin arriesgar tu propio dinero. Los alumnos juegan en salas afiliadas y el rakeback generado cubre el coste de la formación. También ofrecemos bancaje para quienes cumplan los requisitos. En nuestro canal de YouTube y redes sociales tienes clases gratuitas y un pack de bienvenida gratis para empezar.',
   },
   {
     question: '¿Qué es el bancaje y cómo funciona?',
     answer:
-      'El bancaje es capital que la academia pone a disposición de los alumnos que lo necesiten. Es completamente opcional y no afecta al acceso al resto del contenido.',
+      'El bancaje es capital que la academia pone a disposición de alumnos que cumplan los requisitos. Te permite jugar y desarrollarte como jugador profesional sin poner dinero de tu bolsillo. Es una opción disponible, no obligatoria, y tiene condiciones que se explican al entrar.',
+  },
+  {
+    question: '¿Las clases de YouTube son todo el contenido?',
+    answer:
+      'No. Lo que ves en YouTube es solo una pequeña muestra de las clases que se dan en vivo dentro de la academia. El contenido privado incluye sesiones casi diarias, coaching grupal cercano, análisis de spots, sesiones en vivo, mental game, juego contra recreacionales y mucho más. Todas las clases quedan grabadas para los alumnos.',
+  },
+  {
+    question: '¿La academia es solo de cash game?',
+    answer:
+      "Sí. Ninja Poker Academy se especializa exclusivamente en cash game (NL Hold'em). No cubrimos torneos, MTTs, Spins ni PLO. Esa especialización es lo que nos permite ir a fondo en cada concepto.",
   },
   {
     question: '¿Cómo me uno a la academia?',
     answer:
-      'Escríbenos por Telegram, Instagram o el formulario de contacto. Nuestro equipo te responderá para hablar sobre tu nivel y objetivos. Si encajas, te damos acceso inmediato.',
+      'Escríbenos por Telegram, Instagram o el formulario de contacto. Cuéntanos tu historia en el póker, desde qué país juegas y qué buscas mejorar. Nuestro equipo te responderá para conocer tu nivel y objetivos.',
   },
 ]
 
@@ -188,16 +199,6 @@ export default async function HomePage() {
           <div className="pvp">
             <div className="hero-content">
               <div className="hero-top">
-                <div className="hero-pill sr">
-                  <div className="hero-avatars">
-                    <div className="hero-av">🥷</div>
-                    <div className="hero-av">🃏</div>
-                    <div className="hero-av">♠</div>
-                  </div>
-                  <span>
-                    <strong>Ninja Poker Academy</strong> · Escuela de Póker Online
-                  </span>
-                </div>
                 <div className="hero-h1 sr">
                   <h1>
                     Academia de póker online para <em>jugadores ganadores</em>
@@ -205,8 +206,9 @@ export default async function HomePage() {
                 </div>
                 <div className="hero-sub sr">
                   <p className="p1">
-                    Aprende cash game con clases en vivo, revisión de manos y el seguimiento real
-                    que necesitas para mejorar tu winrate.
+                    Formación profesional en cash game con clases en vivo, revisión de manos y
+                    seguimiento real para romper tus límites.{' '}
+                    <em>Pack de bienvenida gratis al unirte.</em>
                   </p>
                 </div>
                 <div className="hero-ctas sr">
@@ -218,7 +220,7 @@ export default async function HomePage() {
                 <div className="hero-bubbles" aria-hidden="true">
                   <div className="bubble _1">
                     <div className="bubble-icon">📅</div>
-                    <span className="bubble-label">Clases diarias</span>
+                    <span className="bubble-label">Clases semanales</span>
                   </div>
                   <div className="bubble _2">
                     <div className="bubble-icon">🎯</div>
@@ -380,15 +382,16 @@ export default async function HomePage() {
                 Todo lo que necesitas para mejorar tu juego
               </h2>
               <p style={{ fontSize: 16, color: '#575757', maxWidth: 480, margin: '0 auto' }}>
-                Sin cuotas. Sin módulos de pago. Todo incluido desde el primer día.
+                Formación completa desde el primer día. Desarrolla tu carrera en el póker sin
+                arriesgar tu propio dinero.
               </p>
             </div>
             <div className="pilares-grid">
               {[
                 {
                   icon: '📅',
-                  title: 'Clases diarias en vivo',
-                  desc: 'De lunes a viernes hay clase. No grabaciones de hace meses — sesiones en directo donde puedes preguntar, participar y aprender en tiempo real. Y si no puedes conectarte, queda grabada.',
+                  title: 'Clases varias veces por semana',
+                  desc: 'Sesiones en directo donde puedes preguntar, participar y aprender en tiempo real. Y si no puedes conectarte, queda grabada. No son grabaciones de hace meses — es contenido fresco.',
                 },
                 {
                   icon: '🃏',
@@ -412,8 +415,8 @@ export default async function HomePage() {
                 },
                 {
                   icon: '💰',
-                  title: 'Bancaje opcional',
-                  desc: 'Para alumnos que lo necesiten, ofrecemos acceso a bancaje en condiciones competitivas. Completamente opcional y sin condicionar el acceso al resto de la academia.',
+                  title: 'Bancaje disponible',
+                  desc: 'Capital para jugar sin arriesgar tu propio dinero. Disponible para alumnos que cumplan los requisitos. Opcional y con condiciones que se explican al entrar.',
                 },
                 {
                   icon: '🤝',
@@ -536,8 +539,8 @@ export default async function HomePage() {
               <div className="pc-num">Paso 04</div>
               <h4>Mejoras y ganas</h4>
               <p>
-                Con seguimiento continuo, revisión de manos y clases diarias, tu winrate empieza a
-                moverse. Así de simple.
+                Con seguimiento continuo, revisión de manos y clases durante la semana, tu winrate
+                empieza a moverse. Así de simple.
               </p>
             </div>
           </div>
@@ -677,11 +680,7 @@ export default async function HomePage() {
                   </p>
                 </div>
                 <div className="nl-form sr">
-                  <div className="nl-pill">
-                    <input type="email" placeholder="Tu email" className="nl-input" />
-                    <button className="nl-btn">Suscribirme</button>
-                  </div>
-                  <p className="nl-fine">Sin spam. Cancela cuando quieras.</p>
+                  <NewsletterPill />
                 </div>
               </div>
             </div>
@@ -699,8 +698,8 @@ export default async function HomePage() {
               <div className="sect-label">Únete hoy</div>
               <h2>¿Listo para mejorar tu juego en serio?</h2>
               <p className="p1" style={{ color: 'var(--text-03)', maxWidth: '40ch' }}>
-                Cuéntanos dónde estás. Nuestro equipo te ayuda a llegar donde quieres estar en el
-                póker.
+                Cuéntanos dónde estás y qué buscas mejorar. Al unirte recibes un pack de bienvenida
+                gratis para empezar con todo desde el primer día.
               </p>
               <div className="cta-btns">
                 <BtnRed href="/contacto">Quiero unirme</BtnRed>

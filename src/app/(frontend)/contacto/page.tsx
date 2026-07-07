@@ -5,7 +5,7 @@ import { ContactForm } from './ContactForm'
 export const metadata: Metadata = {
   title: 'Contacto | Ninja Poker Academy',
   description:
-    'Solicita unirte a Ninja Poker Academy. Cuéntanos tu nivel y tus redes sociales — te contactamos directamente por Telegram, Instagram, TikTok o YouTube.',
+    'Únete a Ninja Poker Academy. Cuéntanos tu historia en el póker, desde qué país juegas y qué buscas mejorar. Te respondemos por Discord.',
 }
 
 const CANALES = [
@@ -32,14 +32,6 @@ const CANALES = [
     href: 'https://www.tiktok.com/@ninjapokeracademy',
     desc: 'También respondemos por aquí.',
     color: '#1d1d1d',
-  },
-  {
-    icon: '▶️',
-    name: 'YouTube',
-    handle: '@ninjapokeracademy',
-    href: 'https://www.youtube.com/@ninjapokeracademy',
-    desc: '+200 clases gratis mientras decides.',
-    color: '#CC1A1A',
   },
 ]
 
@@ -84,14 +76,6 @@ export default function ContactoPage() {
                 margin: '0 auto',
               }}
             >
-              <div className="hero-pill" style={{ display: 'inline-flex', marginBottom: 32 }}>
-                <div className="hero-avatars">
-                  <div className="hero-av">💬</div>
-                  <div className="hero-av">🥷</div>
-                  <div className="hero-av">♠</div>
-                </div>
-                <span>Contacto</span>
-              </div>
               <h1
                 style={{
                   fontSize: 'clamp(36px, 5vw, 64px)',
@@ -102,57 +86,12 @@ export default function ContactoPage() {
                   margin: '0 0 24px',
                 }}
               >
-                Hablemos de
-                <br />
-                <em style={{ color: '#CC1A1A', fontStyle: 'normal' }}>tu juego</em>
+                Cuéntanos de <em style={{ color: '#CC1A1A', fontStyle: 'normal' }}>ti</em>
               </h1>
               <p style={{ fontSize: 18, lineHeight: 1.7, color: '#575757', margin: 0 }}>
-                Cuéntanos tu nivel y déjanos tus redes sociales. Te contactamos directamente para
-                ver si Ninja Poker Academy es el lugar adecuado para ti.
+                Tu historia en el póker, desde qué país juegas, qué buscas mejorar. Nuestra escuela
+                está en Discord — te enviamos la invitación tras conversar contigo.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══ STATS PUENTE ══ */}
-      <section
-        style={{
-          background: '#fff',
-          borderTop: '1px solid #f0f0f0',
-          borderBottom: '1px solid #f0f0f0',
-        }}
-      >
-        <div className="container">
-          <div className="pvp" style={{ paddingTop: 40, paddingBottom: 40 }}>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-                gap: 24,
-                textAlign: 'center',
-              }}
-            >
-              {[
-                { num: '24h', label: 'Tiempo medio de respuesta' },
-                { num: '0€', label: 'Coste de la consulta' },
-                { num: '4', label: 'Canales para contactarnos' },
-                { num: '100%', label: 'Mensajes leídos por el equipo' },
-              ].map((s, i) => (
-                <div key={i}>
-                  <div
-                    style={{
-                      fontSize: 'clamp(24px, 3vw, 32px)',
-                      fontWeight: 700,
-                      color: '#CC1A1A',
-                      fontFamily: 'var(--font-display)',
-                    }}
-                  >
-                    {s.num}
-                  </div>
-                  <div style={{ fontSize: 13, color: '#575757', marginTop: 4 }}>{s.label}</div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -257,13 +196,13 @@ export default function ContactoPage() {
                     <h3
                       style={{ fontSize: 17, fontWeight: 700, color: '#fff', margin: '0 0 14px' }}
                     >
-                      No compartimos el invite públicamente
+                      La escuela está en Discord
                     </h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                       {[
-                        'Nos dejas tu nivel y redes en el formulario',
-                        'Te contactamos por la red que elegiste',
-                        'Si encajas, te enviamos el invite manualmente',
+                        'Nos cuentas tu historia en el formulario',
+                        'Conversamos contigo sobre tu nivel y objetivos',
+                        'Te enviamos la invitación al Discord',
                       ].map((step, i) => (
                         <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                           <div

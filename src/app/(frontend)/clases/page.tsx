@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
 import { ClassCard } from '../_components/ClassCard'
+import { NewsletterPill } from '../_components/NewsletterPill'
 
 function nivelLabel(n?: string) {
   if (n === 'basico') return 'Básico'
@@ -14,7 +15,7 @@ function nivelLabel(n?: string) {
 export const metadata: Metadata = {
   title: 'Clases de Póker Online Gratis | Ninja Poker Academy',
   description:
-    'Videoteca de clases de cash game en español: preflop, postflop, análisis de manos, estadísticas y mental game. Filtra por nivel y tema.',
+    'Clases de póker online gratis en español. Cash game: preflop, postflop, análisis de manos, estadísticas, HUD y mental game. Filtra por nivel y tema.',
 }
 
 interface Video {
@@ -51,28 +52,28 @@ const PER_PAGE = 12
 
 const FAQ_ITEMS = [
   {
-    q: '¿Las clases son realmente gratis?',
-    a: 'Sí. Todas las clases de la videoteca son gratuitas. Ninja Poker Academy es una escuela de póker online sin coste para el alumno. Nuestro modelo se basa en afiliación con salas de póker, no en el cobro de cuotas.',
+    q: '¿Estas clases son gratuitas?',
+    a: 'Sí. Las clases de la videoteca son contenido gratuito publicado en nuestro canal de YouTube. Son una pequeña muestra de lo que se enseña dentro de la academia, donde el contenido es mucho más amplio y exclusivo para alumnos.',
   },
   {
-    q: '¿Qué nivel necesito para empezar?',
-    a: 'Ninguno en particular. Formamos jugadores desde cero y también ayudamos a mejorar a jugadores con experiencia. Usa el filtro "Básico" para empezar desde el principio.',
+    q: '¿Quiénes imparten las clases?',
+    a: 'Perep es jugador profesional de midstakes con más de una década de experiencia. Vive del póker. Yani es jugador profesional de NL50 y también vive de esto. Ambos enseñan desde la experiencia real en las mesas.',
+  },
+  {
+    q: '¿Qué nivel necesito para ver estas clases?',
+    a: 'Ninguno en particular. Hay clases desde nivel básico hasta avanzado. Usa los filtros de nivel para encontrar las que se adapten a ti.',
   },
   {
     q: '¿Estas clases son solo de cash game?',
-    a: "Sí. Ninja Poker Academy se especializa exclusivamente en cash game de Texas Hold'em. No cubrimos torneos, MTTs, Spins ni PLO.",
+    a: "Sí. Ninja Poker Academy se especializa exclusivamente en cash game (NL Hold'em). No cubrimos torneos, MTTs, Spins ni PLO.",
   },
   {
-    q: '¿Quién imparte las clases?',
-    a: 'Las clases las imparte Perep, instructor principal de Ninja Poker Academy, con experiencia en NL50 y NL100 y un historial demostrado de resultados en cash game.',
-  },
-  {
-    q: '¿Puedo acceder a más material si me uno a la academia?',
-    a: 'Sí. Los alumnos de la academia tienen acceso a clases en vivo diarias, revisión de manos, análisis de HUD y seguimiento personalizado, además de la videoteca pública.',
+    q: '¿Qué más hay dentro de la academia?',
+    a: 'Clases en vivo durante la semana, coaching grupal cercano, revisión de manos, análisis de estadísticas y HUD, seguimiento personalizado, bancaje disponible para quienes cumplan los requisitos y una comunidad activa en Discord. Lo que ves aquí es solo la puerta de entrada.',
   },
   {
     q: '¿Cómo me uno a la academia?',
-    a: 'Escríbenos por Telegram, Instagram o el formulario de contacto. Nuestro equipo te responderá para conocer tu nivel y objetivos.',
+    a: 'Escríbenos por Telegram, Instagram o el formulario de contacto. Cuéntanos tu historia en el póker y qué buscas mejorar. Nuestro equipo te responderá.',
   },
 ]
 
@@ -246,21 +247,11 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                 gap: 24,
               }}
             >
-              <div className="hero-pill sr">
-                <div className="hero-avatars">
-                  <div className="hero-av">🥷</div>
-                  <div className="hero-av">🃏</div>
-                  <div className="hero-av">♠</div>
-                </div>
-                <span>
-                  <strong>Videoteca</strong> · Clases de Póker Online
-                </span>
-              </div>
               <div className="hero-h1 sr" style={{ textAlign: 'center' }}>
                 <h1>
                   {nivel ? (
                     <>
-                      Clases <em>nivel {nivelLabel(nivel)}</em>
+                      Clases de póker <em>nivel {nivelLabel(nivel)}</em>
                     </>
                   ) : tema ? (
                     <>
@@ -272,15 +263,16 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                     </>
                   ) : (
                     <>
-                      Clases de <em>cash game</em> gratis
+                      Clases de <em>Póker Online</em> Gratis
                     </>
                   )}
                 </h1>
               </div>
               <div className="hero-sub sr" style={{ textAlign: 'center' }}>
                 <p className="p1">
-                  Aprende cash game con clases grabadas por Perep. Filtra por nivel o tema y empieza
-                  a mejorar tu winrate hoy.
+                  Clases en vivo grabadas de Perep y Yani. Coaching grupal cercano con análisis de
+                  spots, sesiones en vivo, mental game y juego contra recreacionales. Esto es solo
+                  una muestra — el contenido completo es exclusivo para alumnos de la academia.
                 </p>
               </div>
             </div>
@@ -511,11 +503,7 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                   </p>
                 </div>
                 <div className="nl-form sr">
-                  <div className="nl-pill">
-                    <input type="email" placeholder="Tu email" className="nl-input" />
-                    <button className="nl-btn">Suscribirme</button>
-                  </div>
-                  <p className="nl-fine">Sin spam. Cancela cuando quieras.</p>
+                  <NewsletterPill />
                 </div>
               </div>
             </div>
@@ -533,8 +521,8 @@ export default async function ClasesPage({ searchParams }: PageProps) {
               <div className="sect-label">Únete hoy</div>
               <h2>¿Listo para mejorar tu juego en serio?</h2>
               <p className="p1" style={{ color: 'var(--text-03)', maxWidth: '40ch' }}>
-                Cuéntanos dónde estás. Nuestro equipo te ayuda a llegar donde quieres estar en el
-                póker.
+                Lo que ves aquí es una pequeña parte. Dentro de la academia: clases en vivo durante
+                la semana, tutorías, seguimiento y bancaje disponible.
               </p>
               <div className="cta-btns">
                 <Link href="/contacto" className="btn red">

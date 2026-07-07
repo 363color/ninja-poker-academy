@@ -31,12 +31,9 @@ export function ContactForm() {
   const [form, setForm] = useState({
     nombre: '',
     email: '',
-    nivel: '',
-    telegram: '',
-    instagram: '',
-    tiktok: '',
-    youtube: '',
     discord: '',
+    pais: '',
+    interes: '',
     mensaje: '',
     rgpd: false,
   })
@@ -50,9 +47,6 @@ export function ContactForm() {
     if (name === 'email') setEmailError('')
   }
 
-  const tieneRedSocial =
-    form.discord || form.telegram || form.instagram || form.tiktok || form.youtube
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!form.rgpd) return
@@ -63,8 +57,6 @@ export function ContactForm() {
       )
       return
     }
-
-    if (!tieneRedSocial) return
 
     setStatus('loading')
     try {
@@ -78,12 +70,9 @@ export function ContactForm() {
       const params = new URLSearchParams()
       params.set('nombre', form.nombre)
       params.set('email', form.email)
-      params.set('nivel', form.nivel)
       if (form.discord) params.set('discord', form.discord)
-      if (form.telegram) params.set('telegram', form.telegram)
-      if (form.instagram) params.set('instagram', form.instagram)
-      if (form.tiktok) params.set('tiktok', form.tiktok)
-      if (form.youtube) params.set('youtube', form.youtube)
+      if (form.pais) params.set('pais', form.pais)
+      if (form.interes) params.set('interes', form.interes)
 
       router.push(`/contacto/gracias?${params.toString()}`)
     } catch {
@@ -124,8 +113,7 @@ export function ContactForm() {
           placeholder="tu@gmail.com"
         />
         <p style={{ fontSize: 12, color: '#b8b7b7', margin: '6px 0 0' }}>
-          No te contactamos por email — es solo para confirmar tu solicitud y la newsletter (puedes
-          darte de baja cuando quieras).
+          Solo para confirmar tu solicitud. No te contactamos por email.
         </p>
         {emailError && (
           <p style={{ fontSize: 12, color: '#CC1A1A', margin: '6px 0 0' }}>{emailError}</p>
@@ -133,81 +121,62 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="nivel" className="contacto-label">
-          Tu nivel actual
+        <label htmlFor="discord" className="contacto-label">
+          Discord <span style={{ color: '#CC1A1A' }}>(usuario)</span>
+        </label>
+        <input
+          id="discord"
+          name="discord"
+          type="text"
+          required
+          value={form.discord}
+          onChange={handleChange}
+          className="contacto-input"
+          placeholder="Tu usuario de Discord"
+        />
+        <p style={{ fontSize: 12, color: '#b8b7b7', margin: '6px 0 0' }}>
+          La escuela funciona en Discord. Te enviaremos la invitación por aquí.
+        </p>
+      </div>
+
+      <div>
+        <label htmlFor="pais" className="contacto-label">
+          País
+        </label>
+        <input
+          id="pais"
+          name="pais"
+          type="text"
+          required
+          value={form.pais}
+          onChange={handleChange}
+          className="contacto-input"
+          placeholder="¿Desde qué país juegas?"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="interes" className="contacto-label">
+          ¿Qué te interesa?
         </label>
         <select
-          id="nivel"
-          name="nivel"
+          id="interes"
+          name="interes"
           required
-          value={form.nivel}
+          value={form.interes}
           onChange={handleChange}
           className="contacto-input"
         >
           <option value="">Selecciona una opción</option>
-          <option value="principiante">Soy principiante, no sé jugar</option>
-          <option value="recreativo">Juego de forma recreativa</option>
-          <option value="intermedio">Tengo experiencia, busco mejorar</option>
-          <option value="semipro">Juego semi-profesional</option>
+          <option value="aprender">Aprender desde cero</option>
+          <option value="mejorar">Mejorar mi juego y subir de límites</option>
+          <option value="bancaje">Bancaje — quiero jugar sin arriesgar mi dinero</option>
         </select>
       </div>
 
       <div>
-        <div className="contacto-label">
-          Tus redes sociales <span style={{ color: '#CC1A1A' }}>(al menos una, obligatorio)</span>
-        </div>
-        <p style={{ fontSize: 12, color: '#575757', margin: '0 0 10px' }}>
-          Nos contactamos por aquí — Discord es el principal. Deja varias para encontrarte más
-          rápido.
-        </p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <input
-            name="discord"
-            type="text"
-            value={form.discord}
-            onChange={handleChange}
-            className="contacto-input"
-            placeholder="Discord (usuario)"
-            style={{ gridColumn: 'span 2', borderColor: '#CC1A1A20', background: '#fff9f9' }}
-          />
-          <input
-            name="telegram"
-            type="text"
-            value={form.telegram}
-            onChange={handleChange}
-            className="contacto-input"
-            placeholder="Telegram (@usuario)"
-          />
-          <input
-            name="instagram"
-            type="text"
-            value={form.instagram}
-            onChange={handleChange}
-            className="contacto-input"
-            placeholder="Instagram (@usuario)"
-          />
-          <input
-            name="tiktok"
-            type="text"
-            value={form.tiktok}
-            onChange={handleChange}
-            className="contacto-input"
-            placeholder="TikTok (@usuario)"
-          />
-          <input
-            name="youtube"
-            type="text"
-            value={form.youtube}
-            onChange={handleChange}
-            className="contacto-input"
-            placeholder="YouTube (canal)"
-          />
-        </div>
-      </div>
-
-      <div>
         <label htmlFor="mensaje" className="contacto-label">
-          Mensaje{' '}
+          Cuéntanos tu historia en el póker{' '}
           <span style={{ color: '#b8b7b7', textTransform: 'none', fontWeight: 400 }}>
             (opcional)
           </span>
@@ -219,7 +188,7 @@ export function ContactForm() {
           value={form.mensaje}
           onChange={handleChange}
           className="contacto-input"
-          placeholder="Cuéntanos algo más si quieres — tu objetivo, tus límites actuales, dudas..."
+          placeholder="Qué límites juegas, en qué salas, qué buscas mejorar, si usas HUD o trackers..."
           style={{ resize: 'vertical' }}
         />
       </div>

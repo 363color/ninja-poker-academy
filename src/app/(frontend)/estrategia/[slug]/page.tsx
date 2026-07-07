@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import { ArticleTOC } from './ArticleTOC'
 import { ArticleShareButtons } from './ArticleShareButtons'
+import { NewsletterPill } from '../../_components/NewsletterPill'
 
 // ── Tipos ─────────────────────────────────────────────────────────────────────
 
@@ -560,9 +561,8 @@ export default async function EstrategiaSlugPage({
                   >
                     Análisis de manos, artículos como este y novedades de la academia. Sin spam.
                   </p>
-                  <div className="nl-pill" style={{ maxWidth: 440 }}>
-                    <input type="email" placeholder="Tu email" className="nl-input" />
-                    <button className="nl-btn">Suscribirme</button>
+                  <div style={{ maxWidth: 440 }}>
+                    <NewsletterPill />
                   </div>
                   <p style={{ fontSize: 12, color: 'rgba(255,255,255,.25)', margin: 0 }}>
                     Sin spam. Cancela cuando quieras.

@@ -150,14 +150,6 @@ export default function SobreNosotrosPage() {
                 margin: '0 auto',
               }}
             >
-              <div className="hero-pill" style={{ display: 'inline-flex', marginBottom: 32 }}>
-                <div className="hero-avatars">
-                  <div className="hero-av">🥷</div>
-                  <div className="hero-av">🃏</div>
-                  <div className="hero-av">♠</div>
-                </div>
-                <span>Sobre nosotros</span>
-              </div>
               <h1
                 style={{
                   fontSize: 'clamp(36px, 5vw, 64px)',

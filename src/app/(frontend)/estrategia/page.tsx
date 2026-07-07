@@ -228,17 +228,6 @@ export default async function EstrategiaPage({ searchParams }: PageProps) {
                 gap: 24,
               }}
             >
-              <div className="hero-pill sr">
-                <div className="hero-avatars">
-                  <div className="hero-av">✍️</div>
-                  <div className="hero-av">🃏</div>
-                  <div className="hero-av">📊</div>
-                </div>
-                <span>
-                  <strong>Estrategia</strong> · Artículos de Póker Online
-                </span>
-              </div>
-
               <div className="hero-h1 sr" style={{ textAlign: 'center' }}>
                 <h1>
                   {categoria ? (
