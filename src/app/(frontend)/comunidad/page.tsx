@@ -57,9 +57,18 @@ const ALUMNOS = [
     nivel: 'NL100',
     color: '#CC1A1A',
     historia:
-      'Entró sin saber nada de póker. En aproximadamente 12 meses pasó de NL2 a NL100 con resultados consistentes.',
+      'Entró sin experiencia previa. Con dedicación y seguimiento constante del equipo, hoy juega NL100 de forma regular con resultados consistentes.',
     desde: 'NL2',
     hasta: 'NL100',
+  },
+  {
+    nick: 'Marcos',
+    nivel: 'NL50',
+    color: '#cc8f1a',
+    historia:
+      'Llevaba dos años estancado en NL10 sin conseguir subir. Tras unirse a la academia, el análisis de estadísticas y la revisión de manos le ayudaron a identificar sus leaks y romper su techo.',
+    desde: 'NL10',
+    hasta: 'NL50',
   },
   {
     nick: 'Yisus',
@@ -179,7 +188,7 @@ export default function ComunidadPage() {
             >
               {[
                 { num: '🎬', label: 'Clases grabadas' },
-                { num: '📚', label: 'Clase en vivo' },
+                { num: '📚', label: 'Clases en vivo' },
                 { num: '💼', label: 'Bancaje disponible' },
                 { num: '🎁', label: 'Pack de bienvenida gratis' },
               ].map((s, i) => (
@@ -231,8 +240,8 @@ export default function ComunidadPage() {
                   margin: '0 auto',
                 }}
               >
-                Tres alumnos que entraron sin saber nada de póker. Hoy juegan límites donde otros
-                tardan años en llegar.
+                Algunos empezaron desde cero, otros estaban estancados. Todos rompieron sus límites
+                con la formación y el seguimiento de la academia.
               </p>
             </div>
             <div

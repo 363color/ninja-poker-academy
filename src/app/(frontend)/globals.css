@@ -294,7 +294,7 @@ html[data-theme='dark'], html[data-theme='light'] { opacity: initial; }
 .hero-ctas { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; }
 .hero-bubbles { position: absolute; inset: 0; pointer-events: none; }
 .bubble { position: absolute; background: #fff; border: 1px solid #e7e6e6; border-radius: 14px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,.06); animation: bob 4s ease-in-out infinite; white-space: nowrap; }
-.bubble._1 { left: -130px; top: 50px; animation-delay: 0s; }
+.bubble._1 { left: -180px; top: 20px; animation-delay: 0s; }
 .bubble._2 { right: -130px; top: 30px; animation-delay: .8s; }
 .bubble._3 { left: -90px; bottom: 70px; animation-delay: 1.6s; }
 .bubble._4 { right: -90px; bottom: 50px; animation-delay: 2.4s; }

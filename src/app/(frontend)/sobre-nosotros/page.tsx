@@ -53,37 +53,32 @@ const PROFESORES = [
   {
     nombre: 'Perep',
     rol: 'Fundador · Coach Principal',
-    nivel: 'NL50 – NL100',
+    nivel: 'NL200 – NL400',
     color: '#CC1A1A',
-    bio: 'Lleva más de 8 años jugando cash game online. Fundó Ninja Poker Academy en 2023 con una idea simple: la mayoría de las escuelas de póker venden cursos y desaparecen. Aquí el seguimiento es real, diario, y el coach sigue jugando los mismos límites que enseña.',
-    especialidad: 'Estrategia preflop, construcción de rangos y análisis de HUD avanzado.',
+    bio: 'Jugador profesional de midstakes con más de una década de experiencia. Vive del póker. Fundó Ninja Poker Academy con una idea simple: la mayoría de las escuelas venden cursos y desaparecen. Aquí el seguimiento es real, el coach sigue compitiendo en las mesas y la formación se construye desde la experiencia diaria en cash game.',
+    especialidad:
+      'Estrategia preflop, construcción de rangos, análisis de HUD avanzado y coaching grupal.',
   },
   {
     nombre: 'Yani',
     rol: 'Profesora · Ex-alumna',
-    nivel: 'NL50+',
+    nivel: 'NL50',
     color: '#1acc7a',
-    bio: 'Empezó en Ninja Poker Academy sin saber nada de póker, jugando NL2. En poco más de un año llegó a NL50 y se convirtió en parte del equipo docente. Su perspectiva es única: sabe exactamente qué se siente empezar desde cero.',
-    especialidad: 'Mental game, control del tilt y acompañamiento a alumnos principiantes.',
-  },
-  {
-    nombre: 'Galathea',
-    rol: 'Profesora · Análisis de Datos',
-    nivel: 'NL100+',
-    color: '#1a7acc',
-    bio: 'Especialista en estadísticas y bases de datos. Si tu HUD tiene un leak, ella lo encuentra. Su enfoque combina matemática aplicada al póker con explicaciones claras, sin jerga innecesaria.',
-    especialidad: 'HUD, tracking de manos, GTO aplicado y revisión de sesiones.',
+    bio: 'Conocida en las mesas como Galathea. Empezó en Ninja Poker Academy sin saber nada de póker. Hoy es jugadora profesional de NL50 y vive de esto. Su perspectiva es única: sabe exactamente qué se siente empezar desde cero y qué hace falta para convertirlo en profesión.',
+    especialidad:
+      'Mental game, control del tilt, análisis de estadísticas y acompañamiento a alumnos que empiezan.',
   },
 ]
 
 const PILARES = [
-  { icon: '📅', title: 'Clases diarias en vivo' },
+  { icon: '📅', title: 'Clases en vivo durante la semana' },
   { icon: '🃏', title: 'Revisión y análisis de manos' },
   { icon: '📊', title: 'Análisis de estadísticas y bases de datos' },
   { icon: '🎯', title: 'Tutorías y seguimiento personalizado' },
   { icon: '🧠', title: 'Trabajo sobre leaks, decisiones y mental game' },
   { icon: '💰', title: 'Bancaje y condiciones competitivas (opcional)' },
   { icon: '🤝', title: 'Trato cercano y familiar' },
+  { icon: '📹', title: 'Videoteca completa con sesiones grabadas' },
 ]
 
 const FILOSOFIA = [
@@ -118,7 +113,7 @@ export default function SobreNosotrosPage() {
       name: 'Ninja Poker Academy',
       foundingDate: '2023',
       description:
-        'Academia de póker online en español especializada en cash game, con clases diarias en vivo, revisión de manos y comunidad activa.',
+        'Academia de póker online en español especializada en cash game, con clases en vivo, revisión de manos, bancaje disponible y comunidad activa.',
       employee: PROFESORES.map((p) => ({
         '@type': 'Person',
         name: p.nombre,
@@ -339,11 +334,11 @@ export default function SobreNosotrosPage() {
                   lineHeight: 1.2,
                 }}
               >
-                Los profesores que te van a formar
+                Los dos profesores que te van a formar
               </h2>
               <p style={{ fontSize: 16, color: '#575757', maxWidth: 520, margin: '0 auto' }}>
-                Todos juegan activamente. Ninguno dejó las mesas para "enseñar teoría" — siguen
-                compitiendo en los límites que enseñan.
+                Ambos juegan activamente y viven del póker. No dejaron las mesas para "enseñar
+                teoría" — siguen compitiendo en los límites que enseñan.
               </p>
             </div>
             <div
@@ -533,8 +528,8 @@ export default function SobreNosotrosPage() {
                 formemos nosotros?
               </h2>
               <p className="p1" style={{ color: 'var(--text-03)', maxWidth: '40ch' }}>
-                Escríbenos y empieza tu camino con el mismo equipo que ha llevado a alumnos de NL2 a
-                NL100.
+                Alumnos que empezaron en microlímites hoy son regulares de NL50 y NL100. Escríbenos
+                y empieza tu camino con nosotros.
               </p>
               <div className="cta-btns">
                 <BtnRed href="/contacto">Quiero unirme</BtnRed>
