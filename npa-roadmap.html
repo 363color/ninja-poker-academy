@@ -77,7 +77,8 @@ main{max-width:960px;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(16px,4vw,4
 .ttag-yo{background:rgba(34,114,195,.14);color:#4a8fd4;border-color:rgba(34,114,195,.25)}
 .ttag-juntos{background:rgba(204,26,26,.12);color:#cc1a1a;border-color:rgba(204,26,26,.22)}
 .ttag-critico{background:rgba(220,80,80,.12);color:#c43030;border-color:rgba(220,80,80,.2)}
-[data-theme="light"] .ttag-tu{color:#8c6600}[data-theme="light"] .ttag-yo{color:#1458a0}[data-theme="light"] .ttag-juntos{color:#a01414}[data-theme="light"] .ttag-critico{color:#a02020}
+.ttag-equipo{background:rgba(26,138,80,.12);color:#1a8a50;border-color:rgba(26,138,80,.2)}
+[data-theme="light"] .ttag-tu{color:#8c6600}[data-theme="light"] .ttag-yo{color:#1458a0}[data-theme="light"] .ttag-juntos{color:#a01414}[data-theme="light"] .ttag-critico{color:#a02020}[data-theme="light"] .ttag-equipo{color:#0d6630}
 .task-time{font-size:11px;font-weight:500;color:var(--t3);white-space:nowrap;text-align:right;padding-top:2px;flex-shrink:0}
 footer{border-top:1px solid var(--brd);padding:20px clamp(16px,4vw,48px);text-align:center;font-size:12px;color:var(--t3);margin-top:40px}
 footer strong{color:var(--rd);font-weight:600}
@@ -85,7 +86,7 @@ footer strong{color:var(--rd);font-weight:600}
 .phase{animation:fadeUp .4s ease both}
 .phase:nth-child(1){animation-delay:.05s}.phase:nth-child(2){animation-delay:.10s}.phase:nth-child(3){animation-delay:.15s}
 .phase:nth-child(4){animation-delay:.20s}.phase:nth-child(5){animation-delay:.25s}.phase:nth-child(6){animation-delay:.30s}
-.phase:nth-child(7){animation-delay:.35s}.phase:nth-child(8){animation-delay:.40s}
+.phase:nth-child(7){animation-delay:.35s}.phase:nth-child(8){animation-delay:.40s}.phase:nth-child(9){animation-delay:.45s}.phase:nth-child(10){animation-delay:.50s}
 @media(max-width:520px){.task{grid-template-columns:20px 1fr}.task-time{display:none}.phase-meta .phase-progress-mini{display:none}}
 </style>
 </head>
@@ -93,7 +94,7 @@ footer strong{color:var(--rd);font-weight:600}
 <header>
   <div class="logo"><span class="logo-dot"></span>Ninja Poker Academy — Roadmap</div>
   <div class="header-right">
-    <div class="last-updated"><span class="save-dot"></span><span>Actualizado 31 Jun 2026</span></div>
+    <div class="last-updated"><span class="save-dot"></span><span>Actualizado 8 Jul 2026</span></div>
     <button class="theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema"><span id="theme-ico">☀</span></button>
   </div>
 </header>
@@ -101,8 +102,8 @@ footer strong{color:var(--rd);font-weight:600}
   <div class="project-hero">
     <div class="project-eyebrow">Proyecto activo · 2025–2026</div>
     <h1 class="project-title">Escuela de Poker.<br>Construida desde cero.</h1>
-    <div class="project-claim">Aprende, mejora y disfruta del póker con nosotros.</div>
-    <p class="project-sub">ninjapokeracademy.com en Next.js + Payload CMS 3.0 + Cloudflare. Solo español. Keyword principal: "academia de poker". Motor de contenido: YouTube → artículo SEO con Claude. Secciones: /clases/ + /estrategia/. RGPD, verificación 18+, juego responsable. Analytics: GA4 + GSC + Bing.</p>
+    <div class="project-claim">Fórmate como jugador profesional de cash game sin arriesgar tu propio dinero.</div>
+    <p class="project-sub">ninjapokeracademy.com en Next.js + Payload CMS 3.0 + Cloudflare. Solo español. Keyword principal: "academia de poker". Motor de contenido IA: 3 pipelines (YouTube → clases, clase → artículo, keyword → artículo). 89 videos publicados. Secciones: /clases/ + /estrategia/. RGPD, verificación 18+, juego responsable.</p>
   </div>
   <div class="stats-row">
     <div class="stat-card"><div class="stat-n" id="st-total">0</div><div class="stat-l">Tareas totales</div></div>
@@ -117,6 +118,7 @@ footer strong{color:var(--rd);font-weight:600}
       <span><span class="pdot" style="background:#c8960a"></span>Tú</span>
       <span><span class="pdot" style="background:#4a8fd4"></span>Yo (Claude)</span>
       <span><span class="pdot" style="background:#cc1a1a"></span>Los dos juntos</span>
+      <span><span class="pdot" style="background:#1a8a50"></span>Equipo (Perep/Yani)</span>
       <span><span class="pdot" style="background:#c43030"></span>Crítico / bloqueante</span>
     </div>
   </div>
@@ -124,135 +126,127 @@ footer strong{color:var(--rd);font-weight:600}
     <span class="leg"><span class="leg-dot" style="background:#c8960a"></span>Tú — lo ejecutas tú</span>
     <span class="leg"><span class="leg-dot" style="background:#4a8fd4"></span>Yo (Claude) — lo hago yo</span>
     <span class="leg"><span class="leg-dot" style="background:#cc1a1a"></span>Los dos — juntos</span>
+    <span class="leg"><span class="leg-dot" style="background:#1a8a50"></span>Equipo — Perep y Yani</span>
     <span class="leg"><span class="leg-dot" style="background:#c43030"></span>Crítico — bloqueante</span>
   </div>
   <div id="phases-container"></div>
 </main>
 <footer>
-  Proyecto <strong>Ninja Poker Academy</strong> · ninjapokeracademy.com · Stack: Next.js + Payload CMS 3.0 + Cloudflare · Analytics: GA4 + GSC + Bing · IA: Claude API<br>
-  Progreso guardado en el archivo · Keyword: "academia de poker" · Secciones: /clases/ + /estrategia/
+  Proyecto <strong>Ninja Poker Academy</strong> · ninjapokeracademy.com · Stack: Next.js + Payload CMS 3.0 + Cloudflare · IA: Claude API · 3 Pipelines activos<br>
+  Keyword: "academia de poker" · Target: regulares estancados en microlímites · 89 videos + artículos SEO
 </footer>
 <script>
-// ── Estado del progreso (hardcodeado — actualizar y hacer push para compartir) ──
 const DONE = {
-  // Fase 0 — Preparación
-  f0t01: true,   // Crear emails con Cloudflare ✅
-  f0t02: false,  // Aportar datos responsable legal ⏳
-  f0t03: true,   // Crear repositorio en GitHub ✅
-  f0t04: true,   // Activar Cloudflare DNS ✅
-  f0t05: true,   // Verificar dominio en Resend ✅
-  f0t06: true,   // Crear cuentas de analytics ✅
-  f0t07: true,   // Keyword research ✅
-  // Fase 1 — Backend
-  f1t01: true,   // Instalar Next.js + Payload ✅
-  f1t02: true,   // Ruta personalizada CMS ✅
-  f1t03: true,   // Colecciones core Payload ✅
-  f1t04: true,   // Custom Fields Videos ✅
-  f1t05: true,   // SEO plugin ✅
-  f1t06: true,   // Roles y acceso ✅
-  f1t07: true,   // Vercel deploy ✅
-  // Fase 2 — Legal y analytics
-  f2t01: true,   // Age Gate ✅
-  f2t02: true,   // Cookie consent Klaro ✅
-  f2t03: false,  // Google Analytics 4 ⏳
-  f2t04: false,  // Google Search Console ⏳
-  f2t05: false,  // Bing Webmaster Tools ⏳
-  f2t06: true,   // Páginas legales ✅
-  // Fase 3 — Design system
-  f3t01: true,   // Tokens CSS ✅
-  f3t02: true,   // Header ✅
-  f3t03: true,   // Footer ✅
-  f3t04: true,   // Logo y assets ✅
-  f3t05: true,   // Componentes UI ✅
-  // Fase 4 — Frontend (en progreso)
-  f4t01: true,  // Home ✅
-  f4t02: true,  // /clases/ ✅
-  f4t03: true,  // /clases/[slug]/ ✅
-  f4t04: true,  // /estrategia/ ✅
-  f4t05: true,  // /estrategia/[slug]/ ✅
-  f4t06: true,  // /comunidad/ ✅
-  f4t07: true,  // /sobre-nosotros/ ✅
-  f4t08: true,  // /contacto/ ✅
-  f4t09: true,  // 404 ✅
-  f4t10: true,  // Contenido inicial ✅
+  // Fase 0
+  f0t01: true, f0t02: false, f0t03: true, f0t04: true, f0t05: true, f0t06: true, f0t07: true,
+  // Fase 1
+  f1t01: true, f1t02: true, f1t03: true, f1t04: true, f1t05: true, f1t06: true, f1t07: true,
+  // Fase 2
+  f2t01: true, f2t02: true, f2t03: false, f2t04: false, f2t05: false, f2t06: true,
+  // Fase 3
+  f3t01: true, f3t02: true, f3t03: true, f3t04: true, f3t05: true,
+  // Fase 4
+  f4t01: true, f4t02: true, f4t03: true, f4t04: true, f4t05: true, f4t06: true, f4t07: true, f4t08: true, f4t09: true, f4t10: true,
   // Fase 5 — IA
-  f5t01: true, f5t02: true, f5t03: false, f5t04: false,
-  f5t05: false, f5t06: false, f5t07: false, f5t08: false,
-  // Fase 6 — SEO avanzado
-  f6t01: false, f6t02: false, f6t03: false, f6t04: false, f6t05: false,
-  // Fase 7 — Lanzamiento
-  f7t01: false, f7t02: false, f7t03: false, f7t04: false, f7t05: false,
+  f5t01: true, f5t02: true, f5t03: true, f5t04: true, f5t05: true, f5t06: true,
+  // Fase 6 — Revisión editorial
+  f6t01: true, f6t02: true, f6t03: true, f6t04: false, f6t05: false,
+  // Fase 7 — SEO avanzado
+  f7t01: false, f7t02: false, f7t03: false, f7t04: false,
+  // Fase 8 — Pre-lanzamiento
+  f8t01: false, f8t02: false, f8t03: false, f8t04: false,
+  // Fase 9 — Lanzamiento
+  f9t01: false, f9t02: false, f9t03: false, f9t04: false, f9t05: false,
+  // Fase 10 — Post-lanzamiento
+  f10t01: false, f10t02: false, f10t03: false, f10t04: false, f10t05: false,
 };
 
 const FASES=[
   {id:'f0',num:'Fase 0',titulo:'Preparación — antes de tocar código',color:'#888780',horas:8,tareas:[
-    {id:'f0t01',titulo:'Crear emails con Cloudflare Email Routing',desc:'Activar Email Routing en ninjapokeracademy.com dentro de la cuenta 363color@gmail.com (misma de APD y GPD). Crear alias: hola@, privacidad@, bancaje@ninjapokeracademy.com → todos redirigen a 363color@gmail.com. Gratis. Necesario antes de completar las páginas legales.',tiempo:'20 min',tags:['tu','critico']},
-    {id:'f0t02',titulo:'Aportar datos del responsable legal',desc:'Nombre legal del titular, NIF/CIF, domicilio fiscal. Con el email privacidad@ ya creado y estos datos, Claude genera todas las páginas legales completas. Sin esto el sitio no puede lanzarse legalmente.',tiempo:'15 min',tags:['tu','critico']},
-    {id:'f0t03',titulo:'Crear repositorio en GitHub',desc:'Repo: ninja-poker-academy. Ramas: main (producción) y develop (staging). Subir npa-documentacion.html y npa-roadmap.html al repo. Activar GitHub Pages en Settings → Pages → main → / (root).',tiempo:'25 min',tags:['tu']},
-    {id:'f0t04',titulo:'Activar Cloudflare DNS en el dominio',desc:'Cambiar nameservers de ninjapokeracademy.com hacia los de Cloudflare. Usar cuenta 363color@gmail.com — misma para APD, GPD y NPA. Una cuenta gratuita admite dominios ilimitados.',tiempo:'15 min',tags:['tu','critico']},
-    {id:'f0t05',titulo:'Verificar dominio en Resend',desc:'Resend.com → verificar ninjapokeracademy.com. Configurar SPF, DKIM y DMARC en Cloudflare DNS.',tiempo:'20 min',tags:['tu']},
-    {id:'f0t06',titulo:'Crear cuentas de analytics',desc:'(1) Google Search Console. (2) Google Analytics 4. (3) Bing Webmaster Tools. Guardar todos los IDs.',tiempo:'40 min',tags:['tu','critico']},
-    {id:'f0t07',titulo:'Keyword research inicial — "academia de poker"',desc:'50–100 keywords objetivo. Cluster principal: academia de poker, escuela de poker online. Clusters secundarios: estrategia poker, análisis de manos, mental game, leaks, bankroll.',tiempo:'3 h',tags:['juntos']},
+    {id:'f0t01',titulo:'Crear emails con Cloudflare Email Routing',desc:'Alias: hola@, privacidad@, bancaje@ninjapokeracademy.com → todos redirigen a 363color@gmail.com.',tiempo:'20 min',tags:['tu','critico']},
+    {id:'f0t02',titulo:'Aportar datos del responsable legal',desc:'Nombre legal del titular, NIF/CIF, domicilio fiscal. Sin esto el sitio no puede lanzarse legalmente.',tiempo:'15 min',tags:['tu','critico']},
+    {id:'f0t03',titulo:'Crear repositorio en GitHub',desc:'Repo: ninja-poker-academy. GitHub Pages para roadmap.',tiempo:'25 min',tags:['tu']},
+    {id:'f0t04',titulo:'Activar Cloudflare DNS en el dominio',desc:'Nameservers de ninjapokeracademy.com hacia Cloudflare.',tiempo:'15 min',tags:['tu','critico']},
+    {id:'f0t05',titulo:'Verificar dominio en Resend',desc:'SPF, DKIM y DMARC configurados en Cloudflare DNS.',tiempo:'20 min',tags:['tu']},
+    {id:'f0t06',titulo:'Crear cuentas de analytics',desc:'Google Search Console, GA4, Bing Webmaster Tools.',tiempo:'40 min',tags:['tu','critico']},
+    {id:'f0t07',titulo:'Keyword research inicial — "academia de poker"',desc:'50–100 keywords. Cluster principal: academia de poker. Secundarios: estrategia, análisis de manos, mental game, bankroll.',tiempo:'3 h',tags:['juntos']},
   ]},
-  {id:'f1',num:'Fase 1',titulo:'Backend — Payload CMS 3.0 + Next.js + infraestructura',color:'#2272c3',horas:12,tareas:[
-    {id:'f1t01',titulo:'Instalar Next.js + Payload CMS 3.0',desc:'Monorepo: Next.js y Payload en el mismo proyecto. Deploy en Railway (PostgreSQL) + Vercel (frontend). Deploy automático desde GitHub en cada push a main.',tiempo:'1.5 h',tags:['yo']},
-    {id:'f1t02',titulo:'Ruta personalizada del panel CMS — nunca /admin/',desc:'Configurar en Payload una ruta no obvia para el panel. /admin/ es la primera que prueban los bots.',tiempo:'20 min',tags:['yo','critico']},
-    {id:'f1t03',titulo:'Crear colecciones core en Payload',desc:'Videos, Posts/artículos, Categories, Tags, Authors, Subscribers, Pages, Media, Users.',tiempo:'3 h',tags:['yo']},
-    {id:'f1t04',titulo:'Custom Fields completos — collection Videos',desc:'Título, slug, URL YouTube, YouTube ID (auto), descripción corta, transcripción, nivel, modalidad, categoría, tags, artículo relacionado, thumbnail, fecha, estado.',tiempo:'2 h',tags:['yo']},
-    {id:'f1t05',titulo:'Configurar SEO plugin en todas las collections',desc:'Meta título, meta descripción e imagen OG en cada collection. Schema JSON-LD. Sitemap dinámico.',tiempo:'1 h',tags:['yo']},
-    {id:'f1t06',titulo:'Configurar roles y acceso control',desc:'Roles: admin (acceso total) y editor (contenido, sin datos sensibles).',tiempo:'45 min',tags:['yo']},
-    {id:'f1t07',titulo:'Configurar Vercel y primer deploy',desc:'Conectar repo GitHub a Vercel. Variables de entorno. ninjapokeracademy.com apuntando a Vercel vía Cloudflare.',tiempo:'1 h',tags:['juntos']},
+  {id:'f1',num:'Fase 1',titulo:'Backend — Payload CMS 3.0 + Next.js',color:'#2272c3',horas:12,tareas:[
+    {id:'f1t01',titulo:'Instalar Next.js + Payload CMS 3.0',desc:'Monorepo. Deploy: Railway (PostgreSQL) + Vercel (frontend). Auto-deploy desde GitHub.',tiempo:'1.5 h',tags:['yo']},
+    {id:'f1t02',titulo:'Ruta personalizada del panel CMS',desc:'Panel en ruta no obvia. /admin/ es la primera que prueban los bots.',tiempo:'20 min',tags:['yo','critico']},
+    {id:'f1t03',titulo:'Crear colecciones core en Payload',desc:'Videos, Posts, Categories, Tags, Authors, Subscribers, Pages, Media, Users.',tiempo:'3 h',tags:['yo']},
+    {id:'f1t04',titulo:'Custom Fields — collection Videos',desc:'Título, slug, YouTube ID, descripción corta, resumen SEO, transcripción, nivel, modalidad, categorías, tags, artículo relacionado.',tiempo:'2 h',tags:['yo']},
+    {id:'f1t05',titulo:'Configurar SEO plugin',desc:'Meta título, meta descripción e imagen OG en cada collection.',tiempo:'1 h',tags:['yo']},
+    {id:'f1t06',titulo:'Configurar roles y acceso',desc:'Roles: admin (acceso total) y editor (contenido).',tiempo:'45 min',tags:['yo']},
+    {id:'f1t07',titulo:'Configurar Vercel y primer deploy',desc:'Repo GitHub → Vercel. Variables de entorno. Dominio vía Cloudflare.',tiempo:'1 h',tags:['juntos']},
   ]},
   {id:'f2',num:'Fase 2',titulo:'Legal, compliance y analytics',color:'#c8960a',horas:10,tareas:[
-    {id:'f2t01',titulo:'Age Gate — verificación 18+',desc:'Modal de bloqueo en primera visita. "Confirmo que tengo 18 años o más" → cookie age_verified por 365 días. "Soy menor" → salida.',tiempo:'2 h',tags:['yo']},
-    {id:'f2t02',titulo:'Cookie consent con Klaro — RGPD compliant',desc:'Klaro open-source. Categorías: esenciales (siempre), analítica GA4 (opt-in). GA4 NO carga sin consentimiento.',tiempo:'2 h',tags:['yo']},
-    {id:'f2t03',titulo:'Integrar Google Analytics 4',desc:'Measurement ID del operador. IP anonymization activa. Consent Mode v2. Eventos personalizados.',tiempo:'1.5 h',tags:['yo']},
-    {id:'f2t04',titulo:'Integrar Google Search Console',desc:'Verificación por DNS en Cloudflare. Enviar /sitemap.xml. Activar Core Web Vitals.',tiempo:'30 min',tags:['juntos']},
-    {id:'f2t05',titulo:'Integrar Bing Webmaster Tools + IndexNow',desc:'Añadir propiedad, verificar por DNS. Hook afterPublish → notificación IndexNow.',tiempo:'45 min',tags:['juntos']},
-    {id:'f2t06',titulo:'Páginas legales — 5 páginas completas',desc:'Privacidad, Cookies, Términos y Condiciones, Juego Responsable, Aviso Legal.',tiempo:'3 h',tags:['yo','critico']},
+    {id:'f2t01',titulo:'Age Gate — verificación 18+',desc:'Modal de bloqueo en primera visita. Cookie age_verified 365 días.',tiempo:'2 h',tags:['yo']},
+    {id:'f2t02',titulo:'Cookie consent con Klaro — RGPD',desc:'Klaro open-source. GA4 NO carga sin consentimiento. Consent Mode v2.',tiempo:'2 h',tags:['yo']},
+    {id:'f2t03',titulo:'Integrar Google Analytics 4',desc:'⚠️ Pendiente auditar cambios de Claude Code. /collect requests no confirmadas.',tiempo:'1.5 h',tags:['yo']},
+    {id:'f2t04',titulo:'Integrar Google Search Console',desc:'⏳ Pausado — requiere entidad legal para verificación DNS.',tiempo:'30 min',tags:['juntos']},
+    {id:'f2t05',titulo:'Integrar Bing Webmaster Tools + IndexNow',desc:'⏳ Pausado — requiere entidad legal + GSC.',tiempo:'45 min',tags:['juntos']},
+    {id:'f2t06',titulo:'Páginas legales — 5 páginas',desc:'Privacidad, Cookies, Términos, Juego Responsable, Aviso Legal. Placeholders para datos legales.',tiempo:'3 h',tags:['yo','critico']},
   ]},
   {id:'f3',num:'Fase 3',titulo:'Design system y componentes base',color:'#CC1A1A',horas:10,tareas:[
-    {id:'f3t01',titulo:'Tokens CSS — paleta NPA, dark/light nativo',desc:'Variables CSS: rojo #CC1A1A, negro #0D0D0D, blanco cálido #F3F0EB. Dark mode por defecto.',tiempo:'2 h',tags:['yo']},
-    {id:'f3t02',titulo:'Componente Header — logo, nav, dark toggle',desc:'Logo NPA. Navegación: Inicio · Clases · Estrategia · Comunidad · Contacto. Sticky en scroll. Hamburguesa en móvil.',tiempo:'3 h',tags:['yo']},
-    {id:'f3t03',titulo:'Componente Footer — legal, social, aviso 18+',desc:'Links legales. Aviso 18+. Logos GamCare y BeGambleAware. Links a todas las redes. Botón gestión cookies.',tiempo:'2 h',tags:['yo']},
-    {id:'f3t04',titulo:'Tú subes logo, favicon y assets de marca',desc:'Logo NPA PNG fondo transparente, favicon 32x32 y 16x16. OG image 1200x630.',tiempo:'15 min',tags:['tu']},
-    {id:'f3t05',titulo:'Componentes UI — cards, botones, filtros, badges',desc:'Card de clase, card de artículo, botones, badges de nivel, filtros, inputs. Consistencia total.',tiempo:'3 h',tags:['yo']},
+    {id:'f3t01',titulo:'Tokens CSS — paleta NPA, dark/light nativo',desc:'Variables OKLCH: rojo #CC1A1A, negro #0D0D0D, cream #F3F0EB. Dark mode por defecto.',tiempo:'2 h',tags:['yo']},
+    {id:'f3t02',titulo:'Componente Header',desc:'Logo NPA. Nav: Inicio · Clases · Estrategia · Comunidad · Contacto. Sticky. Hamburguesa móvil.',tiempo:'3 h',tags:['yo']},
+    {id:'f3t03',titulo:'Componente Footer',desc:'Links legales. Aviso 18+. GamCare y BeGambleAware. Redes. Gestión cookies.',tiempo:'2 h',tags:['yo']},
+    {id:'f3t04',titulo:'Logo, favicon y assets de marca',desc:'Logo PNG transparente, favicon, OG image 1200x630.',tiempo:'15 min',tags:['tu']},
+    {id:'f3t05',titulo:'Componentes UI',desc:'ClassCard, ArticleCard, Badge, Button, FilterPills, Input. Style guide.',tiempo:'3 h',tags:['yo']},
   ]},
-  {id:'f4',num:'Fase 4',titulo:'Frontend — todas las páginas del sitio',color:'#7c5cbf',horas:24,tareas:[
-    {id:'f4t01',titulo:'Home — portada principal',desc:'H1: "Academia de póker online para jugadores ganadores". Pilares de la academia (7 puntos oficiales). Últimas clases con ClassCard + FilterPills. Últimos artículos. Schema.org Organization. 100% responsive.',tiempo:'5 h',tags:['yo']},
-    {id:'f4t02',titulo:'/clases/ — videoteca principal',desc:'Listado de clases filtrables. Filtros nivel: Básico/Intermedio/Avanzado. Filtros modalidad: Preflop/Postflop/Análisis de manos/Estadísticas/Mental game. Cards con thumbnail YouTube, título, nivel. Paginación clásica SEO.',tiempo:'4 h',tags:['yo']},
-    {id:'f4t03',titulo:'/clases/[slug]/ — clase individual',desc:'Video YouTube embebido full width. Título, nivel, modalidad, fecha. Descripción completa. Artículo relacionado. Botones compartir. CTA sidebar. Clases relacionadas.',tiempo:'3 h',tags:['yo']},
-    {id:'f4t04',titulo:'/estrategia/ — hub de artículos SEO',desc:'Listado de artículos por categoría. Filtros. Cards con imagen, título, categoría, tiempo de lectura. Schema ArticleList.',tiempo:'3 h',tags:['yo']},
-    {id:'f4t05',titulo:'/estrategia/[slug]/ — artículo individual',desc:'Artículo SEO completo. H1 con keyword. Rich text. Video YouTube embebido. Autor, fecha. CTA al final. Artículos relacionados. Schema Article/BlogPosting.',tiempo:'3 h',tags:['yo']},
-    {id:'f4t06',titulo:'/comunidad/ — hub de canales',desc:'Descripción completa de la experiencia NPA: clases en vivo, material exclusivo, revisión de manos, HUD, seguimiento. Links a Discord, Telegram, YouTube, Instagram, TikTok.',tiempo:'2 h',tags:['yo']},
-    {id:'f4t07',titulo:'/sobre-nosotros/ — historia y filosofía',desc:'Historia de la academia. Equipo. Filosofía. Los 7 puntos del "Qué ofrecemos". Bancaje como posibilidad opcional.',tiempo:'2 h',tags:['yo']},
-    {id:'f4t08',titulo:'/contacto/ — formulario y canales',desc:'Formulario: nombre, email, asunto, mensaje. Checkbox RGPD. Submit → Resend + notificación Telegram. Lista de canales sociales.',tiempo:'2 h',tags:['yo']},
+  {id:'f4',num:'Fase 4',titulo:'Frontend — todas las páginas',color:'#7c5cbf',horas:24,tareas:[
+    {id:'f4t01',titulo:'Home — portada principal',desc:'H1: "Academia de póker online para jugadores ganadores". Pilares. Últimas clases. Últimos artículos. Schema Organization.',tiempo:'5 h',tags:['yo']},
+    {id:'f4t02',titulo:'/clases/ — videoteca',desc:'Listado filtrable. Filtros nivel + modalidad. Paginación SEO. H1: "Clases de Póker Online Gratis".',tiempo:'4 h',tags:['yo']},
+    {id:'f4t03',titulo:'/clases/[slug]/ — clase individual',desc:'YouTube embed. Resumen SEO. Descripción corta. Compartir. CTA sidebar. Clases relacionadas.',tiempo:'3 h',tags:['yo']},
+    {id:'f4t04',titulo:'/estrategia/ — hub de artículos',desc:'Listado por categoría. Filtros. Cards con imagen, categoría, tiempo lectura.',tiempo:'3 h',tags:['yo']},
+    {id:'f4t05',titulo:'/estrategia/[slug]/ — artículo',desc:'Artículo Lexical richText. TOC. Autor. Share. Sidebar. Artículos relacionados. Schema BlogPosting.',tiempo:'3 h',tags:['yo']},
+    {id:'f4t06',titulo:'/comunidad/ — experiencia real',desc:'Comunidad cercana. Casos de éxito (4 alumnos, diferentes perfiles). Proceso de acceso. FAQ.',tiempo:'2 h',tags:['yo']},
+    {id:'f4t07',titulo:'/sobre-nosotros/ — equipo y filosofía',desc:'Perep (NL200-400, +10 años) y Yani/Galathea (NL50). 8 pilares. Filosofía. Historia.',tiempo:'2 h',tags:['yo']},
+    {id:'f4t08',titulo:'/contacto/ — formulario simplificado',desc:'6 campos: Nombre, Email, Discord, País, ¿Qué te interesa?, Mensaje. Discord card. RGPD.',tiempo:'2 h',tags:['yo']},
     {id:'f4t09',titulo:'Página 404 personalizada',desc:'Diseño coherente. Links a Inicio, Clases y Estrategia.',tiempo:'1 h',tags:['yo']},
-    {id:'f4t10',titulo:'Tú introduces el contenido inicial en Payload',desc:'10 videos catalogados (nivel + modalidad). 5 artículos iniciales. Página Sobre nosotros con info real.',tiempo:'4–6 h',tags:['tu']},
+    {id:'f4t10',titulo:'Contenido inicial en Payload',desc:'89 videos importados (bulk import). Artículos de estrategia generados. Páginas completadas.',tiempo:'4–6 h',tags:['juntos']},
   ]},
-  {id:'f5',num:'Fase 5',titulo:'Automatización IA — motor de contenido',color:'#1a8a50',horas:16,tareas:[
-    {id:'f5t01',titulo:'Pipeline 1 — YouTube → Artículo de estrategia',desc:'Video nuevo detectado → transcripción → Claude genera artículo SEO → draft en Payload → editor aprueba → publica en /estrategia/.',tiempo:'3 h',tags:['yo']},
-    {id:'f5t02',titulo:'Pipeline 2 — Keyword → Artículo',desc:'Editor introduce keyword + tema → Claude genera artículo optimizado → draft → editor revisa y publica.',tiempo:'2 h',tags:['yo']},
-    {id:'f5t03',titulo:'Notificaciones automáticas al publicar',desc:'Hook afterPublish → mensaje en Telegram y Discord con título, extracto y enlace.',tiempo:'1.5 h',tags:['yo']},
-    {id:'f5t04',titulo:'IndexNow — notificación Bing al publicar',desc:'Hook afterPublish → llamada IndexNow con la URL nueva. Bing indexa en minutos.',tiempo:'30 min',tags:['yo']},
-    {id:'f5t05',titulo:'Pipeline 3 — Newsletter automática',desc:'Cron job semanal. Claude redacta newsletter → draft → editor aprueba → Resend envía.',tiempo:'2 h',tags:['yo']},
-    {id:'f5t06',titulo:'Pipeline 4 — Repurposing a redes sociales',desc:'Artículo publicado → Claude genera caption Instagram + texto TikTok → cola de aprobación.',tiempo:'2 h',tags:['yo']},
-    {id:'f5t07',titulo:'Internal linking automático con Claude',desc:'Al publicar, Claude sugiere 3–5 enlaces internos a artículos y clases existentes.',tiempo:'2 h',tags:['yo']},
-    {id:'f5t08',titulo:'Gestión de suscriptores — formulario y baja',desc:'Suscripción newsletter. Email confirmación doble opt-in. Enlace baja. RGPD compliant.',tiempo:'2 h',tags:['yo']},
+  {id:'f5',num:'Fase 5',titulo:'Automatización IA — motor de contenido',color:'#1a8a50',horas:14,tareas:[
+    {id:'f5t01',titulo:'Pipeline A — YouTube → /clases/ (automático)',desc:'Cron diario 6AM. RSS feed detecta video nuevo → transcripción → Claude genera resumen SEO + categorías + tags → draft en Payload → Telegram notifica. 89 videos importados en bulk.',tiempo:'4 h',tags:['yo']},
+    {id:'f5t02',titulo:'Pipeline B — Clase → Artículo /estrategia/ (on-demand)',desc:'Botón "Generar artículo" en el admin de cada video. Claude genera artículo 800-1500 palabras en Lexical JSON → draft en Posts → enlaza video ↔ artículo. Editor aprueba.',tiempo:'3 h',tags:['yo']},
+    {id:'f5t03',titulo:'Pipeline C — Keyword → Artículo (manual)',desc:'Formulario en dashboard admin: keyword + tema + categoría → Claude genera artículo SEO completo → draft en Posts. Editor revisa y publica.',tiempo:'2 h',tags:['yo']},
+    {id:'f5t04',titulo:'Newsletter — formulario conectado a Subscribers',desc:'Componente NewsletterPill con RGPD. API /api/subscribe guarda emails en colección Subscribers. Reactivación automática si se había dado de baja.',tiempo:'1 h',tags:['yo']},
+    {id:'f5t05',titulo:'Cambios editoriales — feedback del equipo',desc:'FAQ actualizados (4 páginas). "Gratis" solo para YouTube/pack. Instructores con bios reales. "Durante la semana" vs "diarias". Bancaje como opción. Discord: "invitación".',tiempo:'3 h',tags:['juntos']},
+    {id:'f5t06',titulo:'Vercel Cron — Pipeline A automático',desc:'vercel.json configurado. Cron cada 24h a las 10:00 UTC. CRON_SECRET en Vercel.',tiempo:'30 min',tags:['yo']},
   ]},
-  {id:'f6',num:'Fase 6',titulo:'SEO avanzado y rendimiento',color:'#5b47e0',horas:12,tareas:[
-    {id:'f6t01',titulo:'Topic clusters — páginas pilar',desc:'Páginas pilar para clusters principales: "Aprende poker desde cero", "Estrategia cash game", "Mental game", "Bankroll".',tiempo:'4 h',tags:['juntos']},
-    {id:'f6t02',titulo:'Schema markup avanzado',desc:'Article, VideoObject, FAQPage, BreadcrumbList. JSON-LD validado en Google Rich Results Test.',tiempo:'2 h',tags:['yo']},
-    {id:'f6t03',titulo:'Sitemap dinámico por sección',desc:'/sitemap.xml con índice. /sitemap-clases.xml, /sitemap-estrategia.xml, /sitemap-pages.xml.',tiempo:'1 h',tags:['yo']},
-    {id:'f6t04',titulo:'Core Web Vitals — optimización de rendimiento',desc:'Objetivo 95+ en PageSpeed móvil y escritorio. next/image, lazy loading iframes, font preconnect.',tiempo:'3 h',tags:['yo']},
-    {id:'f6t05',titulo:'Búsqueda interna con Pagefind',desc:'Pagefind indexa todo el contenido en build time. Sin backend. Integrada en header y 404.',tiempo:'2 h',tags:['yo']},
+  {id:'f6',num:'Fase 6',titulo:'Revisión de contenido — equipo',color:'#1a8a50',horas:8,tareas:[
+    {id:'f6t01',titulo:'Crear perfiles para Perep y Yani en Payload',desc:'Cuentas con rol editor. Acceso a Videos, Posts, Categories, Tags. Sin acceso a Users ni configuración.',tiempo:'30 min',tags:['juntos']},
+    {id:'f6t02',titulo:'Video tutorial — flujo de publicación',desc:'Grabar/escribir guía: cómo revisar un draft, cambiar nivel/categoría, aprobar y publicar. Pipeline B (generar artículo desde video).',tiempo:'1 h',tags:['tu']},
+    {id:'f6t03',titulo:'Revisión de los 89 videos publicados',desc:'Verificar: nivel correcto, categoría correcta, tags relevantes, descripción precisa, resumen sin errores técnicos. Corregir lo que haga falta.',tiempo:'4 h',tags:['equipo']},
+    {id:'f6t04',titulo:'Revisión de artículos de estrategia',desc:'Verificar: contenido técnico correcto, autor correcto (no Joel), categorías, SEO title y description. Todos generados con IA — requieren validación experta.',tiempo:'2 h',tags:['equipo']},
+    {id:'f6t05',titulo:'Feedback final de textos de páginas fijas',desc:'Equipo revisa Home, Comunidad, Contacto, Sobre nosotros, Clases. Envían feedback → Joel + Claude ajustan con SEO.',tiempo:'1 h',tags:['equipo']},
   ]},
-  {id:'f7',num:'Fase 7',titulo:'Lanzamiento y monitorización',color:'#1a8a50',horas:5,tareas:[
-    {id:'f7t01',titulo:'Checklist legal y compliance pre-lanzamiento',desc:'✅ Age gate. ✅ Klaro bloqueando GA4. ✅ 5 páginas legales completas. ✅ Footer aviso 18+. ✅ Formulario baja newsletter.',tiempo:'1 h',tags:['juntos','critico']},
-    {id:'f7t02',titulo:'Checklist técnico pre-lanzamiento',desc:'✅ SSL. ✅ robots.txt. ✅ sitemap.xml. ✅ Todas las URLs 200. ✅ 404 personalizada. ✅ PageSpeed 90+. ✅ GA4 activo.',tiempo:'1 h',tags:['juntos','critico']},
-    {id:'f7t03',titulo:'Enviar URLs a indexación manual en GSC y Bing',desc:'Google Search Console: "Solicitar indexación" para Home, /clases/, /estrategia/ y los 5 primeros artículos.',tiempo:'30 min',tags:['tu']},
-    {id:'f7t04',titulo:'Primera revisión 48h post-lanzamiento',desc:'Errores GSC. Impresiones Bing. Eventos GA4. Notificaciones Telegram/Discord. Pipeline YouTube probado.',tiempo:'1 h',tags:['juntos']},
-    {id:'f7t05',titulo:'Anuncio en todos los canales',desc:'Instagram, YouTube, Discord y Telegram. CTA: explorar las clases y unirse a la comunidad.',tiempo:'1 h',tags:['tu']},
+  {id:'f7',num:'Fase 7',titulo:'SEO avanzado y rendimiento',color:'#5b47e0',horas:6,tareas:[
+    {id:'f7t01',titulo:'Sitemap dinámico por sección',desc:'/sitemap.xml con índice. /sitemap-clases.xml, /sitemap-estrategia.xml, /sitemap-pages.xml. Next.js genera automáticamente.',tiempo:'1 h',tags:['yo']},
+    {id:'f7t02',titulo:'Schema markup avanzado',desc:'Article, VideoObject, FAQPage, BreadcrumbList. JSON-LD validado en Google Rich Results Test.',tiempo:'2 h',tags:['yo']},
+    {id:'f7t03',titulo:'Core Web Vitals — optimización',desc:'Objetivo 90+ en PageSpeed. next/image, lazy loading iframes, font preconnect. Verificar métricas actuales.',tiempo:'2 h',tags:['yo']},
+    {id:'f7t04',titulo:'Verificar GA4 funciona correctamente',desc:'Auditar cambios de Claude Code en GoogleAnalytics.tsx. Confirmar /collect requests. 3 diagnósticos pendientes.',tiempo:'1 h',tags:['yo']},
+  ]},
+  {id:'f8',num:'Fase 8',titulo:'Pre-lanzamiento',color:'#c8960a',horas:4,tareas:[
+    {id:'f8t01',titulo:'Checklist legal y compliance',desc:'✅ Age gate. ✅ Klaro. ⏳ 5 páginas legales con datos reales (requiere entidad legal). ✅ Footer 18+. ✅ RGPD formularios.',tiempo:'1 h',tags:['juntos','critico']},
+    {id:'f8t02',titulo:'Checklist técnico',desc:'✅ SSL. ✅ robots.txt. ⏳ sitemap.xml. ✅ URLs 200. ✅ 404 personalizada. ⏳ PageSpeed 90+. ⏳ GA4 verificado.',tiempo:'1 h',tags:['juntos','critico']},
+    {id:'f8t03',titulo:'Google Search Console + DNS verificación',desc:'Verificar propiedad. Enviar sitemap. Core Web Vitals. Requiere entidad legal definida.',tiempo:'30 min',tags:['juntos']},
+    {id:'f8t04',titulo:'Bing Webmaster Tools + IndexNow',desc:'Verificar propiedad DNS. Hook afterPublish → IndexNow para indexación rápida.',tiempo:'30 min',tags:['juntos']},
+  ]},
+  {id:'f9',num:'Fase 9',titulo:'Lanzamiento',color:'#CC1A1A',horas:4,tareas:[
+    {id:'f9t01',titulo:'Enviar URLs a indexación manual en GSC',desc:'Home, /clases/, /estrategia/ y los primeros artículos. Solicitar indexación.',tiempo:'30 min',tags:['tu']},
+    {id:'f9t02',titulo:'Primera revisión 48h post-lanzamiento',desc:'Errores GSC. Impresiones Bing. Eventos GA4. Pipeline A ejecutado correctamente.',tiempo:'1 h',tags:['juntos']},
+    {id:'f9t03',titulo:'Anuncio en todos los canales',desc:'Instagram, YouTube, Discord y Telegram. CTA: explorar las clases y unirse.',tiempo:'1 h',tags:['equipo']},
+    {id:'f9t04',titulo:'Primeros 4 artículos de captación (fundamentos)',desc:'Keywords confirmadas: "cómo jugar poker texas holdem", "reglas poker texas holdem español", "aprender poker desde cero", "clases de poker gratis en español". Pipeline C.',tiempo:'1 h',tags:['yo']},
+    {id:'f9t05',titulo:'Crear categoría "fundamentos" en Payload',desc:'Nueva categoría para artículos de captación top-of-funnel. Necesaria antes de publicar artículos de fundamentos.',tiempo:'5 min',tags:['tu']},
+  ]},
+  {id:'f10',num:'Fase 10',titulo:'Post-lanzamiento — cuando haya tracción',color:'#888780',horas:12,tareas:[
+    {id:'f10t01',titulo:'Pipeline 3 — Newsletter automática',desc:'Activar cuando haya 50+ suscriptores. Claude redacta newsletter semanal → draft → editor aprueba → Resend envía. ~1 email/mes.',tiempo:'2 h',tags:['yo']},
+    {id:'f10t02',titulo:'Pipeline 4 — Repurposing a redes sociales',desc:'Artículo publicado → Claude genera caption Instagram + texto TikTok → cola de aprobación.',tiempo:'2 h',tags:['yo']},
+    {id:'f10t03',titulo:'Internal linking automático con Claude',desc:'Al publicar, Claude sugiere 3–5 enlaces internos a artículos y clases existentes. Requiere volumen de contenido.',tiempo:'2 h',tags:['yo']},
+    {id:'f10t04',titulo:'Topic clusters — páginas pilar',desc:'Páginas pilar: "Aprende poker desde cero", "Estrategia cash game", "Mental game", "Bankroll". Requiere +20 artículos publicados.',tiempo:'4 h',tags:['juntos']},
+    {id:'f10t05',titulo:'Búsqueda interna con Pagefind',desc:'Pagefind indexa todo el contenido en build time. Sin backend. Integrada en header y 404.',tiempo:'2 h',tags:['yo']},
   ]},
 ];
 
@@ -262,7 +256,6 @@ function buildRoadmap(){
   FASES.forEach(f=>{
     const phaseDiv=document.createElement('div');
     phaseDiv.className='phase';
-    const isOpen=false;
     const doneTasks=f.tareas.filter(t=>DONE[t.id]).length;
     const phasePct=Math.round(doneTasks/f.tareas.length*100);
     const btn=document.createElement('button');
@@ -279,7 +272,7 @@ function buildRoadmap(){
       const isDone=DONE[t.id]||false;
       const task=document.createElement('div');
       task.className='task'+(isDone?' done-task':'');
-      const tagLabels={tu:'Tú',yo:'Yo (Claude)',juntos:'Los dos',critico:'Crítico'};
+      const tagLabels={tu:'Tú',yo:'Yo (Claude)',juntos:'Los dos',critico:'Crítico',equipo:'Equipo'};
       const tagsHtml=t.tags.map(tg=>`<span class="ttag ttag-${tg}">${tagLabels[tg]||tg}</span>`).join('');
       task.innerHTML=`
         <div class="chk${isDone?' checked':''}">${isDone?'✓':''}</div>
