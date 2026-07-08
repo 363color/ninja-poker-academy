@@ -24,6 +24,10 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
+    meta: {
+      titleSuffix: ' — Ninja Poker Academy',
+      icons: [{ url: '/favicon.svg' }],
+    },
     components: {
       beforeLogin: ['@/components/BeforeLogin'],
       beforeDashboard: [

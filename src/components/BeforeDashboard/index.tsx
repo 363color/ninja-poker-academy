@@ -1,67 +1,46 @@
-import { Banner } from '@payloadcms/ui/elements/Banner'
 import React from 'react'
-
-import { SeedButton } from './SeedButton'
 import './index.scss'
-
-const baseClass = 'before-dashboard'
 
 const BeforeDashboard: React.FC = () => {
   return (
-    <div className={baseClass}>
-      <Banner className={`${baseClass}__banner`} type="success">
-        <h4>Welcome to your dashboard!</h4>
-      </Banner>
-      Here&apos;s what to do next:
-      <ul className={`${baseClass}__instructions`}>
-        <li>
-          <SeedButton />
-          {' with a few pages, posts, and projects to jump-start your new site, then '}
-          <a href="/" target="_blank">
-            visit your website
-          </a>
-          {' to see the results.'}
-        </li>
-        <li>
-          {'Modify your '}
-          <a
-            href="https://payloadcms.com/docs/configuration/collections"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            collections
-          </a>
-          {' and add more '}
-          <a
-            href="https://payloadcms.com/docs/fields/overview"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            fields
-          </a>
-          {' as needed. If you are new to Payload, we also recommend you check out the '}
-          <a
-            href="https://payloadcms.com/docs/getting-started/what-is-payload"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Getting Started
-          </a>
-          {' docs.'}
-        </li>
-        <li>
-          Commit and push your changes to the repository to trigger a redeployment of your project.
-        </li>
-      </ul>
-      {'Pro Tip: This block is a '}
-      <a
-        href="https://payloadcms.com/docs/custom-components/overview"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        custom component
-      </a>
-      , you can remove it at any time by updating your <strong>payload.config</strong>.
+    <div className="npa-dashboard">
+      <div className="npa-dashboard-header">
+        <div className="npa-dashboard-brand">
+          <span className="npa-dashboard-dot" />
+          <span className="npa-dashboard-title">Ninja Poker Academy</span>
+        </div>
+        <span className="npa-dashboard-subtitle">Panel de gestión de contenido</span>
+      </div>
+      <div className="npa-dashboard-cards">
+        <a href="/admin/collections/videos" className="npa-dash-card">
+          <span className="npa-dash-icon">🎬</span>
+          <div>
+            <strong>Videos</strong>
+            <span>Revisar clases, nivel y categorías</span>
+          </div>
+        </a>
+        <a href="/admin/collections/posts" className="npa-dash-card">
+          <span className="npa-dash-icon">📝</span>
+          <div>
+            <strong>Artículos</strong>
+            <span>Estrategia, borradores y publicación</span>
+          </div>
+        </a>
+        <a href="/admin/collections/categories" className="npa-dash-card">
+          <span className="npa-dash-icon">📂</span>
+          <div>
+            <strong>Categorías</strong>
+            <span>Preflop, postflop, mental game...</span>
+          </div>
+        </a>
+        <a href="/admin/collections/subscribers" className="npa-dash-card">
+          <span className="npa-dash-icon">📧</span>
+          <div>
+            <strong>Suscriptores</strong>
+            <span>Emails de la newsletter</span>
+          </div>
+        </a>
+      </div>
     </div>
   )
 }

@@ -1,24 +1,87 @@
-@import '@payloadcms/ui/scss';
+.npa-dashboard {
+  margin-bottom: 24px;
+}
 
-.dashboard .before-dashboard {
-  margin-bottom: base(1.5);
+.npa-dashboard-header {
+  background: #0D0D0D;
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 
-  &__banner {
-    & h4 {
-      margin: 0;
-    }
-  }
+.npa-dashboard-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  &__instructions {
-    list-style: decimal;
-    margin-bottom: base(0.5);
+.npa-dashboard-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #CC1A1A;
+  animation: npa-pulse 2.5s ease-in-out infinite;
+}
 
-    & li {
-      width: 100%;
-    }
-  }
+@keyframes npa-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 
-  & a:hover {
-    opacity: 0.85;
-  }
+.npa-dashboard-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.2px;
+}
+
+.npa-dashboard-subtitle {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.npa-dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.npa-dash-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--theme-elevation-50, #f9f9f7);
+  border: 1px solid var(--theme-elevation-100, #eee);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  color: inherit;
+}
+
+.npa-dash-card:hover {
+  border-color: #CC1A1A;
+  box-shadow: 0 2px 12px rgba(204, 26, 26, 0.08);
+}
+
+.npa-dash-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.npa-dash-card strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.npa-dash-card span {
+  font-size: 12px;
+  color: var(--theme-elevation-400, #888);
 }
