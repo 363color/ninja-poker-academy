@@ -9,6 +9,7 @@ import { authenticated } from '../access/authenticated'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  labels: { singular: 'Archivo', plural: 'Multimedia' },
   folders: true,
   access: {
     create: authenticated,

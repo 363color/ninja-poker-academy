@@ -3,6 +3,7 @@ import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
+import { es } from '@payloadcms/translations/languages/es'
 
 import { Categories } from './collections/Categories'
 import { Videos } from './collections/Videos'
@@ -23,6 +24,10 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  i18n: {
+    supportedLanguages: { es },
+    fallbackLanguage: 'es',
+  },
   admin: {
     meta: {
       titleSuffix: ' — Ninja Poker Academy',

@@ -3,6 +3,7 @@ import { isAdmin, isAdminOrEditor } from '../access/isAdmin'
 
 export const Subscribers: CollectionConfig = {
   slug: 'subscribers',
+  labels: { singular: 'Suscriptor', plural: 'Suscriptores' },
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'name', 'status', 'createdAt'],

@@ -12,6 +12,7 @@ const isAdminOrSelf = ({ req: { user }, id }: any) => {
 
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: { singular: 'Usuario', plural: 'Usuarios' },
   access: {
     admin: authenticated,
     create: isAdmin,
