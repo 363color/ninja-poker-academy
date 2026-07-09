@@ -555,9 +555,16 @@ export default async function HomePage() {
         <div className="container">
           <div className="pvp">
             <div className="spl">
-              <div style={{ textAlign: 'left', marginBottom: 56 }} className="why-top sr">
+              <div style={{ textAlign: 'left', marginBottom: 56 }} className="sr">
                 <div className="sect-label">Explora por tema</div>
-                <h2>
+                <h2
+                  style={{
+                    fontSize: 'clamp(28px, 4vw, 44px)',
+                    fontWeight: 700,
+                    lineHeight: 1.15,
+                    margin: '8px 0 0',
+                  }}
+                >
                   Mejora tus habilidades
                   <br />
                   en cada área del juego
