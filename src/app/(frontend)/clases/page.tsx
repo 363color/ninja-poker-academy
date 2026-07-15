@@ -26,7 +26,9 @@ interface Video {
   descripcionCorta?: string
   nivel?: string
   modalidad?: string
+  publishedAt?: string
 }
+
 interface PayloadResponse {
   docs: Video[]
   totalDocs: number
@@ -47,6 +49,10 @@ const TEMAS = [
   { label: 'Análisis de manos', value: 'analisis-manos' },
   { label: 'Estadísticas', value: 'estadisticas' },
   { label: 'Mental game', value: 'mental-game' },
+]
+const ORDENES = [
+  { label: 'Más recientes', value: 'desc' },
+  { label: 'Más antiguos', value: 'asc' },
 ]
 const PER_PAGE = 12
 
@@ -82,11 +88,13 @@ async function fetchVideos({
   tema,
   pagina,
   busqueda,
+  orden,
 }: {
   nivel: string
   tema: string
   pagina: number
   busqueda: string
+  orden: string
 }): Promise<PayloadResponse> {
   const h = await headers()
   const host = h.get('host') || 'localhost:3000'
@@ -94,7 +102,7 @@ async function fetchVideos({
   const params = new URLSearchParams()
   params.set('limit', String(PER_PAGE))
   params.set('page', String(pagina))
-  params.set('sort', '-createdAt')
+  params.set('sort', orden === 'asc' ? 'publishedAt' : '-publishedAt')
   params.set('where[status][equals]', 'published')
   if (nivel) params.set('where[nivel][equals]', nivel)
   if (tema) params.set('where[modalidad][equals]', tema)
@@ -110,11 +118,18 @@ async function fetchVideos({
   }
 }
 
-function buildUrl(p: { nivel?: string; tema?: string; pagina?: number; busqueda?: string }) {
+function buildUrl(p: {
+  nivel?: string
+  tema?: string
+  pagina?: number
+  busqueda?: string
+  orden?: string
+}) {
   const sp = new URLSearchParams()
   if (p.nivel) sp.set('nivel', p.nivel)
   if (p.tema) sp.set('tema', p.tema)
   if (p.busqueda) sp.set('q', p.busqueda)
+  if (p.orden && p.orden !== 'desc') sp.set('orden', p.orden)
   if (p.pagina && p.pagina > 1) sp.set('pagina', String(p.pagina))
   const qs = sp.toString()
   return `/clases${qs ? `?${qs}` : ''}`
@@ -159,12 +174,14 @@ function Pagination({
   nivel,
   tema,
   busqueda,
+  orden,
 }: {
   page: number
   totalPages: number
   nivel: string
   tema: string
   busqueda: string
+  orden: string
 }) {
   if (totalPages <= 1) return null
   return (
@@ -180,7 +197,10 @@ function Pagination({
       }}
     >
       {page > 1 && (
-        <Link href={buildUrl({ nivel, tema, busqueda, pagina: page - 1 })} className="btn-ghost">
+        <Link
+          href={buildUrl({ nivel, tema, busqueda, orden, pagina: page - 1 })}
+          className="btn-ghost"
+        >
           ← Anterior
         </Link>
       )}
@@ -188,7 +208,7 @@ function Pagination({
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
           <Link
             key={p}
-            href={buildUrl({ nivel, tema, busqueda, pagina: p })}
+            href={buildUrl({ nivel, tema, busqueda, orden, pagina: p })}
             aria-current={p === page ? 'page' : undefined}
             style={{
               width: 40,
@@ -210,7 +230,10 @@ function Pagination({
         ))}
       </div>
       {page < totalPages && (
-        <Link href={buildUrl({ nivel, tema, busqueda, pagina: page + 1 })} className="btn-ghost">
+        <Link
+          href={buildUrl({ nivel, tema, busqueda, orden, pagina: page + 1 })}
+          className="btn-ghost"
+        >
           Siguiente →
         </Link>
       )}
@@ -219,7 +242,13 @@ function Pagination({
 }
 
 interface PageProps {
-  searchParams: Promise<{ nivel?: string; tema?: string; pagina?: string; q?: string }>
+  searchParams: Promise<{
+    nivel?: string
+    tema?: string
+    pagina?: string
+    q?: string
+    orden?: string
+  }>
 }
 
 export default async function ClasesPage({ searchParams }: PageProps) {
@@ -227,8 +256,9 @@ export default async function ClasesPage({ searchParams }: PageProps) {
   const nivel = sp.nivel || ''
   const tema = sp.tema || ''
   const busqueda = sp.q || ''
+  const orden = sp.orden || 'desc'
   const pagina = Math.max(1, parseInt(sp.pagina || '1', 10))
-  const data = await fetchVideos({ nivel, tema, pagina, busqueda })
+  const data = await fetchVideos({ nivel, tema, pagina, busqueda, orden })
   const { docs: videos, totalDocs, totalPages, page } = data
 
   return (
@@ -297,7 +327,7 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                 gap: 16,
               }}
             >
-              {/* Buscador — con botón submit */}
+              {/* Buscador */}
               <form
                 method="GET"
                 action="/clases"
@@ -305,6 +335,7 @@ export default async function ClasesPage({ searchParams }: PageProps) {
               >
                 {nivel && <input type="hidden" name="nivel" value={nivel} />}
                 {tema && <input type="hidden" name="tema" value={tema} />}
+                {orden && orden !== 'desc' && <input type="hidden" name="orden" value={orden} />}
                 <input
                   type="search"
                   name="q"
@@ -333,10 +364,9 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                 </button>
               </form>
 
-              {/* Separador */}
               <div style={{ height: 1, background: '#f4f4f4' }} />
 
-              {/* Nivel — pills como links */}
+              {/* Nivel */}
               <div>
                 <span className="sect-label" style={{ marginBottom: 8, fontSize: 11 }}>
                   Nivel
@@ -345,7 +375,7 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                   {NIVELES.map((opt) => (
                     <Link
                       key={opt.value}
-                      href={buildUrl({ nivel: opt.value, tema, busqueda, pagina: 1 })}
+                      href={buildUrl({ nivel: opt.value, tema, busqueda, orden, pagina: 1 })}
                       className={`pill${opt.value === nivel ? ' on' : ''}`}
                       style={{ fontSize: 12, padding: '6px 14px' }}
                       aria-current={opt.value === nivel ? 'page' : undefined}
@@ -356,7 +386,7 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                 </div>
               </div>
 
-              {/* Tema — pills como links */}
+              {/* Tema */}
               <div>
                 <span className="sect-label" style={{ marginBottom: 8, fontSize: 11 }}>
                   Tema
@@ -365,7 +395,7 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                   {TEMAS.map((opt) => (
                     <Link
                       key={opt.value}
-                      href={buildUrl({ nivel, tema: opt.value, busqueda, pagina: 1 })}
+                      href={buildUrl({ nivel, tema: opt.value, busqueda, orden, pagina: 1 })}
                       className={`pill${opt.value === tema ? ' on' : ''}`}
                       style={{ fontSize: 12, padding: '6px 14px' }}
                       aria-current={opt.value === tema ? 'page' : undefined}
@@ -376,8 +406,27 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                 </div>
               </div>
 
+              {/* Ordenar */}
+              <div>
+                <span className="sect-label" style={{ marginBottom: 8, fontSize: 11 }}>
+                  Ordenar
+                </span>
+                <div className="pills" style={{ marginTop: 8, flexWrap: 'wrap' }}>
+                  {ORDENES.map((opt) => (
+                    <Link
+                      key={opt.value}
+                      href={buildUrl({ nivel, tema, busqueda, orden: opt.value, pagina: 1 })}
+                      className={`pill${opt.value === orden ? ' on' : ''}`}
+                      style={{ fontSize: 12, padding: '6px 14px' }}
+                    >
+                      {opt.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               {/* Limpiar filtros */}
-              {(nivel || tema || busqueda) && (
+              {(nivel || tema || busqueda || orden !== 'desc') && (
                 <Link
                   href="/clases"
                   style={{
@@ -434,6 +483,7 @@ export default async function ClasesPage({ searchParams }: PageProps) {
                   nivel={nivel}
                   tema={tema}
                   busqueda={busqueda}
+                  orden={orden}
                 />
               </>
             )}

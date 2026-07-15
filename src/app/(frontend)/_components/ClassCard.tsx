@@ -11,6 +11,7 @@ export interface ClassCardData {
   descripcionCorta?: string
   nivel?: string
   modalidad?: string
+  publishedAt?: string
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -45,6 +46,12 @@ function modalidadLabel(m?: string) {
   if (m === 'mental-game') return 'Mental game'
   if (m === 'postflop') return 'Postflop'
   return ''
+}
+
+function formatDate(dateStr?: string) {
+  if (!dateStr) return ''
+  const date = new Date(dateStr)
+  return date.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })
 }
 
 function Arr11() {
@@ -103,10 +110,13 @@ export function ClassCard({ video }: { video: ClassCardData }) {
               </span>
             </div>
           )}
-          <div className="c-instructor">
-            <div className="c-av">P</div>
-            <span className="c-name">Perep</span>
-          </div>
+          {video.publishedAt && (
+            <div className="c-meta" style={{ marginTop: 8 }}>
+              <span className="c-meta-item" style={{ fontSize: 11, color: '#888' }}>
+                {formatDate(video.publishedAt)}
+              </span>
+            </div>
+          )}
         </div>
       </Link>
       <Link href={`/clases/${video.slug}`} className="c-cta">
