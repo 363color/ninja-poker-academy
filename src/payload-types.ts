@@ -758,7 +758,7 @@ export interface Video {
   id: number;
   title: string;
   /**
-   * Se genera automáticamente desde el título. Puedes editarlo manualmente.
+   * Se genera automáticamente desde el título. Edítalo manualmente si hay duplicado.
    */
   slug?: string | null;
   /**

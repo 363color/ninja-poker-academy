@@ -32,7 +32,7 @@ export async function notifyNewDraft(input: NotifyDraftInput): Promise<boolean> 
   const emoji = input.type === 'clase' ? '🎬' : '📝'
 
   // URL del panel admin de Payload para revisar el draft
-  const adminUrl = `https://ninjapokeracademy.com/gestion/collections/videos`
+  const adminUrl = `https://ninjapokeracademy.com/admin/collections/videos`
 
   const message = `${emoji} *Nuevo borrador de ${input.type} listo*
 
@@ -46,19 +46,16 @@ export async function notifyNewDraft(input: NotifyDraftInput): Promise<boolean> 
 _Generado automáticamente por el motor de IA\\. Revisar antes de publicar\\._`
 
   try {
-    const response = await fetch(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-          parse_mode: 'MarkdownV2',
-          disable_web_page_preview: true,
-        }),
-      },
-    )
+    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: message,
+        parse_mode: 'MarkdownV2',
+        disable_web_page_preview: true,
+      }),
+    })
 
     if (!response.ok) {
       const error = await response.text()

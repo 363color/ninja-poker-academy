@@ -20,23 +20,51 @@ export const Videos: CollectionConfig = {
       name: 'slug',
       type: 'text',
       label: 'Slug',
+      unique: true,
       admin: {
-        description: 'Se genera automáticamente desde el título. Puedes editarlo manualmente.',
+        description:
+          'Se genera automáticamente desde el título. Edítalo manualmente si hay duplicado.',
       },
       hooks: {
         beforeValidate: [
-          ({ value, data }) => {
-            if (!value && data?.title) {
-              return data.title
-                .toLowerCase()
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '')
-                .replace(/[^a-z0-9\s-]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-')
-                .trim()
+          async ({ value, data, req, siblingData, originalDoc }) => {
+            // Solo generar si no hay valor
+            if (value) return value
+
+            if (!data?.title) return value
+
+            const baseSlug = data.title
+              .toLowerCase()
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .replace(/[^a-z0-9\s-]/g, '')
+              .replace(/\s+/g, '-')
+              .replace(/-+/g, '-')
+              .trim()
+
+            // Verificar si ya existe
+            const payload = req?.payload
+            if (!payload) return baseSlug
+
+            let slug = baseSlug
+            let counter = 1
+
+            while (true) {
+              const existing = await payload.find({
+                collection: 'videos',
+                where: {
+                  slug: { equals: slug },
+                  ...(originalDoc?.id ? { id: { not_equals: originalDoc.id } } : {}),
+                },
+                limit: 1,
+              })
+
+              if (existing.docs.length === 0) break
+              slug = `${baseSlug}-${counter}`
+              counter++
             }
-            return value
+
+            return slug
           },
         ],
       },
