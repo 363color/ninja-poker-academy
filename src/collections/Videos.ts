@@ -5,6 +5,7 @@ export const Videos: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'nivel', 'modalidad', 'status', 'publishedAt'],
+    defaultSort: '-publishedAt',
   },
   access: {
     read: () => true,
